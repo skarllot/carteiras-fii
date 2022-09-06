@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{B8006121-E70D-434A-A962-D98248B5FD4A}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CCE6889-E3E5-461E-B423-476805CD9239}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{08A11670-20FD-4EEE-96D3-D924DA00E3ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Core", "src\ImobFeed.Core\ImobFeed.Core.csproj", "{90A274D3-5704-46ED-A308-F2491ABD3A68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Core.Tests", "tests\ImobFeed.Core.Tests\ImobFeed.Core.Tests.csproj", "{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Reader", "src\ImobFeed.Reader\ImobFeed.Reader.csproj", "{9D60AAD7-E501-4555-9F1A-EF96C41C3371}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{90A274D3-5704-46ED-A308-F2491ABD3A68} = {3CCE6889-E3E5-461E-B423-476805CD9239}
+		{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059} = {08A11670-20FD-4EEE-96D3-D924DA00E3ED}
+		{9D60AAD7-E501-4555-9F1A-EF96C41C3371} = {3CCE6889-E3E5-461E-B423-476805CD9239}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90A274D3-5704-46ED-A308-F2491ABD3A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A274D3-5704-46ED-A308-F2491ABD3A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A274D3-5704-46ED-A308-F2491ABD3A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A274D3-5704-46ED-A308-F2491ABD3A68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D60AAD7-E501-4555-9F1A-EF96C41C3371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D60AAD7-E501-4555-9F1A-EF96C41C3371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D60AAD7-E501-4555-9F1A-EF96C41C3371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D60AAD7-E501-4555-9F1A-EF96C41C3371}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
