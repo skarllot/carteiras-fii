@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace ImobFeed.Core;
+namespace ImobFeed.Core.Common;
 
 public static class CultureCache
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Globalization;
 using ImobFeed.Core.CarteiraMensal;
+using ImobFeed.Core.Common;
 using NodaTime;
 
 namespace ImobFeed.Core.Leitores;
