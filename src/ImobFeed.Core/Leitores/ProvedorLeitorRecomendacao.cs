@@ -8,6 +8,7 @@ public static class ProvedorLeitorRecomendacao
     private static IEnumerable<ILeitorRecomendacao> TodosLeitores()
     {
         yield return new LeitorRecomendacaoBancoBrasil();
+        yield return new LeitorRecomendacaoBtgPactual();
     }
 
     public static ILeitorRecomendacao? Buscar(string nome)

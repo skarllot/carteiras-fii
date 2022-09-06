@@ -20,7 +20,7 @@ public class LeitorRecomendacaoBancoBrasil : ILeitorRecomendacao
         while (reader.ReadLine() is { } line)
         {
             if (string.IsNullOrWhiteSpace(line))
-                continue;
+                break;
 
             int index11 = line.IndexOf("11", StringComparison.Ordinal);
             int indexPct = line.IndexOf("%", StringComparison.Ordinal);

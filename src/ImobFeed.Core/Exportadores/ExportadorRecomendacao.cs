@@ -27,7 +27,7 @@ public class ExportadorRecomendacao
             dirRecomendacao.FullName,
             (NormalizePath(recomendacao.NomeCarteira) ?? "default") + ".json");
 
-        using var fileStream = _fileSystem.File.Open(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
+        using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
         JsonSerializer.Serialize(fileStream, recomendacao.Carteira, SourceGenerationContext.Default.Options);
 
         fileStream.Flush();

@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO.Abstractions;
+using ImobFeed.Core.Common;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
 using NodaTime;
@@ -80,17 +81,12 @@ public class FilePathCommand : Command<FilePathCommand.Settings>
         var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
         foreach (var recomendacao in recomendacoes)
         {
-            exportador.Salvar(recomendacao, new ProgressRecomendacao());
+            exportador.Salvar(
+                recomendacao,
+                new InlineProgress<RecomendacaoSalva>(
+                    static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
         }
 
         return 0;
-    }
-    
-    private sealed class ProgressRecomendacao : IProgress<RecomendacaoSalva>
-    {
-        public void Report(RecomendacaoSalva value)
-        {
-            AnsiConsole.MarkupLine($"Arquivo gerado: [green]{value.FilePath}[/].");
-        }
     }
 }
