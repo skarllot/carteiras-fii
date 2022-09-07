@@ -20,7 +20,7 @@ VISC11	Vinci Shopping Centers	Shopping	15%	R$ 112,35	0,98	0,64%	7,28%";
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoGenial();
-        var recomendacao = leitor.Ler(inputReader, new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Renda");

@@ -8,11 +8,9 @@ public class LeitorRecomendacaoBancoBrasil : ILeitorRecomendacao
 {
     public string NomeCorretora => "BB Investimentos";
 
-    public Recomendacao Ler(TextReader reader, YearMonth data)
+    public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
     {
         var carteiraBuilder = ImmutableArray.CreateBuilder<AtivoRecomendado>();
-
-        string? nomeCarteira = reader.ReadLine();
 
         while (reader.ReadLine() is { } line)
         {

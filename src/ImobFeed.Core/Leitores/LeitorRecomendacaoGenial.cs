@@ -8,11 +8,9 @@ public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
 {
     public string NomeCorretora => "Genial Investimentos";
 
-    public Recomendacao Ler(TextReader reader, YearMonth data)
+    public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
     {
         var carteiraBuilder = ImmutableArray.CreateBuilder<AtivoRecomendado>();
-
-        string? nomeCarteira = reader.ReadLine();
 
         while (reader.ReadLine() is { } line)
         {

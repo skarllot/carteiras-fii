@@ -43,7 +43,7 @@ public static class LeitorCampo
     {
         int indexPct = line.IndexOf("%", StringComparison.Ordinal);
 
-        int indexSpc = -1;
+        int indexSpc = -2;
         for (int i = indexPct - 1; i >= 0; i--)
         {
             if (char.IsWhiteSpace(line, i))
@@ -51,9 +51,12 @@ public static class LeitorCampo
                 indexSpc = i;
                 break;
             }
+
+            if (i == 0 && char.IsNumber(line, i))
+                indexSpc = -1;
         }
 
-        if (indexSpc == -1)
+        if (indexSpc == -2)
             return null;
 
         var pesoBuffer = line.AsSpan(indexSpc + 1, indexPct - indexSpc - 1);

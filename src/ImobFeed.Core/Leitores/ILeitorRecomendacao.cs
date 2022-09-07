@@ -7,5 +7,7 @@ public interface ILeitorRecomendacao
 {
     string NomeCorretora { get; }
 
-    Recomendacao Ler(TextReader reader, YearMonth data);
+    string? LerNomeCarteira(TextReader reader) => reader.ReadLine();
+
+    Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data);
 }

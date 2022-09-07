@@ -28,7 +28,8 @@ public class LeitorListaRecomendacao
             if (leitor is null)
                 throw Verify.FailOperation("A corretora não foi encontrada: {0}", line);
 
-            yield return leitor.Ler(fileReader, _data);
+            string? nomeCarteira = leitor.LerNomeCarteira(fileReader);
+            yield return leitor.Ler(fileReader, nomeCarteira, _data);
         }
     }
 }

@@ -10,5 +10,12 @@ serviceCollection
 
 var registrar = new TypeRegistrar(serviceCollection);
 
-var app = new CommandApp<FilePathCommand>(registrar);
+var app = new CommandApp(registrar);
+app.Configure(
+    config =>
+    {
+        config.AddCommand<TextFileCommand>("texto");
+        config.AddCommand<ImageFileCommand>("imagem");
+    });
+
 return app.Run(args);

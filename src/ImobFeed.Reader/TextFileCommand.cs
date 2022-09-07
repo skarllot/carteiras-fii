@@ -11,11 +11,11 @@ using Spectre.Console.Cli;
 
 namespace ImobFeed.Reader;
 
-public class FilePathCommand : Command<FilePathCommand.Settings>
+public class TextFileCommand : Command<TextFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
 
-    public FilePathCommand(IFileSystem fileSystem)
+    public TextFileCommand(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
     }
@@ -36,19 +36,9 @@ public class FilePathCommand : Command<FilePathCommand.Settings>
 
         public YearMonth? ResolveData()
         {
-            if (string.IsNullOrWhiteSpace(Data))
-                return GetThisMonth();
-
-            if (!DateTimeOffset.TryParseExact(Data, "yyyy-MM", null, DateTimeStyles.AssumeUniversal, out var result))
-                return null;
-
-            return new YearMonth(result.Year, result.Month);
-        }
-
-        private static YearMonth GetThisMonth()
-        {
-            var now = DateTime.UtcNow;
-            return new YearMonth(now.Year, now.Month);
+            return string.IsNullOrWhiteSpace(Data)
+                ? YearMonthProvider.ThisMonth()
+                : YearMonthProvider.TryParse(Data);
         }
     }
 

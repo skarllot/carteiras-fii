@@ -10,6 +10,7 @@ public static class ProvedorLeitorRecomendacao
         yield return new LeitorRecomendacaoBancoBrasil();
         yield return new LeitorRecomendacaoBtgPactual();
         yield return new LeitorRecomendacaoGenial();
+        yield return new LeitorRecomendacaoGuide();
     }
 
     public static ILeitorRecomendacao? Buscar(string nome)
