@@ -23,7 +23,7 @@ VISC11 FII Vinci Sc 10 101,39
 XPML11 FII Xp Malls 10 95,63";
 
         using var inputReader = new StringReader(input);
-        var leitor = new LeitorRecomendacaoItau();
+        var leitor = new LeitorRecomendacaoMirae();
         var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);

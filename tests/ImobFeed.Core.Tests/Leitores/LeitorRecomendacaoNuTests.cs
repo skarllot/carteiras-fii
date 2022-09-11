@@ -22,7 +22,7 @@ Vinci Shopping Centers FII	VISC11	12%	Shopping	R$110,85	R$115,00	7.28%
 BTG Pactual Corp. Office	BRCR11	4%	Escritório	R$69,45	R$80,00	8.22%";
 
         using var inputReader = new StringReader(input);
-        var leitor = new LeitorRecomendacaoItau();
+        var leitor = new LeitorRecomendacaoNu();
         var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);

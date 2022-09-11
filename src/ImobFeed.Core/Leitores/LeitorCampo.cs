@@ -39,9 +39,11 @@ public static class LeitorCampo
         return codigoBuffer.ToString();
     }
 
-    public static float? LerPeso(string line)
+    public static float? LerPeso(string line, bool isLast = false)
     {
-        int indexPct = line.IndexOf("%", StringComparison.Ordinal);
+        int indexPct = isLast
+            ? line.LastIndexOf("%", StringComparison.Ordinal)
+            : line.IndexOf("%", StringComparison.Ordinal);
 
         int indexSpc = -2;
         for (int i = indexPct - 1; i >= 0; i--)
