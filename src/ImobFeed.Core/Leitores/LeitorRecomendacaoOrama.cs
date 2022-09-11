@@ -4,9 +4,9 @@ using NodaTime;
 
 namespace ImobFeed.Core.Leitores;
 
-public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
+public sealed class LeitorRecomendacaoOrama : ILeitorRecomendacao
 {
-    public string NomeCorretora => "Genial Investimentos";
+    public string NomeCorretora => "Órama";
 
     public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
     {

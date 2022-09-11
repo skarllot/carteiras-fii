@@ -29,7 +29,7 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
 
                 Validar.CodigoAtivo(codigo);
 
-                float? peso = null;
+                decimal? peso = null;
                 if (indexPct < index11)
                     peso = LeitorCampo.LerPeso(line);
                 else
@@ -42,19 +42,19 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
 
         if (needCalc)
         {
-            float soma = carteiraBuilder.Sum(it => it.Peso.Valor);
-            Assumes.True(soma < 1f);
-            int qtd = carteiraBuilder.Count(it => it.Peso.Valor == 0f);
+            decimal soma = carteiraBuilder.Sum(it => it.Peso.Valor);
+            Assumes.True(soma < 1m);
+            int qtd = carteiraBuilder.Count(it => it.Peso.Valor == 0m);
             Assumes.True(qtd == 1);
 
             int index = -1;
             for (int i = 0; i < carteiraBuilder.Count; i++)
             {
-                if (carteiraBuilder[i].Peso.Valor == 0f)
+                if (carteiraBuilder[i].Peso.Valor == 0m)
                     index = i;
             }
 
-            float peso = MathF.Round(1f - soma, 2);
+            decimal peso = 1m - soma;
             carteiraBuilder[index] = carteiraBuilder[index] with { Peso = new Percentual(peso) };
         }
 

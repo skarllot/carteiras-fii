@@ -28,10 +28,10 @@ public sealed class LeitorRecomendacaoInter : ILeitorRecomendacao
             carteiraBuilder.Add(new AtivoRecomendado(codigo, default));
         }
 
-        float count = carteiraBuilder.Count;
+        decimal peso = 1m / carteiraBuilder.Count;
         for (int i = 0; i < carteiraBuilder.Count; i++)
         {
-            carteiraBuilder[i] = carteiraBuilder[i] with { Peso = new Percentual(1f / count) };
+            carteiraBuilder[i] = carteiraBuilder[i] with { Peso = new Percentual(peso) };
         }
 
         Validar.PesosAtivos(carteiraBuilder);

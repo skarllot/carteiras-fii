@@ -31,11 +31,11 @@ VISC11	Vinci Shopping Centers	Shopping	15%	R$ 112,35	0,98	0,64%	7,28%";
         recomendacao.Carteira[3].Codigo.Should().Be("MCCI11");
         recomendacao.Carteira[4].Codigo.Should().Be("GALG11");
         recomendacao.Carteira[5].Codigo.Should().Be("VISC11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.15f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.15f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.20f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.20f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.15f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.15f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.15m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.15m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.20m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.20m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.15m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.15m);
     }
 }

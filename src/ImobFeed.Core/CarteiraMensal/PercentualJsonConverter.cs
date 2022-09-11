@@ -9,7 +9,7 @@ public sealed class PercentualJsonConverter : JsonConverter<Percentual>
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options) =>
-        new(reader.GetSingle());
+        new(reader.GetDecimal());
 
     public override void Write(
         Utf8JsonWriter writer,

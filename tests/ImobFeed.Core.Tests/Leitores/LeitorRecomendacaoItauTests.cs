@@ -41,16 +41,16 @@ Kinea Rendimentos Imobiliários KNCR11 Ativos Financeiros 11,25% 7,9 4,5 1,02 14
         recomendacao.Carteira[8].Codigo.Should().Be("HGCR11");
         recomendacao.Carteira[9].Codigo.Should().Be("KNHY11");
         recomendacao.Carteira[10].Codigo.Should().Be("KNCR11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.05f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.05f);
-        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.05f);
-        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.1125f);
-        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.1125f);
-        recomendacao.Carteira[9].Peso.Valor.Should().Be(0.1125f);
-        recomendacao.Carteira[10].Peso.Valor.Should().Be(0.1125f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.05m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.05m);
+        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.05m);
+        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.1125m);
+        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.1125m);
+        recomendacao.Carteira[9].Peso.Valor.Should().Be(0.1125m);
+        recomendacao.Carteira[10].Peso.Valor.Should().Be(0.1125m);
     }
 }

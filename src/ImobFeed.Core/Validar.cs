@@ -12,8 +12,8 @@ public static class Validar
 
     public static void PesosAtivos(IEnumerable<AtivoRecomendado> ativos)
     {
-        float sum = ativos.Sum(it => it.Peso.Valor);
-        if (Math.Abs(sum - 1f) >= 0.001f)
-            Verify.FailOperation("Falha ao ler pesos dos ativos: Total {0}%", sum * 100f);
+        decimal sum = ativos.Sum(it => it.Peso.Valor);
+        if (sum - 1m >= 0.0001m)
+            Verify.FailOperation("Falha ao ler pesos dos ativos: Total {0}%", sum * 100m);
     }
 }

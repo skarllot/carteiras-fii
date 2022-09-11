@@ -21,7 +21,7 @@ public class LeitorRecomendacaoBancoBrasil : ILeitorRecomendacao
             if (codigo is null)
                 continue;
 
-            float? peso = LeitorCampo.LerPeso(line);
+            decimal? peso = LeitorCampo.LerPeso(line);
             if (peso is null)
                 continue;
 

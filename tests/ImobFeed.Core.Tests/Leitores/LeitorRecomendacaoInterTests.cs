@@ -38,12 +38,12 @@ RBRR11 FII RBR RENDIMENTO HIGH GRAD 1.010 1.287 97,5 102% -0,8 8,0 16,8 13,5 Com
         recomendacao.Carteira[4].Codigo.Should().Be("RBRF11");
         recomendacao.Carteira[5].Codigo.Should().Be("KNIP11");
         recomendacao.Carteira[6].Codigo.Should().Be("RBRR11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.1428571428571429f);
-        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.1428571428571429f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
+        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.1428571428571428571428571429m);
     }
 }

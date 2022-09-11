@@ -21,7 +21,7 @@ public sealed class LeitorRecomendacaoMirae : ILeitorRecomendacao
             if (codigo is null)
                 continue;
 
-            float? peso = LeitorCampo.LerPesoNumero(line, 0);
+            decimal? peso = LeitorCampo.LerPesoNumero(line, 0);
             if (peso is null)
                 continue;
 

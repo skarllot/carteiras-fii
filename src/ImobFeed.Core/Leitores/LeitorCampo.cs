@@ -39,7 +39,7 @@ public static class LeitorCampo
         return codigoBuffer.ToString();
     }
 
-    public static float? LerPeso(string line, bool isLast = false)
+    public static decimal? LerPeso(string line, bool isLast = false)
     {
         int indexPct = isLast
             ? line.LastIndexOf("%", StringComparison.Ordinal)
@@ -62,13 +62,13 @@ public static class LeitorCampo
             return null;
 
         var pesoBuffer = line.AsSpan(indexSpc + 1, indexPct - indexSpc - 1);
-        if (!float.TryParse(pesoBuffer, NumberStyles.Float, CultureCache.PortuguesBrasil, out float peso))
+        if (!decimal.TryParse(pesoBuffer, NumberStyles.Float, CultureCache.PortuguesBrasil, out decimal peso))
             return null;
 
         return peso;
     }
 
-    public static float? LerPesoNumero(string line, int skip)
+    public static decimal? LerPesoNumero(string line, int skip)
     {
         int iniIndex = -1;
         int finIndex = -1;
@@ -113,7 +113,7 @@ public static class LeitorCampo
         }
 
         var pesoBuffer = line.AsSpan(iniIndex, finIndex - iniIndex + 1);
-        if (!float.TryParse(pesoBuffer, NumberStyles.Float, CultureCache.PortuguesBrasil, out float peso))
+        if (!decimal.TryParse(pesoBuffer, NumberStyles.Float, CultureCache.PortuguesBrasil, out decimal peso))
             return null;
 
         return peso;

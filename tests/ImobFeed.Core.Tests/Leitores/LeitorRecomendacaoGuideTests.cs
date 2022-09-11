@@ -51,15 +51,15 @@ nee Ganho de ; ; 3 .
         recomendacao.Carteira[7].Codigo.Should().Be("BRCR11");
         recomendacao.Carteira[8].Codigo.Should().Be("VISC11");
         recomendacao.Carteira[9].Codigo.Should().Be("HGCR11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.15f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.05f);
-        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.10f);
-        recomendacao.Carteira[9].Peso.Valor.Should().Be(0.10f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.15m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.05m);
+        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.10m);
+        recomendacao.Carteira[9].Peso.Valor.Should().Be(0.10m);
     }
 }

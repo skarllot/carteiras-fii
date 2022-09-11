@@ -26,7 +26,7 @@ public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
             if (!hasTwo)
                 continue;
 
-            float? peso = LeitorCampo.LerPeso(line, true);
+            decimal? peso = LeitorCampo.LerPeso(line, true);
             if (peso is null)
                 continue;
 

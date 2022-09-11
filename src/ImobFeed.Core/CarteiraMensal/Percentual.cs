@@ -3,7 +3,7 @@
 namespace ImobFeed.Core.CarteiraMensal;
 
 [JsonConverter(typeof(PercentualJsonConverter))]
-public readonly record struct Percentual(float Valor) : IComparable<Percentual>, IComparable
+public readonly record struct Percentual(decimal Valor) : IComparable<Percentual>, IComparable
 {
     public static readonly Percentual Zero = new(0);
 

@@ -35,13 +35,13 @@ REC Recebív Recebíveis R ECR 11 12,5% 0,50% 2,24% 4,7 93,28 85,75 98,86 0,98 5
         recomendacao.Carteira[5].Codigo.Should().Be("HGCR11");
         recomendacao.Carteira[6].Codigo.Should().Be("KNCR11");
         recomendacao.Carteira[7].Codigo.Should().Be("RECR11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.125f);
-        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.125f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.125m);
+        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.125m);
     }
 }

@@ -37,14 +37,14 @@ BTG Pactual Corp. Office	BRCR11	4%	Escritório	R$69,45	R$80,00	8.22%";
         recomendacao.Carteira[6].Codigo.Should().Be("BTAL11");
         recomendacao.Carteira[7].Codigo.Should().Be("VISC11");
         recomendacao.Carteira[8].Codigo.Should().Be("BRCR11");
-        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.12f);
-        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.04f);
+        recomendacao.Carteira[0].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[1].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[2].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[3].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[4].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[5].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[6].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[7].Peso.Valor.Should().Be(0.12m);
+        recomendacao.Carteira[8].Peso.Valor.Should().Be(0.04m);
     }
 }
