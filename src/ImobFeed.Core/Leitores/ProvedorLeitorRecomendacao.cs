@@ -1,9 +1,14 @@
-﻿namespace ImobFeed.Core.Leitores;
+﻿using ImobFeed.Core.Exportadores;
+
+namespace ImobFeed.Core.Leitores;
 
 public static class ProvedorLeitorRecomendacao
 {
-    private static readonly Dictionary<string, ILeitorRecomendacao> Leitores =
+    private static readonly Dictionary<string, ILeitorRecomendacao> _leitores =
         TodosLeitores().ToDictionary(it => it.NomeCorretora, StringComparer.OrdinalIgnoreCase);
+
+    private static readonly Dictionary<string, string> _nomesArquivo =
+        _leitores.Keys.ToDictionary(it => SistemaArquivos.NormalizarNome(it));
 
     private static IEnumerable<ILeitorRecomendacao> TodosLeitores()
     {
@@ -23,6 +28,11 @@ public static class ProvedorLeitorRecomendacao
 
     public static ILeitorRecomendacao? Buscar(string nome)
     {
-        return Leitores.TryGetValue(nome, out var resultado) ? resultado : null;
+        return _leitores.TryGetValue(nome, out var resultado) ? resultado : null;
+    }
+
+    public static string BuscaReversaNomeArquivo(string nomeArquivo)
+    {
+        return _nomesArquivo[nomeArquivo];
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.IO.Abstractions;
+﻿using System.Collections.Immutable;
+using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Core.CarteiraMensal;
-using ImobFeed.Core.Common;
 
 namespace ImobFeed.Core.Exportadores;
 
@@ -21,25 +21,22 @@ public class ExportadorRecomendacao
         var dirRecomendacao = _baseDirectory
             .CreateSubdirectory(recomendacao.Data.Year.ToString())
             .CreateSubdirectory(recomendacao.Data.Month.ToString("00"))
-            .CreateSubdirectory(NormalizePath(recomendacao.Corretora));
+            .CreateSubdirectory(SistemaArquivos.NormalizarNome(recomendacao.Corretora));
 
         string filePath = _fileSystem.Path.Join(
             dirRecomendacao.FullName,
-            (NormalizePath(recomendacao.NomeCarteira) ?? "default") + ".json");
+            (SistemaArquivos.NormalizarNome(recomendacao.NomeCarteira) ?? "default") + ".json");
 
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(fileStream, recomendacao.Carteira, SourceGenerationContext.Default.Options);
+        JsonSerializer.Serialize(
+            fileStream,
+            new ArquivoCarteira(recomendacao.NomeCarteira, recomendacao.Carteira),
+            SourceGenerationContext.Default.Options);
 
         fileStream.Flush();
 
         progress.Report(new RecomendacaoSalva(filePath));
     }
-
-    private static string? NormalizePath(string? value)
-    {
-        return value
-            ?.RemoveDiacritics()
-            .ToLowerInvariant()
-            .Replace(' ', '-');
-    }
 }
+
+public sealed record ArquivoCarteira(string? Nome, ImmutableArray<AtivoRecomendado> Ativos);
