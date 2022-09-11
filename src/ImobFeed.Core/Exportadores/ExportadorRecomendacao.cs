@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.IO.Abstractions;
-using System.Text.Json;
+﻿using System.IO.Abstractions;
 using ImobFeed.Core.CarteiraMensal;
 
 namespace ImobFeed.Core.Exportadores;
@@ -27,16 +25,10 @@ public class ExportadorRecomendacao
             dirRecomendacao.FullName,
             (SistemaArquivos.NormalizarNome(recomendacao.NomeCarteira) ?? "default") + ".json");
 
-        using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(
-            fileStream,
-            new ArquivoCarteira(recomendacao.NomeCarteira, recomendacao.Carteira),
-            SourceGenerationContext.Default.Options);
-
-        fileStream.Flush();
+        SerializadorArquivoCarteira.Salvar(
+            _fileSystem.FileInfo.FromFileName(filePath),
+            new ArquivoCarteira(recomendacao.NomeCarteira, recomendacao.Carteira));
 
         progress.Report(new RecomendacaoSalva(filePath));
     }
 }
-
-public sealed record ArquivoCarteira(string? Nome, ImmutableArray<AtivoRecomendado> Ativos);

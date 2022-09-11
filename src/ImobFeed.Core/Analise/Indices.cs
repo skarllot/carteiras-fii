@@ -30,7 +30,10 @@ public class Indices
     private void CriarIndiceRaiz(IProgress<IndiceCriado> progress)
     {
         var indiceRaiz = new IndiceRaiz(
-            Anos: _baseDirectory.EnumerateDirectories().Select(it => it.Name).ToImmutableArray());
+            Anos: _baseDirectory.EnumerateDirectories().Select(it => it.Name).ToImmutableArray(),
+            Tops: _baseDirectory.EnumerateFiles("??????-top.json", SearchOption.TopDirectoryOnly)
+                .Select(it => new InfoTop(int.Parse(it.Name.AsSpan(0, 4)), int.Parse(it.Name.AsSpan(2, 2)), it.Name))
+                .ToImmutableArray());
 
         string filePath = _fileSystem.Path.Join(_baseDirectory.FullName, "index.json");
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
@@ -83,7 +86,7 @@ public class Indices
         var indiceAno = new IndiceCorretora(
             Carteiras: directoryInfo.EnumerateFiles("*.json", SearchOption.TopDirectoryOnly)
                 .Where(it => it.Name != "index.json")
-                .Select(it => new InfoCarteira(ObterNomeCarteira(it), it.Name))
+                .Select(it => new InfoCarteira(SerializadorArquivoCarteira.Ler(it)?.Nome, it.Name))
                 .ToImmutableArray());
 
         string filePath = _fileSystem.Path.Join(directoryInfo.FullName, "index.json");
@@ -93,18 +96,9 @@ public class Indices
 
         progress.Report(new IndiceCriado(filePath));
     }
-
-    private static string? ObterNomeCarteira(IFileInfo fileInfo)
-    {
-        using var stream = fileInfo.OpenRead();
-        var arquivoCarteira =
-            JsonSerializer.Deserialize<ArquivoCarteira>(stream, SourceGenerationContext.Default.Options);
-
-        return arquivoCarteira?.Nome;
-    }
 }
 
-public sealed record IndiceRaiz(ImmutableArray<string> Anos);
+public sealed record IndiceRaiz(ImmutableArray<string> Anos, ImmutableArray<InfoTop> Tops);
 
 public sealed record IndiceAno(ImmutableArray<string> Meses);
 
@@ -115,3 +109,5 @@ public sealed record InfoCorretora(string Nome, string Caminho);
 public sealed record IndiceCorretora(ImmutableArray<InfoCarteira> Carteiras);
 
 public sealed record InfoCarteira(string? Nome, string Caminho);
+
+public sealed record InfoTop(int Ano, int Mes, string Caminho);
