@@ -4214,4 +4214,9 @@ public static class AtivosClubeFii
             ? ativo
             : null;
     }
+
+    public static bool ContemAtivo(string codigo)
+    {
+        return DicionarioAtivos.ContainsKey(codigo);
+    }
 }

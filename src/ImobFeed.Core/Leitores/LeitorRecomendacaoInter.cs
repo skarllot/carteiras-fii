@@ -4,9 +4,9 @@ using NodaTime;
 
 namespace ImobFeed.Core.Leitores;
 
-public sealed class LeitorRecomendacaoBtgPactual : ILeitorRecomendacao
+public sealed class LeitorRecomendacaoInter : ILeitorRecomendacao
 {
-    public string NomeCorretora => "BTG Pactual";
+    public string NomeCorretora => "Inter Invest";
 
     public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
     {
@@ -17,16 +17,21 @@ public sealed class LeitorRecomendacaoBtgPactual : ILeitorRecomendacao
             if (string.IsNullOrWhiteSpace(line))
                 break;
 
+            if (!line.Contains("Compra", StringComparison.Ordinal))
+                continue;
+
             string? codigo = LeitorCampo.LerCodigo(line);
             if (codigo is null)
                 continue;
 
-            float? peso = LeitorCampo.LerPeso(line);
-            if (peso is null)
-                continue;
-
             Validar.CodigoAtivo(codigo);
-            carteiraBuilder.Add(new AtivoRecomendado(codigo, new Percentual(peso.Value / 100)));
+            carteiraBuilder.Add(new AtivoRecomendado(codigo, default));
+        }
+
+        float count = carteiraBuilder.Count;
+        for (int i = 0; i < carteiraBuilder.Count; i++)
+        {
+            carteiraBuilder[i] = carteiraBuilder[i] with { Peso = new Percentual(1f / count) };
         }
 
         Validar.PesosAtivos(carteiraBuilder);

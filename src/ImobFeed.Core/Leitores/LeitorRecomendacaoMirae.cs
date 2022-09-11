@@ -4,9 +4,9 @@ using NodaTime;
 
 namespace ImobFeed.Core.Leitores;
 
-public sealed class LeitorRecomendacaoBtgPactual : ILeitorRecomendacao
+public sealed class LeitorRecomendacaoMirae : ILeitorRecomendacao
 {
-    public string NomeCorretora => "BTG Pactual";
+    public string NomeCorretora => "Mirae Asset";
 
     public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
     {
@@ -21,7 +21,7 @@ public sealed class LeitorRecomendacaoBtgPactual : ILeitorRecomendacao
             if (codigo is null)
                 continue;
 
-            float? peso = LeitorCampo.LerPeso(line);
+            float? peso = LeitorCampo.LerPesoNumero(line, 0);
             if (peso is null)
                 continue;
 

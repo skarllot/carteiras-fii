@@ -25,9 +25,11 @@ public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
             if (peso is null)
                 continue;
 
+            Validar.CodigoAtivo(codigo);
             carteiraBuilder.Add(new AtivoRecomendado(codigo, new Percentual(peso.Value / 100)));
         }
 
+        Validar.PesosAtivos(carteiraBuilder);
         return new Recomendacao(NomeCorretora, data, nomeCarteira, carteiraBuilder.ToImmutable());
     }
 }

@@ -65,4 +65,55 @@ public static class LeitorCampo
 
         return peso;
     }
+
+    public static float? LerPesoNumero(string line, int skip)
+    {
+        int iniIndex = -1;
+        int finIndex = -1;
+        int i = 0;
+        while (skip >= 0)
+        {
+            bool waitSpace = false;
+            for (; i < line.Length; i++)
+            {
+                char c = line[i];
+                if (char.IsWhiteSpace(c))
+                {
+                    if (iniIndex != -1)
+                        break;
+
+                    waitSpace = false;
+                    continue;
+                }
+
+                if (!char.IsNumber(c) && c != ',')
+                {
+                    iniIndex = -1;
+                    finIndex = -1;
+                    waitSpace = true;
+                    continue;
+                }
+
+                if (waitSpace)
+                    continue;
+
+                if (iniIndex == -1)
+                    iniIndex = i;
+                else
+                    finIndex = i;
+            }
+
+            if (iniIndex < 0 || finIndex <= iniIndex)
+                return null;
+
+            skip--;
+            i = finIndex + 1;
+        }
+
+        var pesoBuffer = line.AsSpan(iniIndex, finIndex - iniIndex + 1);
+        if (!float.TryParse(pesoBuffer, NumberStyles.Float, CultureCache.PortuguesBrasil, out float peso))
+            return null;
+
+        return peso;
+    }
 }

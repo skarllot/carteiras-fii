@@ -27,7 +27,7 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
                 if (codigo is null)
                     continue;
 
-                Verify.Operation(AtivosClubeFii.BuscaAtivo(codigo) is not null, "O ativo {0} não foi encontrado");
+                Validar.CodigoAtivo(codigo);
 
                 float? peso = null;
                 if (indexPct < index11)
@@ -58,8 +58,7 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
             carteiraBuilder[index] = carteiraBuilder[index] with { Peso = new Percentual(peso) };
         }
 
-        Verify.Operation(Math.Abs(carteiraBuilder.Sum(it => it.Peso.Valor) - 1f) < 0.001f, "Falha ao ler pesos dos ativos");
-
+        Validar.PesosAtivos(carteiraBuilder);
         return new Recomendacao(NomeCorretora, data, nomeCarteira, carteiraBuilder.ToImmutable());
     }
 }
