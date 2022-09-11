@@ -17,6 +17,8 @@ public static class ProvedorLeitorRecomendacao
         yield return new LeitorRecomendacaoNu();
         yield return new LeitorRecomendacaoRb();
         yield return new LeitorRecomendacaoOrama();
+        yield return new LeitorRecomendacaoSantander();
+        yield return new LeitorRecomendacaoRico();
     }
 
     public static ILeitorRecomendacao? Buscar(string nome)
