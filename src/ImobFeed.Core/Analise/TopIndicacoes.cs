@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.IO.Abstractions;
 using System.Text.Json;
+using EnumsNET;
+using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
 using NodaTime;
@@ -28,20 +30,31 @@ public class TopIndicacoes
                     Carteira: SerializadorArquivoCarteira.Ler(it)!))
             .SelectMany(it => it.Carteira.Ativos.Select(x => (it.Corretora, x.Codigo)))
             .GroupBy(it => it.Codigo)
-            .Select(it => new IndicacaoTopAtivo(it.Key, it.Count(), it.Select(x => x.Corretora).ToImmutableArray()))
-            .OrderByDescending(it => it.Quantidade);
+            .Select(
+                it => new IndicacaoTopAtivo(
+                    it.Key,
+                    AtivosClubeFii.BuscaAtivo(it.Key)?.Segmento.AsString(EnumFormat.Description)
+                    ?? Segmento.Desconhecido.AsString(EnumFormat.Description)!,
+                    it.DistinctBy(it => it.Corretora).Count(),
+                    it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
+            .OrderByDescending(it => it.Quantidade)
+            .ToImmutableArray();
 
-        var lista = new ListaTopIndicacoes(0, 0, indicacoes.ToImmutableArray());
+        var lista = new ListaTopIndicacoes(data.Year, data.Month, indicacoes.Length, indicacoes);
 
         string path = _fileSystem.Path.Combine(baseDirectory.FullName, $"{data.Year}{data.Month:00}-top.json");
         using var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write);
         JsonSerializer.Serialize(stream, lista, SourceGenerationContext.Default.Options);
         stream.Flush();
-        
+
         progress.Report(path);
     }
 }
 
-public sealed record ListaTopIndicacoes(int Ano, int Mes, ImmutableArray<IndicacaoTopAtivo> Indicacoes);
+public sealed record ListaTopIndicacoes(int Ano, int Mes, int Quantidade, ImmutableArray<IndicacaoTopAtivo> Indicacoes);
 
-public sealed record IndicacaoTopAtivo(string Codigo, int Quantidade, ImmutableArray<string> Corretoras);
+public sealed record IndicacaoTopAtivo(
+    string Codigo,
+    string Segmento,
+    int Quantidade,
+    ImmutableArray<string> Corretoras);
