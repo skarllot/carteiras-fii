@@ -1,0 +1,330 @@
+﻿= Indicações Favoritas em 9/2022
+
+[cols="1,2,2,1,4", options="header"]
+|===
+|Código |Nome |Segmento |Peso |Corretoras
+
+|BRCO11
+|Bresco Log&#237;stica
+|Fundo de Fundos
+|7.11%
+|BB Investimentos, BTG Pactual, Genial Investimentos, Guide Investimentos, Ita&#250; Corretora, Nu Invest, RB Investimentos, Rico, 
+
+|KNCR11
+|Kinea Rendimentos Imobili&#225;rios FII
+|Lajes Comerciais
+|6.82%
+|BB Investimentos, BTG Pactual, Ita&#250; Corretora, RB Investimentos, Rico, 
+
+|HGCR11
+|CSHG Receb&#237;veis Imobili&#225;rios
+|Lajes Comerciais
+|5.56%
+|BB Investimentos, BTG Pactual, Genial Investimentos, Guide Investimentos, Ita&#250; Corretora, RB Investimentos, Santander Corretora, 
+
+|HGRU11
+|CSHG Renda Urbana
+|Lajes Comerciais
+|5.15%
+|Ita&#250; Corretora, &#211;rama, RB Investimentos, Rico, Santander Corretora, 
+
+|CPTS11
+|Capit&#226;nia Securities II
+|H&#237;brido
+|4.73%
+|BTG Pactual, Genial Investimentos, Guide Investimentos, Nu Invest, Rico, 
+
+|RBRR11
+|RBR Rendimentos High Grade
+|Receb&#237;veis Imobili&#225;rios
+|4.66%
+|BTG Pactual, Guide Investimentos, Inter Invest, Nu Invest, Rico, 
+
+|BTLG11
+|BTG Pactual Log&#237;stica
+|Fundo de Fundos
+|4.39%
+|BB Investimentos, Guide Investimentos, Nu Invest, &#211;rama, RB Investimentos, 
+
+|HGRE11
+|CSHG Real Estate
+|Lajes Comerciais
+|4.07%
+|BTG Pactual, Genial Investimentos, Inter Invest, &#211;rama, 
+
+|VISC11
+|Vinci Shopping Centers
+|Residencial
+|3.98%
+|Genial Investimentos, Guide Investimentos, Inter Invest, Nu Invest, 
+
+|RBRF11
+|RBR Alpha Multiestrat&#233;gia Real Estate
+|Receb&#237;veis Imobili&#225;rios
+|3.55%
+|BB Investimentos, Guide Investimentos, Inter Invest, Santander Corretora, 
+
+|VILG11
+|Vinci Log&#237;stica
+|Residencial
+|3.53%
+|BTG Pactual, Inter Invest, Ita&#250; Corretora, Santander Corretora, 
+
+|BRCR11
+|BTG Pactual Corporate Office Fund
+|Fundo de Fundos
+|2.45%
+|BTG Pactual, Guide Investimentos, Nu Invest, &#211;rama, 
+
+|KNIP11
+|Kinea &#205;ndices de Pre&#231;os
+|Lajes Comerciais
+|2.32%
+|Inter Invest, Ita&#250; Corretora, 
+
+|XPML11
+|XP Malls
+|Shopping/Varejo
+|2.27%
+|Guide Investimentos, RB Investimentos, 
+
+|PVBI11
+|VBI Prime Properties
+|Desconhecido
+|2.27%
+|Ita&#250; Corretora, Rico, 
+
+|HGBS11
+|Hedge Brasil Shopping
+|Lajes Comerciais
+|2.21%
+|Inter Invest, RB Investimentos, 
+
+|JSRE11
+|JS Real Estate Multigest&#227;o
+|Lajes Comerciais
+|2.07%
+|BB Investimentos, &#211;rama, RB Investimentos, Santander Corretora, 
+
+|DEVA11
+|Devant Receb&#237;veis Imobili&#225;rios
+|H&#237;brido
+|2.00%
+|Nu Invest, &#211;rama, 
+
+|MCCI11
+|Mau&#225; Capital Receb&#237;veis Imobili&#225;rios
+|Log&#237;sticos
+|1.64%
+|Genial Investimentos, Santander Corretora, 
+
+|TRXF11
+|TRX Real Estate
+|Receb&#237;veis Imobili&#225;rios
+|1.64%
+|&#211;rama, Santander Corretora, 
+
+|CVBI11
+|VBI CRI
+|H&#237;brido
+|1.48%
+|BB Investimentos, Santander Corretora, 
+
+|RBRY11
+|RBR Cr&#233;dito Imobili&#225;rio Estruturado
+|Receb&#237;veis Imobili&#225;rios
+|1.36%
+|Guide Investimentos, &#211;rama, 
+
+|PATL11
+|P&#225;tria Log&#237;stica
+|Desconhecido
+|1.25%
+|BB Investimentos, Genial Investimentos, 
+
+|RBRL11
+|RBR Log
+|Receb&#237;veis Imobili&#225;rios
+|1.25%
+|BB Investimentos, Genial Investimentos, 
+
+|BTCR11
+|BTG Pactual Cr&#233;dito Imobili&#225;rio
+|Fundo de Fundos
+|1.14%
+|BTG Pactual, 
+
+|VGIR11
+|Valora CRI CDI
+|Residencial
+|1.14%
+|&#211;rama, 
+
+|TGAR11
+|TG Ativo Real
+|Receb&#237;veis Imobili&#225;rios
+|1.14%
+|&#211;rama, Santander Corretora, 
+
+|KNSC11
+|Kinea Securities
+|Lajes Comerciais
+|1.09%
+|Nu Invest, 
+
+|BTAL11
+|BTG Pactual Agro Log&#237;stica
+|Fundo de Fundos
+|1.09%
+|Nu Invest, 
+
+|HSML11
+|HSI Malls
+|Lajes Comerciais
+|1.02%
+|BB Investimentos, Ita&#250; Corretora, 
+
+|KNHY11
+|Kinea High Yield CRI
+|Lajes Comerciais
+|1.02%
+|Ita&#250; Corretora, 
+
+|LVBI11
+|VBI Log&#237;stico
+|Lajes Comerciais
+|0.91%
+|Ita&#250; Corretora, 
+
+|RBHG11
+|Rio Bravo Cr&#233;dito Imobili&#225;rio High Grade
+|Outros
+|0.91%
+|&#211;rama, 
+
+|RZAK11
+|Riza Akin
+|Receb&#237;veis Imobili&#225;rios
+|0.91%
+|&#211;rama, 
+
+|RFOF11
+|RB Capital I Fundo de Fundos
+|Receb&#237;veis Imobili&#225;rios
+|0.91%
+|RB Investimentos, 
+
+|SARE11
+|Santander Renda de Alugu&#233;is
+|Receb&#237;veis Imobili&#225;rios
+|0.91%
+|Santander Corretora, 
+
+|BPFF11
+|Brasil Plural Absoluto Fundo de Fundos
+|Fundo de Fundos
+|0.88%
+|Santander Corretora, 
+
+|RBRP11
+|RBR Properties FII
+|Receb&#237;veis Imobili&#225;rios
+|0.82%
+|BTG Pactual, Ita&#250; Corretora, 
+
+|VINO11
+|Vinci Offices
+|Residencial
+|0.73%
+|Santander Corretora, 
+
+|HSLG11
+|HSI Log&#237;stica
+|Lajes Comerciais
+|0.68%
+|BTG Pactual, 
+
+|GALG11
+|Guardian Log&#237;stica
+|Incorpora&#231;&#227;o Residencial
+|0.68%
+|Genial Investimentos, 
+
+|MALL11
+|Malls Brasil Plural
+|Log&#237;sticos
+|0.68%
+|Genial Investimentos, 
+
+|AIEC11
+|Autonomy Edif&#237;cios Corporativos
+|Desconhecido
+|0.57%
+|BB Investimentos, 
+
+|KFOF11
+|Kinea Fundo de Fundos
+|Lajes Comerciais
+|0.57%
+|BB Investimentos, 
+
+|RZTR11
+|Riza Terrax
+|Receb&#237;veis Imobili&#225;rios
+|0.57%
+|BB Investimentos, 
+
+|XPSF11
+|XP Selection
+|Shopping/Varejo
+|0.57%
+|BB Investimentos, 
+
+|BCRI11
+|Banestes Receb&#237;veis Imobili&#225;rios
+|Agroneg&#243;cio
+|0.57%
+|BB Investimentos, 
+
+|RECR11
+|REC Receb&#237;veis Imobili&#225;rios
+|Receb&#237;veis Imobili&#225;rios
+|0.57%
+|BB Investimentos, 
+
+|RCRB11
+|Rio Bravo Renda Corporativa
+|Receb&#237;veis Imobili&#225;rios
+|0.45%
+|BTG Pactual, 
+
+|PLCR11
+|Plural Receb&#237;veis Imobili&#225;rios
+|Desconhecido
+|0.45%
+|Genial Investimentos, 
+
+|MORE11
+|More Real Estate FOF
+|Log&#237;sticos
+|0.45%
+|Genial Investimentos, 
+
+|MXRF11
+|Maxi Renda
+|Log&#237;sticos
+|0.36%
+|Santander Corretora, 
+
+|FEXC11
+|BTG Pactual Fundo de CRI
+|Incorpora&#231;&#227;o
+|0.23%
+|BTG Pactual, 
+
+|BTRA11
+|BTG Pactual Terras Agr&#237;colas
+|Fundo de Fundos
+|0.23%
+|BTG Pactual, 
+
