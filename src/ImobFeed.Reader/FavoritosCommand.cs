@@ -9,11 +9,11 @@ using Spectre.Console.Cli;
 
 namespace ImobFeed.Reader;
 
-public class TopCommand : Command<TopCommand.Settings>
+public class FavoritosCommand : Command<FavoritosCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
 
-    public TopCommand(IFileSystem fileSystem)
+    public FavoritosCommand(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
     }
@@ -52,7 +52,7 @@ public class TopCommand : Command<TopCommand.Settings>
             return 2;
         }
 
-        new TopIndicacoes(_fileSystem)
+        new IndicacoesFavoritas(_fileSystem)
             .Calcular(
                 raizDirInfo,
                 data.Value,

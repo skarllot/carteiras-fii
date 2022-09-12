@@ -18,6 +18,7 @@ app.Configure(
         config.AddCommand<ImageFileCommand>("imagem");
         config.AddCommand<IndexCommand>("indice");
         config.AddCommand<TopCommand>("top");
+        config.AddCommand<FavoritosCommand>("favoritos");
     });
 
 return app.Run(args);

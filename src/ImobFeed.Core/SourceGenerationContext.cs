@@ -11,6 +11,7 @@ namespace ImobFeed.Core;
 [JsonSerializable(typeof(IndiceMes))]
 [JsonSerializable(typeof(IndiceCorretora))]
 [JsonSerializable(typeof(ListaTopIndicacoes))]
+[JsonSerializable(typeof(ListaIndicacoesFavoritas))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
