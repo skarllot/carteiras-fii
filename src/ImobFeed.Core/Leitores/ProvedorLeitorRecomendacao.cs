@@ -8,7 +8,7 @@ public static class ProvedorLeitorRecomendacao
         TodosLeitores().ToDictionary(it => it.NomeCorretora, StringComparer.OrdinalIgnoreCase);
 
     private static readonly Dictionary<string, string> _nomesArquivo =
-        _leitores.Keys.ToDictionary(it => SistemaArquivos.NormalizarNome(it));
+        _leitores.Keys.ToDictionary(it => SistemaArquivos.NormalizarNome(it), StringComparer.OrdinalIgnoreCase);
 
     private static IEnumerable<ILeitorRecomendacao> TodosLeitores()
     {
@@ -34,5 +34,10 @@ public static class ProvedorLeitorRecomendacao
     public static string BuscaReversaNomeArquivo(string nomeArquivo)
     {
         return _nomesArquivo[nomeArquivo];
+    }
+
+    public static bool NomeNormalizadoExiste(string nomeArquivo)
+    {
+        return _nomesArquivo.ContainsKey(nomeArquivo);
     }
 }
