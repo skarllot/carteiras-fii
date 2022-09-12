@@ -58,7 +58,7 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
                 data.Value,
                 new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
 
-        new IndicacoesFavoritasAsciidoc(_fileSystem)
+        new IndicacoesFavoritasHtml(_fileSystem)
             .Criar(
                 raizDirInfo,
                 new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
