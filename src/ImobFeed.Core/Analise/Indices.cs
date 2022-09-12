@@ -21,7 +21,8 @@ public class Indices
     {
         CriarIndiceRaiz(progress);
 
-        foreach (var directory in _baseDirectory.EnumerateDirectories())
+        foreach (var directory in _baseDirectory.EnumerateDirectories()
+                     .Where(it => int.TryParse(it.Name, out int r) && r > 2000))
         {
             CriarIndiceAno(directory, progress);
         }
@@ -30,7 +31,10 @@ public class Indices
     private void CriarIndiceRaiz(IProgress<IndiceCriado> progress)
     {
         var indiceRaiz = new IndiceRaiz(
-            Anos: _baseDirectory.EnumerateDirectories().Select(it => it.Name).ToImmutableArray(),
+            Anos: _baseDirectory.EnumerateDirectories()
+                .Where(it => int.TryParse(it.Name, out int r) && r > 2000)
+                .Select(it => it.Name)
+                .ToImmutableArray(),
             Tops: _baseDirectory.EnumerateFiles("??????-top.json", SearchOption.TopDirectoryOnly)
                 .Select(it => new InfoTop(int.Parse(it.Name.AsSpan(0, 4)), int.Parse(it.Name.AsSpan(2, 2)), it.Name))
                 .ToImmutableArray());
@@ -45,7 +49,8 @@ public class Indices
 
     private void CriarIndiceAno(IDirectoryInfo directoryInfo, IProgress<IndiceCriado> progress)
     {
-        foreach (var directory in directoryInfo.EnumerateDirectories())
+        foreach (var directory in directoryInfo.EnumerateDirectories()
+                     .Where(it => int.TryParse(it.Name, out int r) && r >= 1 && r <= 12))
         {
             CriarIndiceMes(directory, progress);
         }
@@ -63,7 +68,8 @@ public class Indices
 
     private void CriarIndiceMes(IDirectoryInfo directoryInfo, IProgress<IndiceCriado> progress)
     {
-        foreach (var directory in directoryInfo.EnumerateDirectories())
+        foreach (var directory in directoryInfo.EnumerateDirectories()
+                     .Where(it => ProvedorLeitorRecomendacao.NomeNormalizadoExiste(it.Name)))
         {
             CriarIndiceCorretora(directory, progress);
         }
