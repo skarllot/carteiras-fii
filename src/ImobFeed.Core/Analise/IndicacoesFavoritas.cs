@@ -38,12 +38,17 @@ public class IndicacoesFavoritas
             .GroupBy(it => it.Corretora)
             .Select(it => (Corretora: it.Key, QtdCarteiras: it.Count(), Carteiras: it.Select(x => x.Carteira)))
             .SelectMany(it => it.Carteiras.Select(x => (it.Corretora, PesoCarteira: 1m / it.QtdCarteiras, Carteira: x)))
-            .SelectMany(it => it.Carteira.Ativos.Select(x => (it.Corretora, x.Codigo, Peso: x.Peso.Valor * it.PesoCarteira * pesoCorretora)))
-            .GroupBy(it => it.Codigo)
+            .SelectMany(
+                it => it.Carteira.Ativos.Select(
+                    x => (it.Corretora,
+                        Ativo: AtivosClubeFii.BuscaAtivo(x.Codigo)!,
+                        Peso: x.Peso.Valor * it.PesoCarteira * pesoCorretora)))
+            .GroupBy(it => it.Ativo)
             .Select(
                 it => new IndicacaoAtivoFavorito(
-                    it.Key,
-                    AtivosClubeFii.BuscaAtivo(it.Key)?.Segmento.AsString(EnumFormat.Description)
+                    it.Key.Codigo,
+                    it.Key.Nome,
+                    it.Key.Segmento.AsString(EnumFormat.Description)
                     ?? Segmento.Desconhecido.AsString(EnumFormat.Description)!,
                     Math.Round(it.Sum(x => x.Peso), 4),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
@@ -65,6 +70,7 @@ public sealed record ListaIndicacoesFavoritas(int Ano, int Mes, ImmutableArray<I
 
 public sealed record IndicacaoAtivoFavorito(
     string Codigo,
+    string Nome,
     string Segmento,
     decimal Peso,
     ImmutableArray<string> Corretoras);

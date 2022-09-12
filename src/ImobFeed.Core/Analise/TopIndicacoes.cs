@@ -28,12 +28,14 @@ public class TopIndicacoes
             .Select(
                 it => (Corretora: ProvedorLeitorRecomendacao.BuscaReversaNomeArquivo(it.Directory.Name),
                     Carteira: SerializadorArquivoCarteira.Ler(it)!))
-            .SelectMany(it => it.Carteira.Ativos.Select(x => (it.Corretora, x.Codigo)))
-            .GroupBy(it => it.Codigo)
+            .SelectMany(
+                it => it.Carteira.Ativos.Select(x => (it.Corretora, Ativo: AtivosClubeFii.BuscaAtivo(x.Codigo)!)))
+            .GroupBy(it => it.Ativo)
             .Select(
                 it => new IndicacaoTopAtivo(
-                    it.Key,
-                    AtivosClubeFii.BuscaAtivo(it.Key)?.Segmento.AsString(EnumFormat.Description)
+                    it.Key.Codigo,
+                    it.Key.Nome,
+                    it.Key.Segmento.AsString(EnumFormat.Description)
                     ?? Segmento.Desconhecido.AsString(EnumFormat.Description)!,
                     it.DistinctBy(it => it.Corretora).Count(),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
@@ -55,6 +57,7 @@ public sealed record ListaTopIndicacoes(int Ano, int Mes, int Quantidade, Immuta
 
 public sealed record IndicacaoTopAtivo(
     string Codigo,
+    string Nome,
     string Segmento,
     int Quantidade,
     ImmutableArray<string> Corretoras);
