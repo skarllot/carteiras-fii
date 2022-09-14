@@ -8,7 +8,11 @@ public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
 {
     public string NomeCorretora => "Genial Investimentos";
 
-    public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
+    public Recomendacao Ler(
+        IReadOnlyDictionary<string, Ativo> dictAtivos,
+        TextReader reader,
+        string? nomeCarteira,
+        YearMonth data)
     {
         var carteiraBuilder = ImmutableArray.CreateBuilder<AtivoRecomendado>();
 
@@ -25,7 +29,7 @@ public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
             if (peso is null)
                 continue;
 
-            Validar.CodigoAtivo(codigo);
+            Validar.CodigoAtivo(dictAtivos, codigo);
             carteiraBuilder.Add(new AtivoRecomendado(codigo, new Percentual(peso.Value / 100)));
         }
 

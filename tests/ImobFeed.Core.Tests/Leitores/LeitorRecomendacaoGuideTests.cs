@@ -36,7 +36,7 @@ nee Ganho de ; ; 3 .
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoGuide();
-        var recomendacao = leitor.Ler(inputReader, null, new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, null, new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().BeNull();

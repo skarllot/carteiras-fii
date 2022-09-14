@@ -5,9 +5,9 @@ namespace ImobFeed.Core;
 
 public static class Validar
 {
-    public static void CodigoAtivo(string codigo)
+    public static void CodigoAtivo(IReadOnlyDictionary<string, Ativo> dictAtivos, string codigo)
     {
-        Verify.Operation(AtivosClubeFii.ContemAtivo(codigo), "O ativo {0} não foi encontrado", codigo);
+        Verify.Operation(dictAtivos.ContainsKey(codigo), "O ativo {0} não foi encontrado", codigo);
     }
 
     public static void PesosAtivos(IEnumerable<AtivoRecomendado> ativos)

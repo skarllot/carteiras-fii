@@ -19,6 +19,7 @@ app.Configure(
         config.AddCommand<IndexCommand>("indice");
         config.AddCommand<TopCommand>("top");
         config.AddCommand<FavoritosCommand>("favoritos");
+        config.AddCommand<AtualizarListaAtivosCommand>("atualizar-ativos");
     });
 
 return app.Run(args);

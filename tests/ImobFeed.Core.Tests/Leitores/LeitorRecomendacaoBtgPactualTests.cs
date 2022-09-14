@@ -28,7 +28,7 @@ BTRA11 2,5% BTG Pactual Agronegócio 90,7 103,8 0,87x 17,1% - 9,3% 9,3%";
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoBtgPactual();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Recomendada");

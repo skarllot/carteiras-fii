@@ -25,7 +25,7 @@ RZAK11 Riza Akin Recebíveis 10% 15,43% R$ 110,81 11,57% Compra";
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoOrama();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Moderada");

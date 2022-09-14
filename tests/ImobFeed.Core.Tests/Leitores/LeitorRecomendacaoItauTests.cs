@@ -25,7 +25,7 @@ Kinea Rendimentos Imobiliários KNCR11 Ativos Financeiros 11,25% 7,9 4,5 1,02 14
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoItau();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Recomendada");

@@ -15,7 +15,7 @@ public class LeitorListaRecomendacao
         _data = data;
     }
 
-    public IEnumerable<Recomendacao> LerTudo(IFileInfo fileInfo)
+    public IEnumerable<Recomendacao> LerTudo(IFileInfo fileInfo, IReadOnlyDictionary<string, Ativo> dictAtivos)
     {
         Assumes.True(fileInfo.Exists);
 
@@ -29,7 +29,7 @@ public class LeitorListaRecomendacao
                 throw Verify.FailOperation("A corretora não foi encontrada: {0}", line);
 
             string? nomeCarteira = leitor.LerNomeCarteira(fileReader);
-            yield return leitor.Ler(fileReader, nomeCarteira, _data);
+            yield return leitor.Ler(dictAtivos, fileReader, nomeCarteira, _data);
         }
     }
 }

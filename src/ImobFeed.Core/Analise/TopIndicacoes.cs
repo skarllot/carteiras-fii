@@ -1,8 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.IO.Abstractions;
 using System.Text.Json;
-using EnumsNET;
-using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
 using NodaTime;
@@ -12,14 +10,18 @@ namespace ImobFeed.Core.Analise;
 public class TopIndicacoes
 {
     private readonly IFileSystem _fileSystem;
+    private readonly AtivosClubeFii _ativosClubeFii;
 
     public TopIndicacoes(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
+        _ativosClubeFii = new AtivosClubeFii(fileSystem);
     }
 
     public void Calcular(IDirectoryInfo baseDirectory, YearMonth data, IProgress<string> progress)
     {
+        var dictAtivos = _ativosClubeFii.CarregarAtivos(baseDirectory);
+
         var indicacoes = baseDirectory
             .CreateSubdirectory(data.Year.ToString())
             .CreateSubdirectory(data.Month.ToString("00"))
@@ -29,15 +31,14 @@ public class TopIndicacoes
                 it => (Corretora: ProvedorLeitorRecomendacao.BuscaReversaNomeArquivo(it.Directory.Name),
                     Carteira: SerializadorArquivoCarteira.Ler(it)!))
             .SelectMany(
-                it => it.Carteira.Ativos.Select(x => (it.Corretora, Ativo: AtivosClubeFii.BuscaAtivo(x.Codigo)!)))
+                it => it.Carteira.Ativos.Select(x => (it.Corretora, Ativo: dictAtivos[x.Codigo])))
             .GroupBy(it => it.Ativo)
             .Select(
                 it => new IndicacaoTopAtivo(
                     it.Key.Codigo,
                     it.Key.Nome,
-                    it.Key.Segmento.AsString(EnumFormat.Description)
-                    ?? Segmento.Desconhecido.AsString(EnumFormat.Description)!,
-                    it.DistinctBy(it => it.Corretora).Count(),
+                    it.Key.Segmento,
+                    it.DistinctBy(x => x.Corretora).Count(),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
             .OrderByDescending(it => it.Quantidade)
             .ToImmutableArray();

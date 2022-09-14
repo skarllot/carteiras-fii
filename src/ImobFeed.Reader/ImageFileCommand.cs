@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
+using ImobFeed.Core.Analise;
 using ImobFeed.Core.Common;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
@@ -83,7 +84,11 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
         string textoImagem = leitorImagem.LerTextoImagem(imagemFileInfo);
 
         using var reader = new StringReader(textoImagem);
-        var recomendacao = leitorRecomendacao.Ler(reader, settings.NomeCarteira, data.Value);
+        var recomendacao = leitorRecomendacao.Ler(
+            new AtivosClubeFii(_fileSystem).CarregarAtivos(saidaDirInfo),
+            reader,
+            settings.NomeCarteira,
+            data.Value);
 
         var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
         exportador.Salvar(

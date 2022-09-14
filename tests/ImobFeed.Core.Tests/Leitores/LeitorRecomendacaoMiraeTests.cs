@@ -24,7 +24,7 @@ XPML11 FII Xp Malls 10 95,63";
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoMirae();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Recomendada");

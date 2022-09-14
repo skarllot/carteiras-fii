@@ -26,7 +26,7 @@ RBRR11 FII RBR RENDIMENTO HIGH GRAD 1.010 1.287 97,5 102% -0,8 8,0 16,8 13,5 Com
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoInter();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira");

@@ -22,7 +22,7 @@ REC Recebív Recebíveis R ECR 11 12,5% 0,50% 2,24% 4,7 93,28 85,75 98,86 0,98 5
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoBancoBrasil();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira FII Renda");

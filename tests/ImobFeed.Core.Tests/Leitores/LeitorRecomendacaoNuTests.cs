@@ -23,7 +23,7 @@ BTG Pactual Corp. Office	BRCR11	4%	Escritório	R$69,45	R$80,00	8.22%";
 
         using var inputReader = new StringReader(input);
         var leitor = new LeitorRecomendacaoNu();
-        var recomendacao = leitor.Ler(inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
+        var recomendacao = leitor.Ler(ListaAtivosProvider.Carregar(), inputReader, inputReader.ReadLine(), new YearMonth(2022, 9));
 
         recomendacao.Corretora.Should().Be(leitor.NomeCorretora);
         recomendacao.NomeCarteira.Should().Be("Carteira Top FII");

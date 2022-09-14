@@ -9,7 +9,11 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
 {
     public string NomeCorretora => "Guide Investimentos";
 
-    public Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data)
+    public Recomendacao Ler(
+        IReadOnlyDictionary<string, Ativo> dictAtivos,
+        TextReader reader,
+        string? nomeCarteira,
+        YearMonth data)
     {
         var carteiraBuilder = ImmutableArray.CreateBuilder<AtivoRecomendado>();
 
@@ -27,7 +31,7 @@ public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
                 if (codigo is null)
                     continue;
 
-                Validar.CodigoAtivo(codigo);
+                Validar.CodigoAtivo(dictAtivos, codigo);
 
                 decimal? peso = null;
                 if (indexPct < index11)

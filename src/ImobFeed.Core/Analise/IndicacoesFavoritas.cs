@@ -1,8 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.IO.Abstractions;
 using System.Text.Json;
-using EnumsNET;
-using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
 using NodaTime;
@@ -12,14 +10,18 @@ namespace ImobFeed.Core.Analise;
 public class IndicacoesFavoritas
 {
     private readonly IFileSystem _fileSystem;
+    private readonly AtivosClubeFii _ativosClubeFii;
 
     public IndicacoesFavoritas(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
+        _ativosClubeFii = new AtivosClubeFii(fileSystem);
     }
 
     public void Calcular(IDirectoryInfo baseDirectory, YearMonth data, IProgress<string> progress)
     {
+        var dictAtivos = _ativosClubeFii.CarregarAtivos(baseDirectory);
+
         decimal pesoCorretora = 1m / baseDirectory
             .CreateSubdirectory(data.Year.ToString())
             .CreateSubdirectory(data.Month.ToString("00"))
@@ -41,15 +43,14 @@ public class IndicacoesFavoritas
             .SelectMany(
                 it => it.Carteira.Ativos.Select(
                     x => (it.Corretora,
-                        Ativo: AtivosClubeFii.BuscaAtivo(x.Codigo)!,
+                        Ativo: dictAtivos[x.Codigo],
                         Peso: x.Peso.Valor * it.PesoCarteira * pesoCorretora)))
             .GroupBy(it => it.Ativo)
             .Select(
                 it => new IndicacaoAtivoFavorito(
                     it.Key.Codigo,
                     it.Key.Nome,
-                    it.Key.Segmento.AsString(EnumFormat.Description)
-                    ?? Segmento.Desconhecido.AsString(EnumFormat.Description)!,
+                    it.Key.Segmento,
                     Math.Round(it.Sum(x => x.Peso), 4),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
             .OrderByDescending(it => it.Peso)

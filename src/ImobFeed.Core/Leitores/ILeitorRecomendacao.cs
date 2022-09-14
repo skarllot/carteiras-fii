@@ -9,5 +9,5 @@ public interface ILeitorRecomendacao
 
     string? LerNomeCarteira(TextReader reader) => reader.ReadLine();
 
-    Recomendacao Ler(TextReader reader, string? nomeCarteira, YearMonth data);
+    Recomendacao Ler(IReadOnlyDictionary<string, Ativo> dictAtivos, TextReader reader, string? nomeCarteira, YearMonth data);
 }
