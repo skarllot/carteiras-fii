@@ -11,4 +11,7 @@ public sealed record Ativo(
     DateOnly? DataIpo,
     decimal? ValorIpo,
     string Segmento,
-    string Administrador);
+    string Administrador,
+    decimal? PVpa = null,
+    decimal? Yield1Mes = null,
+    decimal? Yield12Meses = null);

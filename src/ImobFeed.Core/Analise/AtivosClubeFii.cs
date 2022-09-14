@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Globalization;
 using System.IO.Abstractions;
 using System.Text.Json;
 using HtmlAgilityPack;
@@ -9,7 +10,8 @@ namespace ImobFeed.Core.Analise;
 
 public sealed class AtivosClubeFii
 {
-    private const string ClubeFiiUrl = "https://clubefii.com.br/fundo_imobiliario_lista#";
+    private const string ClubeFiiListaUrl = "https://clubefii.com.br/fundo_imobiliario_lista#";
+    private const string ClubeFiiRankingUrl = "https://clubefii.com.br/fundos_imobiliarios_ranking";
 
     private readonly IFileSystem _fileSystem;
 
@@ -20,7 +22,13 @@ public sealed class AtivosClubeFii
 
     public void Atualizar(IDirectoryInfo baseDirectory, IProgress<string> progress)
     {
-        var listaAtivos = new ListaAtivos(DateTimeOffset.UtcNow, BaixarListaAtivos(), ClubeFiiUrl);
+        var dictAtivos = BaixarListaAtivos().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
+        BaixarRankingAtivos(dictAtivos);
+
+        var listaAtivos = new ListaAtivos(
+            DateTimeOffset.UtcNow,
+            dictAtivos.Values.ToImmutableArray(),
+            ClubeFiiListaUrl);
 
         string path = ResolveCaminhoArquivo(baseDirectory);
         using var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write);
@@ -45,15 +53,13 @@ public sealed class AtivosClubeFii
         return _fileSystem.Path.Combine(baseDirectory.FullName, "lista-ativos.json");
     }
 
-    private ImmutableArray<Ativo> BaixarListaAtivos()
+    private IEnumerable<Ativo> BaixarListaAtivos()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(ClubeFiiUrl);
+        var doc = web.Load(ClubeFiiListaUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");
-
-        var listaAtivos = ImmutableArray.CreateBuilder<Ativo>();
 
         foreach (var row in tableRows.Skip(1))
         {
@@ -87,19 +93,52 @@ public sealed class AtivosClubeFii
             string segmento = cells[5].ChildNodes["a"].InnerText.Trim();
             string administrador = cells[6].ChildNodes["a"].InnerText.Trim();
 
-            listaAtivos.Add(
-                new Ativo(
-                    codigo,
-                    nome,
-                    valorCota,
-                    dataCotacao,
-                    temDataIpo ? dataIpo : null,
-                    valorIpo,
-                    segmento,
-                    administrador));
+            yield return new Ativo(
+                codigo,
+                nome,
+                valorCota,
+                dataCotacao,
+                temDataIpo ? dataIpo : null,
+                valorIpo,
+                segmento,
+                administrador);
         }
+    }
 
-        return listaAtivos.ToImmutable();
+    private void BaixarRankingAtivos(Dictionary<string, Ativo> dictAtivos)
+    {
+        var web = new HtmlWeb();
+        var doc = web.Load(ClubeFiiRankingUrl);
+
+        var tableRows = doc.DocumentNode
+            .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");
+
+        foreach (var row in tableRows.Skip(1))
+        {
+            var cells = row.Descendants("td").ToList();
+            string codigo = cells[0].ChildNodes["a"].InnerText.Trim();
+
+            decimal pVpa = decimal.Parse(
+                cells[4].ChildNodes["a"].InnerText.AsSpan().Trim(),
+                provider: CultureCache.PortuguesBrasil);
+
+            decimal yield1Mes = decimal.Parse(
+                cells[5].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1],
+                provider: CultureCache.PortuguesBrasil);
+
+            bool temYield12Mes = decimal.TryParse(
+                cells[6].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1],
+                NumberStyles.Float,
+                CultureCache.PortuguesBrasil,
+                out decimal yield12Mes);
+
+            dictAtivos[codigo] = dictAtivos[codigo] with
+            {
+                PVpa = pVpa,
+                Yield1Mes = yield1Mes / 100m,
+                Yield12Meses = temYield12Mes ? yield12Mes / 100m : null
+            };
+        }
     }
 }
 
