@@ -51,6 +51,10 @@ public class IndicacoesFavoritas
                     it.Key.Codigo,
                     it.Key.Nome,
                     it.Key.Segmento,
+                    it.Key.Administrador,
+                    it.Key.PVpa,
+                    it.Key.Yield1Mes,
+                    it.Key.Yield12Meses,
                     Math.Round(it.Sum(x => x.Peso), 4),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
             .OrderByDescending(it => it.Peso)
@@ -73,5 +77,9 @@ public sealed record IndicacaoAtivoFavorito(
     string Codigo,
     string Nome,
     string Segmento,
+    string Administrador,
+    decimal? PVpa,
+    decimal? Yield1Mes,
+    decimal? Yield12Meses,
     decimal Peso,
     ImmutableArray<string> Corretoras);
