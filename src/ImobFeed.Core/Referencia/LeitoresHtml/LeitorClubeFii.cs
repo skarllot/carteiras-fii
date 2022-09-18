@@ -1,62 +1,18 @@
-﻿using System.Collections.Immutable;
-using System.Globalization;
-using System.IO.Abstractions;
-using System.Text.Json;
+﻿using System.Globalization;
 using HtmlAgilityPack;
-using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Common;
 
-namespace ImobFeed.Core.Analise;
+namespace ImobFeed.Core.Referencia.LeitoresHtml;
 
-public sealed class AtivosClubeFii
+public static class LeitorClubeFii
 {
-    private const string ClubeFiiListaUrl = "https://clubefii.com.br/fundo_imobiliario_lista#";
-    private const string ClubeFiiRankingUrl = "https://clubefii.com.br/fundos_imobiliarios_ranking";
+    public const string ListaUrl = "https://clubefii.com.br/fundo_imobiliario_lista#";
+    public const string RankingUrl = "https://clubefii.com.br/fundos_imobiliarios_ranking";
 
-    private readonly IFileSystem _fileSystem;
-
-    public AtivosClubeFii(IFileSystem fileSystem)
-    {
-        _fileSystem = fileSystem;
-    }
-
-    public void Atualizar(IDirectoryInfo baseDirectory, IProgress<string> progress)
-    {
-        var dictAtivos = BaixarListaAtivos().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
-        BaixarRankingAtivos(dictAtivos);
-
-        var listaAtivos = new ListaAtivos(
-            DateTimeOffset.UtcNow,
-            dictAtivos.Values.ToImmutableArray(),
-            ClubeFiiListaUrl);
-
-        string path = ResolveCaminhoArquivo(baseDirectory);
-        using var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write);
-        JsonSerializer.Serialize(stream, listaAtivos, SourceGenerationContext.Default.Options);
-        stream.Flush();
-
-        progress.Report(path);
-    }
-
-    public IReadOnlyDictionary<string, Ativo> CarregarAtivos(IDirectoryInfo baseDirectory)
-    {
-        string path = ResolveCaminhoArquivo(baseDirectory);
-        using var stream = _fileSystem.File.OpenRead(path);
-        var listaAtivos = JsonSerializer.Deserialize<ListaAtivos>(stream, SourceGenerationContext.Default.Options);
-
-        return listaAtivos?.Ativos.ToDictionary(it => it.Codigo, StringComparer.OrdinalIgnoreCase)
-               ?? new Dictionary<string, Ativo>();
-    }
-
-    private string ResolveCaminhoArquivo(IDirectoryInfo baseDirectory)
-    {
-        return _fileSystem.Path.Combine(baseDirectory.FullName, "lista-ativos.json");
-    }
-
-    private IEnumerable<Ativo> BaixarListaAtivos()
+    public static IEnumerable<ClubeFiiAtivo> LerListaAtivos()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(ClubeFiiListaUrl);
+        var doc = web.Load(ListaUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");
@@ -93,7 +49,7 @@ public sealed class AtivosClubeFii
             string segmento = cells[5].ChildNodes["a"].InnerText.Trim();
             string administrador = cells[6].ChildNodes["a"].InnerText.Trim();
 
-            yield return new Ativo(
+            yield return new ClubeFiiAtivo(
                 codigo,
                 nome,
                 valorCota,
@@ -105,10 +61,10 @@ public sealed class AtivosClubeFii
         }
     }
 
-    private void BaixarRankingAtivos(Dictionary<string, Ativo> dictAtivos)
+    public static IEnumerable<ClubeFiiIndicadorAtivo> LerRanking()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(ClubeFiiRankingUrl);
+        var doc = web.Load(RankingUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");
@@ -132,14 +88,11 @@ public sealed class AtivosClubeFii
                 CultureCache.PortuguesBrasil,
                 out decimal yield12Mes);
 
-            dictAtivos[codigo] = dictAtivos[codigo] with
-            {
-                PVpa = pVpa,
-                Yield1Mes = yield1Mes / 100m,
-                Yield12Meses = temYield12Mes ? yield12Mes / 100m : null
-            };
+            yield return new ClubeFiiIndicadorAtivo(
+                codigo,
+                pVpa,
+                yield1Mes / 100m,
+                temYield12Mes ? yield12Mes / 100m : null);
         }
     }
 }
-
-public sealed record ListaAtivos(DateTimeOffset UltimaAtualizacao, ImmutableArray<Ativo> Ativos, string Origem);

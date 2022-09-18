@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Core.Analise;
 using ImobFeed.Core.Common;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
+using ImobFeed.Core.Referencia;
 using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -68,7 +68,7 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
         var leitor = new LeitorListaRecomendacao(data.Value);
         var recomendacoes = leitor.LerTudo(
             arquivoFileInfo,
-            new AtivosClubeFii(_fileSystem).CarregarAtivos(saidaDirInfo));
+            new ReferenciaAtivos(_fileSystem).CarregarAtivos(saidaDirInfo));
 
         var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
         foreach (var recomendacao in recomendacoes)

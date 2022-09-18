@@ -3,6 +3,7 @@ using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
+using ImobFeed.Core.Referencia;
 using NodaTime;
 
 namespace ImobFeed.Core.Analise;
@@ -10,17 +11,18 @@ namespace ImobFeed.Core.Analise;
 public class IndicacoesFavoritas
 {
     private readonly IFileSystem _fileSystem;
-    private readonly AtivosClubeFii _ativosClubeFii;
+    private readonly ReferenciaAtivos _referenciaAtivos;
 
     public IndicacoesFavoritas(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
-        _ativosClubeFii = new AtivosClubeFii(fileSystem);
+        _referenciaAtivos = new ReferenciaAtivos(fileSystem);
     }
 
     public void Calcular(IDirectoryInfo baseDirectory, YearMonth data, IProgress<string> progress)
     {
-        var dictAtivos = _ativosClubeFii.CarregarAtivos(baseDirectory);
+        var dictAtivos = _referenciaAtivos.CarregarAtivos(baseDirectory);
+        var dictIndicadores = _referenciaAtivos.CarregarIndicadores(baseDirectory);
 
         decimal pesoCorretora = 1m / baseDirectory
             .CreateSubdirectory(data.Year.ToString())
@@ -52,9 +54,9 @@ public class IndicacoesFavoritas
                     it.Key.Nome,
                     it.Key.Segmento,
                     it.Key.Administrador,
-                    it.Key.PVpa,
-                    it.Key.Yield1Mes,
-                    it.Key.Yield12Meses,
+                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.PVpa,
+                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.Yield1Mes,
+                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.Yield12Meses,
                     Math.Round(it.Sum(x => x.Peso), 4),
                     it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
             .OrderByDescending(it => it.Peso)

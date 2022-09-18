@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Core.Analise;
 using ImobFeed.Core.Common;
+using ImobFeed.Core.Referencia;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -33,7 +33,7 @@ public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.S
             return 1;
         }
 
-        new AtivosClubeFii(_fileSystem)
+        new ReferenciaAtivos(_fileSystem)
             .Atualizar(
                 raizDirInfo,
                 new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));

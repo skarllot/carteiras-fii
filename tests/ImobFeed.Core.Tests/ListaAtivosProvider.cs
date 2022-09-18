@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
-using ImobFeed.Core.Analise;
 using ImobFeed.Core.CarteiraMensal;
+using ImobFeed.Core.Referencia;
 
 namespace ImobFeed.Core.Tests;
 

@@ -3,6 +3,7 @@ using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Core.Exportadores;
 using ImobFeed.Core.Leitores;
+using ImobFeed.Core.Referencia;
 using NodaTime;
 
 namespace ImobFeed.Core.Analise;
@@ -10,17 +11,17 @@ namespace ImobFeed.Core.Analise;
 public class TopIndicacoes
 {
     private readonly IFileSystem _fileSystem;
-    private readonly AtivosClubeFii _ativosClubeFii;
+    private readonly ReferenciaAtivos _referenciaAtivos;
 
     public TopIndicacoes(IFileSystem fileSystem)
     {
         _fileSystem = fileSystem;
-        _ativosClubeFii = new AtivosClubeFii(fileSystem);
+        _referenciaAtivos = new ReferenciaAtivos(fileSystem);
     }
 
     public void Calcular(IDirectoryInfo baseDirectory, YearMonth data, IProgress<string> progress)
     {
-        var dictAtivos = _ativosClubeFii.CarregarAtivos(baseDirectory);
+        var dictAtivos = _referenciaAtivos.CarregarAtivos(baseDirectory);
 
         var indicacoes = baseDirectory
             .CreateSubdirectory(data.Year.ToString())
