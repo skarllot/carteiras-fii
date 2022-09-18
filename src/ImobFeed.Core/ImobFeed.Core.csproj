@@ -15,4 +15,9 @@
       <PackageReference Include="Validation" Version="2.5.51" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Templates\*.mustache" />
+      <EmbeddedResource Include="Templates\*.mustache" />
+    </ItemGroup>
+
 </Project>
