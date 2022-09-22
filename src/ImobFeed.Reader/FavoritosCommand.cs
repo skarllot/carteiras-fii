@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Core.Analise;
+using ImobFeed.Api.Analise;
 using ImobFeed.Core.Common;
+using ImobFeed.Html.Analise;
 using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -52,7 +53,7 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
             return 2;
         }
 
-        new IndicacoesFavoritas(_fileSystem)
+        new EscritorIndicacoesFavoritas(_fileSystem)
             .Calcular(
                 raizDirInfo,
                 data.Value,

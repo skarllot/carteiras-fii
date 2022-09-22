@@ -2,12 +2,14 @@
 using System.IO.Abstractions;
 using System.Text;
 using System.Text.Json;
+using ImobFeed.Core;
+using ImobFeed.Core.Analise;
 using ImobFeed.Core.Common;
 using Stubble.Core;
 using Stubble.Core.Builders;
 using Stubble.Core.Settings;
 
-namespace ImobFeed.Core.Analise;
+namespace ImobFeed.Html.Analise;
 
 public class IndicacoesFavoritasHtml
 {

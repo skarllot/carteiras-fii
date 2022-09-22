@@ -10,7 +10,7 @@ public static class Templates
 
     public static string IndicacoesFavoritas()
     {
-        const string resourceName = "ImobFeed.Core.Templates.IndicacoesFavoritas.mustache";
+        const string resourceName = "ImobFeed.Html.Templates.IndicacoesFavoritas.mustache";
         return GetString(resourceName);
     }
 
