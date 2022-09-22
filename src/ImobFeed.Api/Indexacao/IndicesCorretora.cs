@@ -1,0 +1,34 @@
+﻿using System.Collections.Immutable;
+using System.IO.Abstractions;
+using System.Text.Json;
+using ImobFeed.Api.Indexacao.Modelos;
+using ImobFeed.Core;
+using ImobFeed.Core.Exportadores;
+
+namespace ImobFeed.Api.Indexacao;
+
+internal sealed class IndicesCorretora
+{
+    private readonly IFileSystem _fileSystem;
+
+    public IndicesCorretora(IFileSystem fileSystem)
+    {
+        _fileSystem = fileSystem;
+    }
+
+    public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)
+    {
+        var indiceAno = new IndiceCorretora(
+            Carteiras: directoryInfo.EnumerateFiles(FiltrosIndexacao.ArquivosJson, SearchOption.TopDirectoryOnly)
+                .Where(FiltrosIndexacao.ArquivosCarteira)
+                .Select(it => new InfoCarteira(SerializadorArquivoCarteira.Ler(it)?.Nome, it.Name))
+                .ToImmutableArray());
+
+        string filePath = _fileSystem.Path.Join(directoryInfo.FullName, "index.json");
+        using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
+        JsonSerializer.Serialize(fileStream, indiceAno, SourceGenerationContext.Default.Options);
+        fileStream.Flush();
+
+        progress.Report(new ArquivoCriado(filePath));
+    }
+}

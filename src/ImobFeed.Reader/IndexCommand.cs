@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Core.Analise;
+using ImobFeed.Api;
+using ImobFeed.Api.Indexacao;
 using ImobFeed.Core.Common;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -35,7 +36,7 @@ public class IndexCommand : Command<IndexCommand.Settings>
 
         new Indices(_fileSystem, raizDirInfo)
             .Criar(
-                new InlineProgress<IndiceCriado>(
+                new InlineProgress<ArquivoCriado>(
                     static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
 
         return 0;
