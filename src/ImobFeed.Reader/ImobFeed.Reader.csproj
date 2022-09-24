@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ImobFeed.Api\ImobFeed.Api.csproj" />
       <ProjectReference Include="..\ImobFeed.Html\ImobFeed.Html.csproj" />
+      <ProjectReference Include="..\ImobFeed.Leitores\ImobFeed.Leitores.csproj" />
     </ItemGroup>
 
     <ItemGroup>

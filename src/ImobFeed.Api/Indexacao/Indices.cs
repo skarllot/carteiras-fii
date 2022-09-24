@@ -4,17 +4,15 @@ namespace ImobFeed.Api.Indexacao;
 
 public class Indices
 {
-    private readonly IDirectoryInfo _baseDirectory;
     private readonly IndicesRaiz _indicesRaiz;
 
-    public Indices(IFileSystem fileSystem, IDirectoryInfo baseDirectory)
+    public Indices(IndicesRaiz indicesRaiz)
     {
-        _baseDirectory = baseDirectory;
-        _indicesRaiz = new IndicesRaiz(fileSystem);
+        _indicesRaiz = indicesRaiz;
     }
 
-    public void Criar(IProgress<ArquivoCriado> progress)
+    public void Criar(IDirectoryInfo baseDirectory, IProgress<ArquivoCriado> progress)
     {
-        _indicesRaiz.Criar(_baseDirectory, progress);
+        _indicesRaiz.Criar(baseDirectory, progress);
     }
 }

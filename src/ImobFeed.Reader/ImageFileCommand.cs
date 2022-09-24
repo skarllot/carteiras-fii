@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Core.Common;
-using ImobFeed.Core.Exportadores;
-using ImobFeed.Core.Leitores;
+using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core.Referencia;
+using ImobFeed.Leitores.Imagem;
+using ImobFeed.Leitores.Texto;
 using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -91,10 +91,7 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
             data.Value);
 
         var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
-        exportador.Salvar(
-            recomendacao,
-            new InlineProgress<RecomendacaoSalva>(
-                static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
+        exportador.Salvar(recomendacao, ArquivoCriadoProgress.Default);
 
         return 0;
     }

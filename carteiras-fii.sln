@@ -16,13 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{08A11670
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Core", "src\ImobFeed.Core\ImobFeed.Core.csproj", "{90A274D3-5704-46ED-A308-F2491ABD3A68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Core.Tests", "tests\ImobFeed.Core.Tests\ImobFeed.Core.Tests.csproj", "{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Leitores.Tests", "tests\ImobFeed.Leitores.Tests\ImobFeed.Leitores.Tests.csproj", "{6E8D0EB0-E8C0-49FB-AA22-1F4C89C5D059}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Reader", "src\ImobFeed.Reader\ImobFeed.Reader.csproj", "{9D60AAD7-E501-4555-9F1A-EF96C41C3371}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Html", "src\ImobFeed.Html\ImobFeed.Html.csproj", "{81F618D0-E30A-487E-875B-14A2E39F315A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Api", "src\ImobFeed.Api\ImobFeed.Api.csproj", "{8A7DD55F-B58B-418A-B0FF-1BA3EA50D8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImobFeed.Leitores", "src\ImobFeed.Leitores\ImobFeed.Leitores.csproj", "{509383F5-AD0F-434B-B7C5-8E02B2AE170A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,7 @@ Global
 		{9D60AAD7-E501-4555-9F1A-EF96C41C3371} = {3CCE6889-E3E5-461E-B423-476805CD9239}
 		{81F618D0-E30A-487E-875B-14A2E39F315A} = {3CCE6889-E3E5-461E-B423-476805CD9239}
 		{8A7DD55F-B58B-418A-B0FF-1BA3EA50D8CB} = {3CCE6889-E3E5-461E-B423-476805CD9239}
+		{509383F5-AD0F-434B-B7C5-8E02B2AE170A} = {3CCE6889-E3E5-461E-B423-476805CD9239}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{90A274D3-5704-46ED-A308-F2491ABD3A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,5 +63,9 @@ Global
 		{8A7DD55F-B58B-418A-B0FF-1BA3EA50D8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A7DD55F-B58B-418A-B0FF-1BA3EA50D8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A7DD55F-B58B-418A-B0FF-1BA3EA50D8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{509383F5-AD0F-434B-B7C5-8E02B2AE170A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{509383F5-AD0F-434B-B7C5-8E02B2AE170A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{509383F5-AD0F-434B-B7C5-8E02B2AE170A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{509383F5-AD0F-434B-B7C5-8E02B2AE170A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

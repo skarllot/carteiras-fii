@@ -2,12 +2,12 @@
 using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Api.Indexacao.Modelos;
+using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
-using ImobFeed.Core.Exportadores;
 
 namespace ImobFeed.Api.Indexacao;
 
-internal sealed class IndicesCorretora
+public sealed class IndicesCorretora
 {
     private readonly IFileSystem _fileSystem;
 

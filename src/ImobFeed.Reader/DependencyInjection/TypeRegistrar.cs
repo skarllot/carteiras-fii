@@ -11,7 +11,9 @@ public sealed class TypeRegistrar : ITypeRegistrar
 
     public ITypeResolver Build()
     {
-        return new TypeResolver(_builder.BuildServiceProvider());
+        return new TypeResolver(
+            _builder.BuildServiceProvider(
+                new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true }));
     }
 
     public void Register(Type service, Type implementation)

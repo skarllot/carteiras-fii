@@ -13,10 +13,12 @@ namespace ImobFeed.Reader;
 public class FavoritosCommand : Command<FavoritosCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
+    private readonly EscritorIndicacoesFavoritas _escritorIndicacoesFavoritas;
 
-    public FavoritosCommand(IFileSystem fileSystem)
+    public FavoritosCommand(IFileSystem fileSystem, EscritorIndicacoesFavoritas escritorIndicacoesFavoritas)
     {
         _fileSystem = fileSystem;
+        _escritorIndicacoesFavoritas = escritorIndicacoesFavoritas;
     }
 
     public sealed class Settings : CommandSettings
@@ -53,11 +55,10 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
             return 2;
         }
 
-        new EscritorIndicacoesFavoritas(_fileSystem)
-            .Calcular(
-                raizDirInfo,
-                data.Value,
-                new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
+        _escritorIndicacoesFavoritas.Calcular(
+            raizDirInfo,
+            data.Value,
+            new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
 
         new IndicacoesFavoritasHtml(_fileSystem)
             .Criar(

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using ImobFeed.Core.Analise;
-using ImobFeed.Core.Exportadores;
+using ImobFeed.Core.Recomendacoes.Modelos;
 using ImobFeed.Core.Referencia;
 
 namespace ImobFeed.Core;

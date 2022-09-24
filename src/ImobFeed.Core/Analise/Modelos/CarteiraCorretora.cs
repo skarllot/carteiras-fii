@@ -1,4 +1,4 @@
-﻿using ImobFeed.Core.Exportadores;
+﻿using ImobFeed.Core.Recomendacoes.Modelos;
 
 namespace ImobFeed.Core.Analise;
 

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
+using ImobFeed.Api;
+using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core.Common;
-using ImobFeed.Core.Exportadores;
-using ImobFeed.Core.Leitores;
 using ImobFeed.Core.Referencia;
+using ImobFeed.Leitores.Texto;
 using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -75,7 +76,7 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
         {
             exportador.Salvar(
                 recomendacao,
-                new InlineProgress<RecomendacaoSalva>(
+                new InlineProgress<ArquivoCriado>(
                     static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
         }
 

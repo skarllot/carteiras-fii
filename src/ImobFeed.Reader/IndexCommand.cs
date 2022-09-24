@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Api;
 using ImobFeed.Api.Indexacao;
-using ImobFeed.Core.Common;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -12,10 +10,12 @@ namespace ImobFeed.Reader;
 public class IndexCommand : Command<IndexCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
+    private readonly Indices _indices;
 
-    public IndexCommand(IFileSystem fileSystem)
+    public IndexCommand(IFileSystem fileSystem, Indices indices)
     {
         _fileSystem = fileSystem;
+        _indices = indices;
     }
 
     public sealed class Settings : CommandSettings
@@ -34,10 +34,7 @@ public class IndexCommand : Command<IndexCommand.Settings>
             return 1;
         }
 
-        new Indices(_fileSystem, raizDirInfo)
-            .Criar(
-                new InlineProgress<ArquivoCriado>(
-                    static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
+        _indices.Criar(raizDirInfo, ArquivoCriadoProgress.Default);
 
         return 0;
     }

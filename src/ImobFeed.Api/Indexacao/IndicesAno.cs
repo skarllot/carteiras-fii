@@ -6,15 +6,15 @@ using ImobFeed.Core;
 
 namespace ImobFeed.Api.Indexacao;
 
-internal sealed class IndicesAno
+public sealed class IndicesAno
 {
     private readonly IFileSystem _fileSystem;
     private readonly IndicesMes _indicesMes;
 
-    public IndicesAno(IFileSystem fileSystem)
+    public IndicesAno(IFileSystem fileSystem, IndicesMes indicesMes)
     {
         _fileSystem = fileSystem;
-        _indicesMes = new IndicesMes(fileSystem);
+        _indicesMes = indicesMes;
     }
 
     public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)

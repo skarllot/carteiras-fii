@@ -3,25 +3,30 @@ using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Api.Indexacao.Modelos;
 using ImobFeed.Core;
-using ImobFeed.Core.Leitores;
+using ImobFeed.Core.Recomendacoes;
 
 namespace ImobFeed.Api.Indexacao;
 
-internal sealed class IndicesMes
+public sealed class IndicesMes
 {
     private readonly IFileSystem _fileSystem;
+    private readonly INomeArquivoCorretora _nomeArquivoCorretora;
     private readonly IndicesCorretora _indicesCorretora;
 
-    public IndicesMes(IFileSystem fileSystem)
+    public IndicesMes(
+        IFileSystem fileSystem,
+        INomeArquivoCorretora nomeArquivoCorretora,
+        IndicesCorretora indicesCorretora)
     {
         _fileSystem = fileSystem;
-        _indicesCorretora = new IndicesCorretora(fileSystem);
+        _nomeArquivoCorretora = nomeArquivoCorretora;
+        _indicesCorretora = indicesCorretora;
     }
 
     public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)
     {
         directoryInfo.EnumerateDirectories()
-            .Where(FiltrosIndexacao.DiretoriosCorretora)
+            .Where(FiltrosIndexacao.DiretoriosCorretora(_nomeArquivoCorretora))
             .Pipe(
                 it => CriarIndicesCorretora(it, progress),
                 it => CriarIndiceMes(it, directoryInfo, progress));
@@ -42,7 +47,7 @@ internal sealed class IndicesMes
     {
         var indiceMes = new IndiceMes(
             Corretoras: directories
-                .Select(it => new InfoCorretora(ProvedorLeitorRecomendacao.BuscaReversaNomeArquivo(it.Name), it.Name))
+                .Select(it => new InfoCorretora(_nomeArquivoCorretora.BuscaReversaNomeArquivo(it.Name), it.Name))
                 .ToImmutableArray());
 
         string filePath = _fileSystem.Path.Join(baseDirectory.FullName, "index.json");
