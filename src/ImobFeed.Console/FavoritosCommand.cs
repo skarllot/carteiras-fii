@@ -8,7 +8,7 @@ using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public class FavoritosCommand : Command<FavoritosCommand.Settings>
 {

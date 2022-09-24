@@ -10,7 +10,7 @@ using NodaTime;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
 {

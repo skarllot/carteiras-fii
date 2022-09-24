@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader.DependencyInjection;
+namespace ImobFeed.Console.DependencyInjection;
 
 public sealed class TypeRegistrar : ITypeRegistrar
 {

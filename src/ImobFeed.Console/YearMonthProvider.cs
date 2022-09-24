@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using NodaTime;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public static class YearMonthProvider
 {

@@ -1,6 +1,6 @@
 ﻿using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader.DependencyInjection;
+namespace ImobFeed.Console.DependencyInjection;
 
 public sealed class TypeResolver : ITypeResolver, IDisposable
 {

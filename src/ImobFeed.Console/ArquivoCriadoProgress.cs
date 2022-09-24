@@ -1,7 +1,7 @@
 ﻿using ImobFeed.Api;
 using Spectre.Console;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public sealed class ArquivoCriadoProgress : IProgress<ArquivoCriado>, IProgress<string>
 {

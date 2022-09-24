@@ -7,7 +7,7 @@ using ImobFeed.Core.Referencia;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.Settings>
 {

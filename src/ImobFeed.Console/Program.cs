@@ -1,14 +1,14 @@
 ﻿using System.IO.Abstractions;
 using ImobFeed.Api.Analise;
 using ImobFeed.Api.Indexacao;
+using ImobFeed.Console;
+using ImobFeed.Console.DependencyInjection;
 using ImobFeed.Core;
 using ImobFeed.Core.Analise;
 using ImobFeed.Core.Recomendacoes;
 using ImobFeed.Core.Referencia;
 using ImobFeed.Html.Analise;
 using ImobFeed.Leitores.Texto;
-using ImobFeed.Reader;
-using ImobFeed.Reader.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 

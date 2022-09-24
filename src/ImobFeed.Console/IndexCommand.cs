@@ -5,7 +5,7 @@ using ImobFeed.Api.Indexacao;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace ImobFeed.Reader;
+namespace ImobFeed.Console;
 
 public class IndexCommand : Command<IndexCommand.Settings>
 {
