@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api.Analise;
-using ImobFeed.Core.Common;
+using ImobFeed.Core;
 using ImobFeed.Html.Analise;
 using NodaTime;
 using Spectre.Console;
@@ -13,12 +13,20 @@ namespace ImobFeed.Reader;
 public class FavoritosCommand : Command<FavoritosCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly EscritorIndicacoesFavoritas _escritorIndicacoesFavoritas;
+    private readonly DefaultAppConfiguration _appConfig;
+    private readonly EscritorIndicacoesFavoritas _escritorJson;
+    private readonly IndicacoesFavoritasHtml _escritorHtml;
 
-    public FavoritosCommand(IFileSystem fileSystem, EscritorIndicacoesFavoritas escritorIndicacoesFavoritas)
+    public FavoritosCommand(
+        IFileSystem fileSystem,
+        DefaultAppConfiguration appConfig,
+        EscritorIndicacoesFavoritas escritorJson,
+        IndicacoesFavoritasHtml escritorHtml)
     {
         _fileSystem = fileSystem;
-        _escritorIndicacoesFavoritas = escritorIndicacoesFavoritas;
+        _appConfig = appConfig;
+        _escritorJson = escritorJson;
+        _escritorHtml = escritorHtml;
     }
 
     public sealed class Settings : CommandSettings
@@ -55,15 +63,10 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
             return 2;
         }
 
-        _escritorIndicacoesFavoritas.Calcular(
-            raizDirInfo,
-            data.Value,
-            new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
+        _appConfig.BaseDirectory = raizDirInfo;
 
-        new IndicacoesFavoritasHtml(_fileSystem)
-            .Criar(
-                raizDirInfo,
-                new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
+        _escritorJson.Calcular(data.Value, ArquivoCriadoProgress.Default);
+        _escritorHtml.Criar(ArquivoCriadoProgress.Default);
 
         return 0;
     }

@@ -11,4 +11,11 @@ public static class DirectoryNavigation
             .CreateSubdirectory(data.Year.ToString())
             .CreateSubdirectory(data.Month.ToString("00"));
     }
+
+    public static IDirectoryInfo IrParaApi(this IDirectoryInfo baseDirectory)
+    {
+        return baseDirectory
+            .CreateSubdirectory("api")
+            .CreateSubdirectory("v1");
+    }
 }

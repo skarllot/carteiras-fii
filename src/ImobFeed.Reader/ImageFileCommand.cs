@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api.Recomendacoes;
+using ImobFeed.Core;
 using ImobFeed.Core.Referencia;
 using ImobFeed.Leitores.Imagem;
 using ImobFeed.Leitores.Texto;
@@ -14,10 +15,17 @@ namespace ImobFeed.Reader;
 public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
+    private readonly DefaultAppConfiguration _appConfig;
+    private readonly ReferenciaAtivos _referenciaAtivos;
 
-    public ImageFileCommand(IFileSystem fileSystem)
+    public ImageFileCommand(
+        IFileSystem fileSystem,
+        DefaultAppConfiguration appConfig,
+        ReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
+        _appConfig = appConfig;
+        _referenciaAtivos = referenciaAtivos;
     }
 
     public sealed class Settings : CommandSettings
@@ -80,12 +88,14 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
             return 4;
         }
 
+        _appConfig.BaseDirectory = saidaDirInfo;
+
         var leitorImagem = new LeitorImagem();
         string textoImagem = leitorImagem.LerTextoImagem(imagemFileInfo);
 
         using var reader = new StringReader(textoImagem);
         var recomendacao = leitorRecomendacao.Ler(
-            new ReferenciaAtivos(_fileSystem).CarregarAtivos(saidaDirInfo),
+            _referenciaAtivos.CarregarAtivos(),
             reader,
             settings.NomeCarteira,
             data.Value);

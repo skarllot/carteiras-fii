@@ -1,4 +1,12 @@
 ﻿using System.IO.Abstractions;
+using ImobFeed.Api.Analise;
+using ImobFeed.Api.Indexacao;
+using ImobFeed.Core;
+using ImobFeed.Core.Analise;
+using ImobFeed.Core.Recomendacoes;
+using ImobFeed.Core.Referencia;
+using ImobFeed.Html.Analise;
+using ImobFeed.Leitores.Texto;
 using ImobFeed.Reader;
 using ImobFeed.Reader.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +14,19 @@ using Spectre.Console.Cli;
 
 var serviceCollection = new ServiceCollection();
 serviceCollection
-    .AddSingleton<IFileSystem, FileSystem>();
+    .AddSingleton<IFileSystem, FileSystem>()
+    .AddSingleton<DefaultAppConfiguration>()
+    .AddSingleton<IAppConfiguration>(provider => provider.GetRequiredService<DefaultAppConfiguration>())
+    .AddSingleton<ReferenciaAtivos>()
+    .AddSingleton<EscritorIndicacoesFavoritas>()
+    .AddSingleton<CalculadoraIndicacoesFavoritas>()
+    .AddSingleton<INomeArquivoCorretora, NomeArquivoCorretora>()
+    .AddSingleton<IndicacoesFavoritasHtml>()
+    .AddSingleton<Indices>()
+    .AddSingleton<IndicesRaiz>()
+    .AddSingleton<IndicesAno>()
+    .AddSingleton<IndicesMes>()
+    .AddSingleton<IndicesCorretora>();
 
 var registrar = new TypeRegistrar(serviceCollection);
 

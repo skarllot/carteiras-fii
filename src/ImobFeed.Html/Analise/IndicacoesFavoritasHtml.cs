@@ -14,28 +14,35 @@ namespace ImobFeed.Html.Analise;
 public class IndicacoesFavoritasHtml
 {
     private readonly IFileSystem _fileSystem;
+    private readonly IAppConfiguration _appConfig;
     private readonly StubbleVisitorRenderer _stubble;
     private readonly RenderSettings _renderSettings;
 
-    public IndicacoesFavoritasHtml(IFileSystem fileSystem)
+    public IndicacoesFavoritasHtml(IFileSystem fileSystem, IAppConfiguration appConfig)
     {
         _fileSystem = fileSystem;
+        _appConfig = appConfig;
         _stubble = new StubbleBuilder().Build();
         _renderSettings = RenderSettings.GetDefaultRenderSettings();
         _renderSettings.CultureInfo = CultureCache.PortuguesBrasil;
     }
 
-    public void Criar(IDirectoryInfo baseDirectory, IProgress<string> progress)
+    public void Criar(IProgress<string> progress)
     {
-        foreach (var file in baseDirectory.EnumerateFiles("??????-favoritos.json", SearchOption.TopDirectoryOnly))
+        var apiDirectory = _appConfig.GetApiDirectory();
+        foreach (var file in apiDirectory.EnumerateFiles("??????-favoritos.json", SearchOption.TopDirectoryOnly))
         {
-            Criar(file, progress);
+            CriarArquivo(file, progress);
         }
     }
 
-    private void Criar(IFileInfo source, IProgress<string> progress)
+    private void CriarArquivo(IFileInfo source, IProgress<string> progress)
     {
-        var destination = _fileSystem.FileInfo.FromFileName(source.FullName.Replace(".json", ".html"));
+        string destinationFileName = _fileSystem.Path.Combine(
+            _appConfig.BaseDirectory.FullName,
+            source.Name.Replace(".json", ".html"));
+
+        var destination = _fileSystem.FileInfo.FromFileName(destinationFileName);
         if (destination.Exists && destination.LastWriteTimeUtc > source.LastWriteTimeUtc)
             return;
 

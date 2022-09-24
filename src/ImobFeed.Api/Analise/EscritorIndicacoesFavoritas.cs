@@ -11,25 +11,34 @@ namespace ImobFeed.Api.Analise;
 
 public class EscritorIndicacoesFavoritas
 {
+    private readonly IAppConfiguration _appConfig;
     private readonly IFileSystem _fileSystem;
     private readonly INomeArquivoCorretora _nomeArquivoCorretora;
     private readonly ReferenciaAtivos _referenciaAtivos;
     private readonly CalculadoraIndicacoesFavoritas _calculadora;
 
-    public EscritorIndicacoesFavoritas(IFileSystem fileSystem, INomeArquivoCorretora nomeArquivoCorretora)
+    public EscritorIndicacoesFavoritas(
+        IAppConfiguration appConfig,
+        IFileSystem fileSystem,
+        ReferenciaAtivos referenciaAtivos,
+        CalculadoraIndicacoesFavoritas calculadora,
+        INomeArquivoCorretora nomeArquivoCorretora)
     {
+        _appConfig = appConfig;
         _fileSystem = fileSystem;
         _nomeArquivoCorretora = nomeArquivoCorretora;
-        _referenciaAtivos = new ReferenciaAtivos(fileSystem);
-        _calculadora = new CalculadoraIndicacoesFavoritas();
+        _referenciaAtivos = referenciaAtivos;
+        _calculadora = calculadora;
     }
 
-    public void Calcular(IDirectoryInfo baseDirectory, YearMonth data, IProgress<string> progress)
+    public void Calcular(YearMonth data, IProgress<ArquivoCriado> progress)
     {
-        var dictAtivos = _referenciaAtivos.CarregarAtivos(baseDirectory);
-        var dictIndicadores = _referenciaAtivos.CarregarIndicadores(baseDirectory);
+        var dictAtivos = _referenciaAtivos.CarregarAtivos();
+        var dictIndicadores = _referenciaAtivos.CarregarIndicadores();
 
-        var indicacoes = baseDirectory
+        var apiDirectory = _appConfig.GetApiDirectory();
+
+        var indicacoes = apiDirectory
             .IrPara(data)
             .EnumerateFiles("*.json", SearchOption.AllDirectories)
             .Where(it => it.Name != "index.json")
@@ -40,11 +49,11 @@ public class EscritorIndicacoesFavoritas
 
         var lista = _calculadora.Calcular(dictAtivos, dictIndicadores, data, indicacoes);
 
-        string path = _fileSystem.Path.Combine(baseDirectory.FullName, $"{data.Year}{data.Month:00}-favoritos.json");
+        string path = _fileSystem.Path.Combine(apiDirectory.FullName, $"{data.Year}{data.Month:00}-favoritos.json");
         using var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write);
         JsonSerializer.Serialize(stream, lista, SourceGenerationContext.Default.Options);
         stream.Flush();
 
-        progress.Report(path);
+        progress.Report(new ArquivoCriado(path));
     }
 }

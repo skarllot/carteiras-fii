@@ -9,13 +9,15 @@ namespace ImobFeed.Core.Referencia;
 public sealed class ReferenciaAtivos
 {
     private readonly IFileSystem _fileSystem;
+    private readonly IAppConfiguration _appConfig;
 
-    public ReferenciaAtivos(IFileSystem fileSystem)
+    public ReferenciaAtivos(IFileSystem fileSystem, IAppConfiguration appConfig)
     {
         _fileSystem = fileSystem;
+        _appConfig = appConfig;
     }
 
-    public void Atualizar(IDirectoryInfo baseDirectory, IProgress<string> progress)
+    public void Atualizar(IProgress<string> progress)
     {
         var fundsExplorerAtivos =
             LeitorFundsExplorer.LerListaAtivos().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
@@ -67,8 +69,9 @@ public sealed class ReferenciaAtivos
                     fundsExplorerIndicador?.QuantidadeAtivos));
         }
 
+        var apiDirectory = _appConfig.GetApiDirectory();
         var listaAtivos = new ListaAtivos(DateTimeOffset.UtcNow, listaAtivosBuilder.ToImmutable());
-        string path = _fileSystem.Path.Combine(baseDirectory.FullName, "lista-ativos.json");
+        string path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-ativos.json");
         using (var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write))
         {
             JsonSerializer.Serialize(stream, listaAtivos, SourceGenerationContext.Default.Options);
@@ -77,7 +80,7 @@ public sealed class ReferenciaAtivos
         }
 
         var listaIndicadores = new ListaIndicadores(DateTimeOffset.UtcNow, listaIndicadoresBuilder.ToImmutable());
-        path = _fileSystem.Path.Combine(baseDirectory.FullName, "lista-indicadores.json");
+        path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-indicadores.json");
         using (var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write))
         {
             JsonSerializer.Serialize(stream, listaIndicadores, SourceGenerationContext.Default.Options);
@@ -86,9 +89,10 @@ public sealed class ReferenciaAtivos
         }
     }
 
-    public IReadOnlyDictionary<string, Ativo> CarregarAtivos(IDirectoryInfo baseDirectory)
+    public IReadOnlyDictionary<string, Ativo> CarregarAtivos()
     {
-        string path = _fileSystem.Path.Combine(baseDirectory.FullName, "lista-ativos.json");
+        var apiDirectory = _appConfig.GetApiDirectory();
+        string path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-ativos.json");
         using var stream = _fileSystem.File.OpenRead(path);
         var listaAtivos = JsonSerializer.Deserialize<ListaAtivos>(stream, SourceGenerationContext.Default.Options);
 
@@ -96,9 +100,10 @@ public sealed class ReferenciaAtivos
                ?? new Dictionary<string, Ativo>();
     }
 
-    public IReadOnlyDictionary<string, IndicadorAtivo> CarregarIndicadores(IDirectoryInfo baseDirectory)
+    public IReadOnlyDictionary<string, IndicadorAtivo> CarregarIndicadores()
     {
-        string path = _fileSystem.Path.Combine(baseDirectory.FullName, "lista-indicadores.json");
+        var apiDirectory = _appConfig.GetApiDirectory();
+        string path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-indicadores.json");
         using var stream = _fileSystem.File.OpenRead(path);
         var listaAtivos = JsonSerializer.Deserialize<ListaIndicadores>(stream, SourceGenerationContext.Default.Options);
 

@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api;
 using ImobFeed.Api.Recomendacoes;
+using ImobFeed.Core;
 using ImobFeed.Core.Common;
 using ImobFeed.Core.Referencia;
 using ImobFeed.Leitores.Texto;
@@ -15,10 +16,14 @@ namespace ImobFeed.Reader;
 public class TextFileCommand : Command<TextFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
+    private readonly DefaultAppConfiguration _appConfig;
+    private readonly ReferenciaAtivos _referenciaAtivos;
 
-    public TextFileCommand(IFileSystem fileSystem)
+    public TextFileCommand(IFileSystem fileSystem, DefaultAppConfiguration appConfig, ReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
+        _appConfig = appConfig;
+        _referenciaAtivos = referenciaAtivos;
     }
 
     public sealed class Settings : CommandSettings
@@ -66,10 +71,12 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
             return 3;
         }
 
+        _appConfig.BaseDirectory = saidaDirInfo;
+
         var leitor = new LeitorListaRecomendacao(data.Value);
         var recomendacoes = leitor.LerTudo(
             arquivoFileInfo,
-            new ReferenciaAtivos(_fileSystem).CarregarAtivos(saidaDirInfo));
+            _referenciaAtivos.CarregarAtivos());
 
         var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
         foreach (var recomendacao in recomendacoes)
