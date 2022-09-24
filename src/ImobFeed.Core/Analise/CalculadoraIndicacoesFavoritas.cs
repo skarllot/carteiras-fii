@@ -32,21 +32,27 @@ public class CalculadoraIndicacoesFavoritas
             .SelectMany(
                 it => it.Carteira.Ativos.Select(
                     x => (it.Corretora,
-                        Ativo: dictAtivos[x.Codigo],
+                        x.Codigo,
                         Peso: x.Peso.Valor * it.PesoCarteira * pesoCorretora)))
-            .GroupBy(it => it.Ativo)
+            .GroupBy(it => it.Codigo, StringComparer.Ordinal)
             .Select(
-                it => new IndicacaoFavorita(
-                    it.Key.Codigo,
-                    it.Key.Nome,
-                    it.Key.Segmento,
-                    it.Key.Administrador,
-                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.Vpa,
-                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.PVpa,
-                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.Yield1Mes,
-                    dictIndicadores.GetValueOrDefault(it.Key.Codigo)?.Yield12Meses,
-                    Math.Round(it.Sum(x => x.Peso), 4),
-                    it.Select(x => x.Corretora).Distinct().ToImmutableArray()))
+                it =>
+                {
+                    var ativo = dictAtivos[it.Key];
+                    var indicador = dictIndicadores.GetValueOrDefault(it.Key);
+
+                    return new IndicacaoFavorita(
+                        ativo.Codigo,
+                        ativo.Nome,
+                        ativo.Segmento,
+                        ativo.Administrador,
+                        indicador?.Vpa,
+                        indicador?.PVpa,
+                        indicador?.Yield1Mes,
+                        indicador?.Yield12Meses,
+                        Math.Round(it.Sum(x => x.Peso), 4),
+                        it.Select(x => x.Corretora).Distinct().ToImmutableArray());
+                })
             .OrderByDescending(it => it.Peso)
             .ToImmutableArray();
 
