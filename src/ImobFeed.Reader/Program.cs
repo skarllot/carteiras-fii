@@ -17,7 +17,6 @@ app.Configure(
         config.AddCommand<TextFileCommand>("texto");
         config.AddCommand<ImageFileCommand>("imagem");
         config.AddCommand<IndexCommand>("indice");
-        config.AddCommand<TopCommand>("top");
         config.AddCommand<FavoritosCommand>("favoritos");
         config.AddCommand<AtualizarListaAtivosCommand>("atualizar-ativos");
     });

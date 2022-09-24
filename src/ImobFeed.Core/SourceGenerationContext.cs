@@ -11,7 +11,6 @@ namespace ImobFeed.Core;
 //[JsonSerializable(typeof(IndiceAno))]
 //[JsonSerializable(typeof(IndiceMes))]
 //[JsonSerializable(typeof(IndiceCorretora))]
-[JsonSerializable(typeof(ListaTopIndicacoes))]
 [JsonSerializable(typeof(ListaIndicacoesFavoritas))]
 [JsonSerializable(typeof(ListaAtivos))]
 [JsonSerializable(typeof(ListaIndicadores))]
