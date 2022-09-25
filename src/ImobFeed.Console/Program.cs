@@ -1,7 +1,7 @@
 ﻿using System.IO.Abstractions;
 using ImobFeed.Api.Analise;
 using ImobFeed.Api.Indexacao;
-using ImobFeed.Console;
+using ImobFeed.Console.Commands;
 using ImobFeed.Console.DependencyInjection;
 using ImobFeed.Core;
 using ImobFeed.Core.Analise;
