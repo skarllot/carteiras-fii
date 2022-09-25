@@ -78,7 +78,7 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
             arquivoFileInfo,
             _referenciaAtivos.CarregarAtivos());
 
-        var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
+        var exportador = new ExportadorRecomendacao(_fileSystem, _appConfig);
         foreach (var recomendacao in recomendacoes)
         {
             exportador.Salvar(

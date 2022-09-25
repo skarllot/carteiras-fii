@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api.Indexacao;
+using ImobFeed.Core;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -10,11 +11,13 @@ namespace ImobFeed.Console.Commands;
 public class IndexCommand : Command<IndexCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
+    private readonly DefaultAppConfiguration _appConfig;
     private readonly Indices _indices;
 
-    public IndexCommand(IFileSystem fileSystem, Indices indices)
+    public IndexCommand(IFileSystem fileSystem, DefaultAppConfiguration appConfig, Indices indices)
     {
         _fileSystem = fileSystem;
+        _appConfig = appConfig;
         _indices = indices;
     }
 
@@ -34,7 +37,9 @@ public class IndexCommand : Command<IndexCommand.Settings>
             return 1;
         }
 
-        _indices.Criar(raizDirInfo, ArquivoCriadoProgress.Default);
+        _appConfig.BaseDirectory = raizDirInfo;
+
+        _indices.Criar(ArquivoCriadoProgress.Default);
 
         return 0;
     }

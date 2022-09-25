@@ -8,17 +8,18 @@ namespace ImobFeed.Api.Recomendacoes;
 public class ExportadorRecomendacao
 {
     private readonly IFileSystem _fileSystem;
-    private readonly IDirectoryInfo _baseDirectory;
+    private readonly IAppConfiguration _appConfig;
 
-    public ExportadorRecomendacao(IFileSystem fileSystem, IDirectoryInfo baseDirectory)
+    public ExportadorRecomendacao(IFileSystem fileSystem, IAppConfiguration appConfig)
     {
         _fileSystem = fileSystem;
-        _baseDirectory = baseDirectory;
+        _appConfig = appConfig;
     }
 
     public void Salvar(Recomendacao recomendacao, IProgress<ArquivoCriado> progress)
     {
-        var dirRecomendacao = _baseDirectory
+        var dirRecomendacao = _appConfig
+            .GetApiDirectory()
             .IrPara(recomendacao.Data)
             .CreateSubdirectory(SistemaArquivos.NormalizarNome(recomendacao.Corretora));
 

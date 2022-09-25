@@ -100,7 +100,7 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
             settings.NomeCarteira,
             data.Value);
 
-        var exportador = new ExportadorRecomendacao(_fileSystem, saidaDirInfo);
+        var exportador = new ExportadorRecomendacao(_fileSystem, _appConfig);
         exportador.Salvar(recomendacao, ArquivoCriadoProgress.Default);
 
         return 0;
