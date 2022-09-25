@@ -19,8 +19,8 @@ public sealed class IndicesCorretora
     public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)
     {
         var indiceAno = new IndiceCorretora(
-            Carteiras: directoryInfo.EnumerateFiles(FiltrosIndexacao.ArquivosJson, SearchOption.TopDirectoryOnly)
-                .Where(FiltrosIndexacao.ArquivosCarteira)
+            Carteiras: directoryInfo.EnumerateFiles(FiltrosArquivos.ArquivosJson, SearchOption.TopDirectoryOnly)
+                .Where(FiltrosArquivos.ArquivosCarteira)
                 .Select(it => new InfoCarteira(SerializadorArquivoCarteira.Ler(it)?.Nome, it.Name))
                 .ToImmutableArray());
 

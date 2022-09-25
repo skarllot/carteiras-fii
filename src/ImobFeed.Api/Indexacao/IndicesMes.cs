@@ -26,7 +26,7 @@ public sealed class IndicesMes
     public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)
     {
         directoryInfo.EnumerateDirectories()
-            .Where(FiltrosIndexacao.DiretoriosCorretora(_nomeArquivoCorretora))
+            .Where(FiltrosArquivos.DiretoriosCorretora(_nomeArquivoCorretora))
             .Pipe(
                 it => CriarIndicesCorretora(it, progress),
                 it => CriarIndiceMes(it, directoryInfo, progress));

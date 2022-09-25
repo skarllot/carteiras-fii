@@ -20,7 +20,7 @@ public sealed class IndicesAno
     public void Criar(IDirectoryInfo directoryInfo, IProgress<ArquivoCriado> progress)
     {
         directoryInfo.EnumerateDirectories()
-            .Where(FiltrosIndexacao.DiretoriosMes)
+            .Where(FiltrosArquivos.DiretoriosMes)
             .Pipe(
                 it => CriarIndicesMes(it, progress),
                 it => CriarIndiceAno(it, directoryInfo, progress));

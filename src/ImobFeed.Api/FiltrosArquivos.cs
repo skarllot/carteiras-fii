@@ -1,9 +1,9 @@
 ﻿using System.IO.Abstractions;
 using ImobFeed.Core.Recomendacoes;
 
-namespace ImobFeed.Api.Indexacao;
+namespace ImobFeed.Api;
 
-public static class FiltrosIndexacao
+public static class FiltrosArquivos
 {
     public static readonly string ArquivosJson = "*.json";
     public static readonly string ArquivosAtivosTop = "??????-top.json";

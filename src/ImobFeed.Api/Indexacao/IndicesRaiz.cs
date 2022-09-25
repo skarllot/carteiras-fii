@@ -20,7 +20,7 @@ public sealed class IndicesRaiz
     public void Criar(IDirectoryInfo baseDirectory, IProgress<ArquivoCriado> progress)
     {
         baseDirectory.EnumerateDirectories()
-            .Where(FiltrosIndexacao.DiretoriosAno)
+            .Where(FiltrosArquivos.DiretoriosAno)
             .Pipe(
                 it => CriarIndicesAno(it, progress),
                 it => CriarIndiceRaiz(it, baseDirectory, progress));
@@ -43,7 +43,7 @@ public sealed class IndicesRaiz
             Anos: directories
                 .Select(it => it.Name)
                 .ToImmutableArray(),
-            Tops: baseDirectory.EnumerateFiles(FiltrosIndexacao.ArquivosAtivosTop, SearchOption.TopDirectoryOnly)
+            Tops: baseDirectory.EnumerateFiles(FiltrosArquivos.ArquivosAtivosTop, SearchOption.TopDirectoryOnly)
                 .Select(it => new InfoTop(int.Parse(it.Name.AsSpan(0, 4)), int.Parse(it.Name.AsSpan(2, 2)), it.Name))
                 .ToImmutableArray());
 

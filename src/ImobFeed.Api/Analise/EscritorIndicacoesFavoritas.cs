@@ -39,19 +39,30 @@ public class EscritorIndicacoesFavoritas
 
         var apiDirectory = _appConfig.GetApiDirectory();
 
-        var indicacoes = apiDirectory
+        var arquivosCarteira = apiDirectory
             .IrPara(data)
-            .EnumerateFiles("*.json", SearchOption.AllDirectories)
-            .Where(it => it.Name != "index.json")
-            .Select(
-                it => new CarteiraCorretora(
-                    Corretora: _nomeArquivoCorretora.BuscaReversaNomeArquivo(it.Directory.Name),
-                    Carteira: SerializadorArquivoCarteira.Ler(it)!));
+            .EnumerateFiles(FiltrosArquivos.ArquivosJson, SearchOption.AllDirectories)
+            .Where(it => _nomeArquivoCorretora.NomeNormalizadoExiste(it.Directory.Name))
+            .Where(FiltrosArquivos.ArquivosCarteira)
+            .ToList();
+
+        var dataCarteiraMaisNova = arquivosCarteira
+            .Select(it => it.LastWriteTimeUtc)
+            .MaxBy(it => it);
+
+        string path = _fileSystem.Path.Combine(apiDirectory.FullName, $"{data.Year}{data.Month:00}-favoritos.json");
+        var destination = _fileSystem.FileInfo.FromFileName(path);
+        if (destination.Exists && destination.LastWriteTimeUtc > dataCarteiraMaisNova)
+            return;
+
+        var indicacoes = arquivosCarteira.Select(
+            it => new CarteiraCorretora(
+                Corretora: _nomeArquivoCorretora.BuscaReversaNomeArquivo(it.Directory.Name),
+                Carteira: SerializadorArquivoCarteira.Ler(it)!));
 
         var lista = _calculadora.Calcular(dictAtivos, dictIndicadores, data, indicacoes);
 
-        string path = _fileSystem.Path.Combine(apiDirectory.FullName, $"{data.Year}{data.Month:00}-favoritos.json");
-        using var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write);
+        using var stream = destination.Open(FileMode.Create, FileAccess.Write);
         JsonSerializer.Serialize(stream, lista, SourceGenerationContext.Default.Options);
         stream.Flush();
 

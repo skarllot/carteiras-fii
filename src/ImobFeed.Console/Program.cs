@@ -6,6 +6,7 @@ using ImobFeed.Console.DependencyInjection;
 using ImobFeed.Core;
 using ImobFeed.Core.Analise;
 using ImobFeed.Core.Recomendacoes;
+using ImobFeed.Core.Referencia;
 using ImobFeed.Html.Analise;
 using ImobFeed.Html.Referencia;
 using ImobFeed.Leitores.Texto;
@@ -26,7 +27,8 @@ serviceCollection
     .AddSingleton<IndicesRaiz>()
     .AddSingleton<IndicesAno>()
     .AddSingleton<IndicesMes>()
-    .AddSingleton<IndicesCorretora>();
+    .AddSingleton<IndicesCorretora>()
+    .AddSingleton<IReferenciaAtivos, ReferenciaAtivos>();
 
 var registrar = new TypeRegistrar(serviceCollection);
 
