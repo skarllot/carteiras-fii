@@ -2,7 +2,7 @@
 using System.Text;
 using Validation;
 
-namespace ImobFeed.Core;
+namespace ImobFeed.Html;
 
 public static class Templates
 {
@@ -10,7 +10,7 @@ public static class Templates
 
     public static string IndicacoesFavoritas()
     {
-        const string resourceName = "ImobFeed.Html.Templates.IndicacoesFavoritas.mustache";
+        const string resourceName = "ImobFeed.Html.Analise.IndicacoesFavoritas.mustache";
         return GetString(resourceName);
     }
 

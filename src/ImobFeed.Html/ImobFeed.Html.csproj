@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Templates\*.mustache"/>
+        <EmbeddedResource Include="**\*.mustache" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ImobFeed.Core\ImobFeed.Core.csproj"/>
+        <ProjectReference Include="..\ImobFeed.Core\ImobFeed.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="HtmlAgilityPack" Version="1.11.45"/>
-        <PackageReference Include="Stubble.Core" Version="1.10.8"/>
+        <PackageReference Include="HtmlAgilityPack" Version="1.11.45" />
+        <PackageReference Include="Stubble.Core" Version="1.10.8" />
     </ItemGroup>
 
 </Project>
