@@ -3,7 +3,7 @@ using System.IO.Abstractions;
 using System.Text;
 using System.Text.Json;
 using ImobFeed.Core;
-using ImobFeed.Core.Analise;
+using ImobFeed.Core.Analise.Modelos;
 using ImobFeed.Core.Common;
 using Stubble.Core;
 using Stubble.Core.Builders;

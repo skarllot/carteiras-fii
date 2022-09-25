@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace ImobFeed.Core.Analise;
+namespace ImobFeed.Core.Analise.Modelos;
 
 public sealed record IndicacaoFavorita(
     string Codigo,

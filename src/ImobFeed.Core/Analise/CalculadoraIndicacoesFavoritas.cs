@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using ImobFeed.Core.Analise.Modelos;
 using ImobFeed.Core.CarteiraMensal;
 using NodaTime;
 

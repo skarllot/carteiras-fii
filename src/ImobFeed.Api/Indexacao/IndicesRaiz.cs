@@ -3,7 +3,6 @@ using System.IO.Abstractions;
 using System.Text.Json;
 using ImobFeed.Api.Indexacao.Modelos;
 using ImobFeed.Core;
-using ImobFeed.Core.Recomendacoes;
 
 namespace ImobFeed.Api.Indexacao;
 

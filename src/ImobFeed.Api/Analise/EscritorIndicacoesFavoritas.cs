@@ -3,6 +3,7 @@ using System.Text.Json;
 using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
 using ImobFeed.Core.Analise;
+using ImobFeed.Core.Analise.Modelos;
 using ImobFeed.Core.Recomendacoes;
 using ImobFeed.Core.Referencia;
 using NodaTime;

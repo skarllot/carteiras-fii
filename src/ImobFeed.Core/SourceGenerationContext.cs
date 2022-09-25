@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using ImobFeed.Core.Analise;
+using ImobFeed.Core.Analise.Modelos;
 using ImobFeed.Core.Recomendacoes.Modelos;
 
 namespace ImobFeed.Core;
