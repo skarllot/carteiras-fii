@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using ImobFeed.Core.Analise;
 using ImobFeed.Core.Recomendacoes.Modelos;
-using ImobFeed.Core.Referencia;
 
 namespace ImobFeed.Core;
 
@@ -12,8 +11,8 @@ namespace ImobFeed.Core;
 //[JsonSerializable(typeof(IndiceMes))]
 //[JsonSerializable(typeof(IndiceCorretora))]
 [JsonSerializable(typeof(ListaIndicacoesFavoritas))]
-[JsonSerializable(typeof(ListaAtivos))]
-[JsonSerializable(typeof(ListaIndicadores))]
+//[JsonSerializable(typeof(ListaAtivos))]
+//[JsonSerializable(typeof(ListaIndicadores))]
 public partial class SourceGenerationContext : JsonSerializerContext
 {
 }

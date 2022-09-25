@@ -5,7 +5,7 @@ using ImobFeed.Api;
 using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
 using ImobFeed.Core.Common;
-using ImobFeed.Core.Referencia;
+using ImobFeed.Html.Referencia;
 using ImobFeed.Leitores.Texto;
 using NodaTime;
 using Spectre.Console;

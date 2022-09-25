@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
-using ImobFeed.Core.Referencia;
+using ImobFeed.Html.Referencia;
 using ImobFeed.Leitores.Imagem;
 using ImobFeed.Leitores.Texto;
 using NodaTime;

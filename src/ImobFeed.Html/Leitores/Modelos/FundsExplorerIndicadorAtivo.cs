@@ -1,4 +1,4 @@
-﻿namespace ImobFeed.Core.Referencia.LeitoresHtml;
+﻿namespace ImobFeed.Html.Leitores.Modelos;
 
 public sealed record FundsExplorerIndicadorAtivo(
     string Codigo,

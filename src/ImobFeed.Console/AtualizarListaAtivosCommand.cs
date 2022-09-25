@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Core;
 using ImobFeed.Core.Common;
-using ImobFeed.Core.Referencia;
+using ImobFeed.Html.Referencia;
 using Spectre.Console;
 using Spectre.Console.Cli;
 

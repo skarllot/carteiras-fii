@@ -14,13 +14,13 @@ public class EscritorIndicacoesFavoritas
     private readonly IAppConfiguration _appConfig;
     private readonly IFileSystem _fileSystem;
     private readonly INomeArquivoCorretora _nomeArquivoCorretora;
-    private readonly ReferenciaAtivos _referenciaAtivos;
+    private readonly IReferenciaAtivos _referenciaAtivos;
     private readonly CalculadoraIndicacoesFavoritas _calculadora;
 
     public EscritorIndicacoesFavoritas(
         IAppConfiguration appConfig,
         IFileSystem fileSystem,
-        ReferenciaAtivos referenciaAtivos,
+        IReferenciaAtivos referenciaAtivos,
         CalculadoraIndicacoesFavoritas calculadora,
         INomeArquivoCorretora nomeArquivoCorretora)
     {

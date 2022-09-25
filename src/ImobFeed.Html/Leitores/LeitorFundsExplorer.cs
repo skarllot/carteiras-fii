@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using HtmlAgilityPack;
 using ImobFeed.Core.Common;
+using ImobFeed.Html.Leitores.Modelos;
 
-namespace ImobFeed.Core.Referencia.LeitoresHtml;
+namespace ImobFeed.Html.Leitores;
 
 public static class LeitorFundsExplorer
 {

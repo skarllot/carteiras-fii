@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using ImobFeed.Core.CarteiraMensal;
 
-namespace ImobFeed.Core.Referencia.LeitoresHtml;
+namespace ImobFeed.Html.Leitores.Modelos;
 
 public sealed record ClubeFiiAtivo(
     string Codigo,

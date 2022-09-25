@@ -38,7 +38,7 @@ namespace ImobFeed.Core.Tests {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImobFeed.Leitores.Tests.StringContent", typeof(StringContent).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ImobFeed.Core.Tests.StringContent", typeof(StringContent).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,7 +60,7 @@ namespace ImobFeed.Core.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;ultimaAtualizacao&quot;:&quot;2022-09-14T00:10:02.8125943+00:00&quot;,&quot;ativos&quot;:[{&quot;codigo&quot;:&quot;ABCP11&quot;,&quot;nome&quot;:&quot;Grand Plaza Shopping&quot;,&quot;valorCota&quot;:75.66,&quot;dataCotacao&quot;:&quot;2022-09-13T17:05:00-03:00&quot;,&quot;dataIpo&quot;:&quot;2004-03-12&quot;,&quot;valorIpo&quot;:18.50,&quot;segmento&quot;:&quot;Shopping/Varejo&quot;,&quot;administrador&quot;:&quot;RIO BRAVO&quot;},{&quot;codigo&quot;:&quot;AFHI11&quot;,&quot;nome&quot;:&quot;AF Invest CRI&quot;,&quot;valorCota&quot;:101.10,&quot;dataCotacao&quot;:&quot;2022-09-13T17:05:00-03:00&quot;,&quot;dataIpo&quot;:&quot;2021-04-05&quot;,&quot;valorIpo&quot;:100.00,&quot;segmento&quot;:&quot;Receb\u00EDveis Imobili\u00E1rios&quot;,&quot;administrador&quot;:&quot;BTG PACTUAL&quot;},{&quot;codigo&quot;:&quot;AGRX1 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to [{&quot;codigo&quot;:&quot;ABCP11&quot;,&quot;nome&quot;:&quot;Grand Plaza Shopping&quot;,&quot;valorCota&quot;:75.66,&quot;dataCotacao&quot;:&quot;2022-09-13T17:05:00-03:00&quot;,&quot;dataIpo&quot;:&quot;2004-03-12&quot;,&quot;valorIpo&quot;:18.50,&quot;segmento&quot;:&quot;Shopping/Varejo&quot;,&quot;administrador&quot;:&quot;RIO BRAVO&quot;},{&quot;codigo&quot;:&quot;AFHI11&quot;,&quot;nome&quot;:&quot;AF Invest CRI&quot;,&quot;valorCota&quot;:101.10,&quot;dataCotacao&quot;:&quot;2022-09-13T17:05:00-03:00&quot;,&quot;dataIpo&quot;:&quot;2021-04-05&quot;,&quot;valorIpo&quot;:100.00,&quot;segmento&quot;:&quot;Receb\u00EDveis Imobili\u00E1rios&quot;,&quot;administrador&quot;:&quot;BTG PACTUAL&quot;},{&quot;codigo&quot;:&quot;AGRX11&quot;,&quot;nome&quot;:&quot;Exes Araguaia Fiagro&quot;,&quot;valorCota&quot;:10.32,&quot;dataCotacao&quot;:&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ListaAtivosJson {
             get {

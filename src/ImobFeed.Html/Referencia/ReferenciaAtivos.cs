@@ -1,12 +1,15 @@
 ﻿using System.Collections.Immutable;
 using System.IO.Abstractions;
 using System.Text.Json;
+using ImobFeed.Core;
 using ImobFeed.Core.CarteiraMensal;
-using ImobFeed.Core.Referencia.LeitoresHtml;
+using ImobFeed.Core.Referencia;
+using ImobFeed.Html.Leitores;
+using ImobFeed.Html.Referencia.Modelos;
 
-namespace ImobFeed.Core.Referencia;
+namespace ImobFeed.Html.Referencia;
 
-public sealed class ReferenciaAtivos
+public sealed class ReferenciaAtivos : IReferenciaAtivos
 {
     private readonly IFileSystem _fileSystem;
     private readonly IAppConfiguration _appConfig;
