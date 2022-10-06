@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using ImobFeed.Api;
 using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
-using ImobFeed.Core.Common;
-using ImobFeed.Html.Referencia;
+using ImobFeed.Core.Referencia;
 using ImobFeed.Leitores.Texto;
 using NodaTime;
 using Spectre.Console;
@@ -17,9 +15,12 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
     private readonly DefaultAppConfiguration _appConfig;
-    private readonly ReferenciaAtivos _referenciaAtivos;
+    private readonly IReferenciaAtivos _referenciaAtivos;
 
-    public TextFileCommand(IFileSystem fileSystem, DefaultAppConfiguration appConfig, ReferenciaAtivos referenciaAtivos)
+    public TextFileCommand(
+        IFileSystem fileSystem,
+        DefaultAppConfiguration appConfig,
+        IReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
         _appConfig = appConfig;
@@ -81,10 +82,7 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
         var exportador = new ExportadorRecomendacao(_fileSystem, _appConfig);
         foreach (var recomendacao in recomendacoes)
         {
-            exportador.Salvar(
-                recomendacao,
-                new InlineProgress<ArquivoCriado>(
-                    static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it.FilePath}[/].")));
+            exportador.Salvar(recomendacao, ArquivoCriadoProgress.Default);
         }
 
         return 0;

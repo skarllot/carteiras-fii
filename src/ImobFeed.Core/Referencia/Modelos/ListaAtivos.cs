@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 using ImobFeed.Core.CarteiraMensal;
 
-namespace ImobFeed.Html.Referencia.Modelos;
+namespace ImobFeed.Core.Referencia.Modelos;
 
 public sealed record ListaAtivos(DateTimeOffset UltimaAtualizacao, ImmutableArray<Ativo> Ativos);

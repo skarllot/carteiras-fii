@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
+using ImobFeed.Api.Referencia;
 using ImobFeed.Core;
-using ImobFeed.Core.Common;
-using ImobFeed.Html.Referencia;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -13,16 +12,16 @@ public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.S
 {
     private readonly IFileSystem _fileSystem;
     private readonly DefaultAppConfiguration _appConfig;
-    private readonly ReferenciaAtivos _referenciaAtivos;
+    private readonly EscritorListaAtivosIndicadores _escritor;
 
     public AtualizarListaAtivosCommand(
         IFileSystem fileSystem,
         DefaultAppConfiguration appConfig,
-        ReferenciaAtivos referenciaAtivos)
+        EscritorListaAtivosIndicadores escritor)
     {
         _fileSystem = fileSystem;
         _appConfig = appConfig;
-        _referenciaAtivos = referenciaAtivos;
+        _escritor = escritor;
     }
 
     public sealed class Settings : CommandSettings
@@ -43,8 +42,7 @@ public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.S
 
         _appConfig.BaseDirectory = raizDirInfo;
 
-        _referenciaAtivos.Atualizar(
-            new InlineProgress<string>(static it => AnsiConsole.MarkupLine($"Arquivo gerado: [green]{it}[/].")));
+        _escritor.Explorar(ArquivoCriadoProgress.Default);
 
         return 0;
     }

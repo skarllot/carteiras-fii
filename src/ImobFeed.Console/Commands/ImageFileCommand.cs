@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using ImobFeed.Api.Recomendacoes;
 using ImobFeed.Core;
-using ImobFeed.Html.Referencia;
+using ImobFeed.Core.Referencia;
 using ImobFeed.Leitores.Imagem;
 using ImobFeed.Leitores.Texto;
 using NodaTime;
@@ -16,12 +16,12 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
     private readonly DefaultAppConfiguration _appConfig;
-    private readonly ReferenciaAtivos _referenciaAtivos;
+    private readonly IReferenciaAtivos _referenciaAtivos;
 
     public ImageFileCommand(
         IFileSystem fileSystem,
         DefaultAppConfiguration appConfig,
-        ReferenciaAtivos referenciaAtivos)
+        IReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
         _appConfig = appConfig;
