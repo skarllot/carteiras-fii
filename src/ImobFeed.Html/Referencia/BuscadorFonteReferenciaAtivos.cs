@@ -10,10 +10,15 @@ public sealed class BuscadorFonteReferenciaAtivos : IFonteReferenciaAtivos
 {
     public (ListaAtivos, ListaIndicadores) BuscarEAgregar()
     {
+        var now = DateTimeOffset.UtcNow;
+
         var fundsExplorerAtivos =
             LeitorFundsExplorer.LerListaAtivos().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
         var fundsExplorerIndicadores =
-            LeitorFundsExplorer.LerRanking().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
+            LeitorFundsExplorer.LerRanking()
+                .ToLookup(it => it.Codigo, StringComparer.Ordinal)
+                .Where(it => it.Count() == 1)
+                .ToDictionary(it => it.Key, it => it.First(), StringComparer.Ordinal);
         var clubeFiiAtivos =
             LeitorClubeFii.LerListaAtivos().ToDictionary(it => it.Codigo, StringComparer.Ordinal);
         var clubeFiiIndicadores =
@@ -60,7 +65,7 @@ public sealed class BuscadorFonteReferenciaAtivos : IFonteReferenciaAtivos
                     fundsExplorerIndicador?.QuantidadeAtivos));
         }
 
-        return (new ListaAtivos(DateTimeOffset.UtcNow, listaAtivosBuilder.ToImmutable()),
-            new ListaIndicadores(DateTimeOffset.UtcNow, listaIndicadoresBuilder.ToImmutable()));
+        return (new ListaAtivos(now, listaAtivosBuilder.ToImmutable()),
+            new ListaIndicadores(now, listaIndicadoresBuilder.ToImmutable()));
     }
 }
