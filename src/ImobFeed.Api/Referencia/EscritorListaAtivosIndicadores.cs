@@ -23,11 +23,17 @@ public class EscritorListaAtivosIndicadores
 
     public void Explorar(IProgress<ArquivoCriado> progress)
     {
-        var apiDirectory = _appConfig.GetApiDirectory();
+        var now = DateTimeOffset.UtcNow;
+
+        var refDirectory = _appConfig.GetApiDirectory()
+            .CreateSubdirectory("referencia");
+
+        var indDirectory = refDirectory
+            .CreateSubdirectory(now.Year.ToString());
 
         var (listaAtivos, listaIndicadores) = _fonteReferenciaAtivos.BuscarEAgregar();
 
-        string path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-ativos.json");
+        string path = _fileSystem.Path.Combine(refDirectory.FullName, "lista-ativos.json");
         using (var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write))
         {
             JsonSerializer.Serialize(stream, listaAtivos, SourceGenerationContext.Default.Options);
@@ -35,7 +41,7 @@ public class EscritorListaAtivosIndicadores
             progress.Report(new ArquivoCriado(path));
         }
 
-        path = _fileSystem.Path.Combine(apiDirectory.FullName, "lista-indicadores.json");
+        path = _fileSystem.Path.Combine(indDirectory.FullName, $"{now.Month:00}-lista-indicadores.json");
         using (var stream = _fileSystem.File.Open(path, FileMode.Create, FileAccess.Write))
         {
             JsonSerializer.Serialize(stream, listaIndicadores, SourceGenerationContext.Default.Options);
