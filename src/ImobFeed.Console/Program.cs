@@ -6,11 +6,13 @@ using ImobFeed.Core;
 using ImobFeed.Html;
 using ImobFeed.Leitores;
 using Microsoft.Extensions.DependencyInjection;
+using NodaTime;
 using Spectre.Console.Cli;
 
 var serviceCollection = new ServiceCollection();
 serviceCollection
     .AddSingleton<IFileSystem, FileSystem>()
+    .AddSingleton<IClock>(SystemClock.Instance)
     .AdicionarImobFeedCore()
     .AdicionarImobFeedLeitores()
     .AdicionarImobFeedApi()
