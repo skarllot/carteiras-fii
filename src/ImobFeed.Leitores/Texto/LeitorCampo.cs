@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Common;
 
 namespace ImobFeed.Leitores.Texto;
@@ -15,10 +16,38 @@ public static class LeitorCampo
         return line.Slice(indexStart, 6).ToString();
     }
 
+    public static string? LerCodigoAgressivoNoInicio(
+        ReadOnlySpan<char> line,
+        IReadOnlyDictionary<string, Ativo> dictAtivos)
+    {
+        int indexSpc = line.IndexOf(' ');
+        if (indexSpc == -1)
+            return null;
+
+        var field = line.Slice(0, indexSpc);
+        if (field.Length == 6 && field.EndsWith("11", StringComparison.Ordinal))
+            return field.ToString();
+
+        if (field.Length < 4)
+            return null;
+
+        var letters = field.Slice(0, 4);
+        foreach (string codigo in dictAtivos.Keys)
+        {
+            if (codigo.AsSpan(0, 4).Equals(letters, StringComparison.Ordinal))
+                return codigo;
+        }
+
+        return null;
+    }
+
     public static string? LerCodigoComEspacos(ReadOnlySpan<char> line)
     {
         Span<char> codigoBuffer = stackalloc char[] { '\0', '\0', '\0', '\0', '1', '1' };
         int index11 = line.IndexOf("11", StringComparison.Ordinal);
+        if (index11 == -1)
+            return null;
+
         var codigoLookup = line.Slice(0, index11);
         int position = 3;
         for (int i = codigoLookup.Length - 1; i >= 0; i--)

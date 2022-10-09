@@ -22,7 +22,7 @@ public sealed class LeitorRecomendacaoOrama : ILeitorRecomendacao
             if (string.IsNullOrWhiteSpace(line))
                 break;
 
-            string? codigo = LeitorCampo.LerCodigo(line);
+            string? codigo = LeitorCampo.LerCodigoAgressivoNoInicio(line, dictAtivos) ?? LeitorCampo.LerCodigo(line);
             if (codigo is null)
                 continue;
 
