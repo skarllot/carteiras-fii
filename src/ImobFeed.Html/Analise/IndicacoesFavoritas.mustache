@@ -29,10 +29,8 @@
         <table class="table table-sm table-striped">
             <thead class="table-light">
             <tr>
-                <th scope="col" class="text-nowrap">Código</th>
-                <th scope="col" class="text-nowrap">Nome</th>
-                <th scope="col" class="text-nowrap">Segmento</th>
-                <th scope="col" class="text-nowrap">Administrador</th>
+                <th scope="col" class="text-nowrap">Código/Nome</th>
+                <th scope="col" class="text-nowrap">Administrador e Segmento</th>
                 <th scope="col" class="text-nowrap">VPA</th>
                 <th scope="col" class="text-nowrap">P/VPA</th>
                 <th scope="col" class="text-nowrap">Yield 1 Mês</th>
@@ -44,10 +42,8 @@
             <tbody>
             {{#Indicacoes}}
                 <tr>
-                    <td>{{Codigo}}</td>
-                    <td>{{Nome}}</td>
-                    <td>{{Segmento}}</td>
-                    <td>{{Administrador}}</td>
+                    <td>{{Codigo}} - {{Nome}}</td>
+                    <td>{{Administrador}} - {{Segmento}}</td>
                     <td class="text-nowrap">R$ {{Vpa}}</td>
                     <td>{{PVpa}}</td>
                     <td>{{Yield1Mes}}%</td>
