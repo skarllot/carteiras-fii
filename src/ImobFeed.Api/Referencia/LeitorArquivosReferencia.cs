@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Immutable;
+using System.Text.Json;
 using ImobFeed.Core;
 using ImobFeed.Core.CarteiraMensal;
 using ImobFeed.Core.Referencia;
@@ -16,29 +17,25 @@ public class LeitorArquivosReferencia : IReferenciaAtivos
         _appConfig = appConfig;
     }
 
-    public IReadOnlyDictionary<string, Ativo> CarregarAtivos()
+    public ListaAtivos CarregarAtivos()
     {
         var arqAtivos = _appConfig.GetApiDirectory()
             .IrParaApiReferencia()
             .IrParaArquivoReferenciaAtivos();
 
         using var stream = arqAtivos.OpenRead();
-        var listaAtivos = JsonSerializer.Deserialize<ListaAtivos>(stream, SourceGenerationContext.Default.Options);
-
-        return listaAtivos?.Ativos.ToDictionary(it => it.Codigo, StringComparer.OrdinalIgnoreCase)
-               ?? new Dictionary<string, Ativo>();
+        return JsonSerializer.Deserialize<ListaAtivos>(stream, SourceGenerationContext.Default.Options) ??
+               new ListaAtivos(DateTimeOffset.MinValue, ImmutableArray<Ativo>.Empty);
     }
 
-    public IReadOnlyDictionary<string, IndicadorAtivo> CarregarIndicadores(YearMonth data)
+    public ListaIndicadores CarregarIndicadores(YearMonth data)
     {
         var arqIndicadores = _appConfig.GetApiDirectory()
             .IrParaApiReferencia(data.Year)
             .IrParaArquivoReferenciaIndicadores(data);
 
         using var stream = arqIndicadores.OpenRead();
-        var listaAtivos = JsonSerializer.Deserialize<ListaIndicadores>(stream, SourceGenerationContext.Default.Options);
-
-        return listaAtivos?.Indicadores.ToDictionary(it => it.Codigo, StringComparer.OrdinalIgnoreCase)
-               ?? new Dictionary<string, IndicadorAtivo>();
+        return JsonSerializer.Deserialize<ListaIndicadores>(stream, SourceGenerationContext.Default.Options) ??
+               new ListaIndicadores(DateTimeOffset.MinValue, ImmutableArray<IndicadorAtivo>.Empty);
     }
 }

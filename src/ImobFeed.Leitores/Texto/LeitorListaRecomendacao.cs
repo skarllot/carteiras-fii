@@ -1,6 +1,7 @@
 ﻿using System.IO.Abstractions;
 using System.Text;
 using ImobFeed.Core.CarteiraMensal;
+using ImobFeed.Core.Referencia.Modelos;
 using NodaTime;
 using Validation;
 
@@ -15,10 +16,11 @@ public class LeitorListaRecomendacao
         _data = data;
     }
 
-    public IEnumerable<Recomendacao> LerTudo(IFileInfo fileInfo, IReadOnlyDictionary<string, Ativo> dictAtivos)
+    public IEnumerable<Recomendacao> LerTudo(IFileInfo fileInfo, ListaAtivos listaAtivos)
     {
         Assumes.True(fileInfo.Exists);
 
+        var dictAtivos = listaAtivos.ToDictionary();
         using var fileStream = fileInfo.Open(FileMode.Open, FileAccess.Read);
         using var fileReader = new StreamReader(fileStream, Encoding.UTF8, true);
 

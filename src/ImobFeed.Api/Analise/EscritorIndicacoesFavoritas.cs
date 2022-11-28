@@ -34,8 +34,8 @@ public class EscritorIndicacoesFavoritas
 
     public void Calcular(YearMonth data, IProgress<ArquivoCriado> progress)
     {
-        var dictAtivos = _referenciaAtivos.CarregarAtivos();
-        var dictIndicadores = _referenciaAtivos.CarregarIndicadores(data);
+        var dictAtivos = _referenciaAtivos.CarregarAtivos().ToDictionary();
+        var dictIndicadores = _referenciaAtivos.CarregarIndicadores(data).ToDictionary();
 
         var apiDirectory = _appConfig.GetApiDirectory();
 

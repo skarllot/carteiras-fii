@@ -95,7 +95,7 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
 
         using var reader = new StringReader(textoImagem);
         var recomendacao = leitorRecomendacao.Ler(
-            _referenciaAtivos.CarregarAtivos(),
+            _referenciaAtivos.CarregarAtivos().ToDictionary(),
             reader,
             settings.NomeCarteira,
             data.Value);
