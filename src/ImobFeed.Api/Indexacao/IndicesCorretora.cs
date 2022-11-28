@@ -26,7 +26,7 @@ public sealed class IndicesCorretora
 
         string filePath = _fileSystem.Path.Join(directoryInfo.FullName, "index.json");
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(fileStream, indiceAno, SourceGenerationContext.Default.Options);
+        JsonSerializer.Serialize(fileStream, indiceAno, SourceGenerationContext.DefaultWithConverters.Options);
         fileStream.Flush();
 
         progress.Report(new ArquivoCriado(filePath));

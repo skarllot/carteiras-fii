@@ -63,7 +63,7 @@ public class EscritorIndicacoesFavoritas
         var lista = _calculadora.Calcular(dictAtivos, dictIndicadores, data, indicacoes);
 
         using var stream = destination.Open(FileMode.Create, FileAccess.Write);
-        JsonSerializer.Serialize(stream, lista, SourceGenerationContext.Default.Options);
+        JsonSerializer.Serialize(stream, lista, SourceGenerationContext.DefaultWithConverters.Options);
         stream.Flush();
 
         progress.Report(new ArquivoCriado(path));

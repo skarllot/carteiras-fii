@@ -33,6 +33,12 @@ public static class FileSystemExtensions
             .CreateFileInfo("lista-ativos.json");
     }
 
+    public static IFileInfo IrParaArquivoDiffReferenciaAtivos(this IDirectoryInfo baseDirectory, DateTimeOffset date)
+    {
+        return baseDirectory.IrParaApiReferencia()
+            .CreateFileInfo($"{date:yyyyMMdd'-'HHmmss}-lista-ativos-diff.json");
+    }
+
     public static IFileInfo IrParaArquivoReferenciaIndicadores(this IDirectoryInfo baseDirectory, YearMonth date)
     {
         return baseDirectory.IrParaApiReferencia(date.Year)

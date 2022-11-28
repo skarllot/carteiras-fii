@@ -2,6 +2,7 @@
 using System.IO.Abstractions;
 using System.Text;
 using System.Text.Json;
+using ImobFeed.Api;
 using ImobFeed.Core;
 using ImobFeed.Core.Analise.Modelos;
 using ImobFeed.Core.Common;

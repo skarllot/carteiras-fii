@@ -52,7 +52,7 @@ public sealed class IndicesMes
 
         string filePath = _fileSystem.Path.Join(baseDirectory.FullName, "index.json");
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(fileStream, indiceMes, SourceGenerationContext.Default.Options);
+        JsonSerializer.Serialize(fileStream, indiceMes, SourceGenerationContext.DefaultWithConverters.Options);
         fileStream.Flush();
 
         progress.Report(new ArquivoCriado(filePath));
