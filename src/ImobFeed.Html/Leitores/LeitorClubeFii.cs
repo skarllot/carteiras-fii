@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using ImobFeed.Core.Common;
 using ImobFeed.Html.Leitores.Modelos;
 
@@ -7,13 +6,10 @@ namespace ImobFeed.Html.Leitores;
 
 public static class LeitorClubeFii
 {
-    public const string ListaUrl = "https://clubefii.com.br/fundo_imobiliario_lista#";
-    public const string RankingUrl = "https://clubefii.com.br/fundos_imobiliarios_ranking";
-
     public static IEnumerable<ClubeFiiAtivo> LerListaAtivos()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(ListaUrl);
+        var doc = web.Load(UrlReferencia.ClubeFiiListaUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");
@@ -65,7 +61,7 @@ public static class LeitorClubeFii
     public static IEnumerable<ClubeFiiIndicadorAtivo> LerRanking()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(RankingUrl);
+        var doc = web.Load(UrlReferencia.ClubeFiiRankingUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//div[@id=\"fundos_listados\"]//table//tr[@class=\"tabela_principal\"]");

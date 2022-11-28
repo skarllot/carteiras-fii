@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using ImobFeed.Core.Common;
 using ImobFeed.Html.Leitores.Modelos;
 
@@ -7,13 +6,10 @@ namespace ImobFeed.Html.Leitores;
 
 public static class LeitorFundsExplorer
 {
-    public const string ListaUrl = "https://www.fundsexplorer.com.br/funds";
-    public const string RankingUrl = "https://www.fundsexplorer.com.br/ranking";
-
     public static IEnumerable<FundsExplorerAtivo> LerListaAtivos()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(ListaUrl);
+        var doc = web.Load(UrlReferencia.FundsExplorerListaUrl);
 
         var containerCards = doc.DocumentNode
             .SelectNodes("//section[@id=\"fiis-list\"]//div[@id=\"fiis-list-container\"]//div[@class=\"fund-card\"]");
@@ -35,7 +31,7 @@ public static class LeitorFundsExplorer
     public static IEnumerable<FundsExplorerIndicadorAtivo> LerRanking()
     {
         var web = new HtmlWeb();
-        var doc = web.Load(RankingUrl);
+        var doc = web.Load(UrlReferencia.FundsExplorerRankingUrl);
 
         var tableRows = doc.DocumentNode
             .SelectNodes("//table[@id=\"table-ranking\"]//tbody/tr");
