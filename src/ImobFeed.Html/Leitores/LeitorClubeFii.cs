@@ -75,25 +75,15 @@ public static class LeitorClubeFii
             var cells = row.Descendants("td").ToList();
             string codigo = cells[0].ChildNodes["a"].InnerText.Trim();
 
-            decimal pVpa = decimal.Parse(
-                cells[4].ChildNodes["a"].InnerText.AsSpan().Trim(),
-                provider: CultureCache.PortuguesBrasil);
-
-            decimal yield1Mes = decimal.Parse(
-                cells[5].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1],
-                provider: CultureCache.PortuguesBrasil);
-
-            bool temYield12Mes = decimal.TryParse(
-                cells[6].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal yield12Mes);
+            decimal pVpa = PtBrNumberParser.Decimal(cells[4].ChildNodes["a"].InnerText.AsSpan().Trim());
+            decimal yield1Mes = PtBrNumberParser.Decimal(cells[5].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1]);
+            decimal? yield12Mes = PtBrNumberParser.TryDecimal(cells[6].ChildNodes["a"].InnerText.AsSpan().Trim()[..^1]);
 
             yield return new ClubeFiiIndicadorAtivo(
                 codigo,
                 pVpa,
                 yield1Mes / 100m,
-                temYield12Mes ? yield12Mes / 100m : null);
+                yield12Mes / 100m);
         }
     }
 }

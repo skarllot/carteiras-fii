@@ -46,91 +46,35 @@ public static class LeitorFundsExplorer
             string codigo = cells[0].ChildNodes["a"].InnerText.Trim();
             string setor = cells[1].InnerText.Trim();
 
-            bool temPrecoAtual = decimal.TryParse(
-                cells[2].InnerText.AsSpan().Trim().Slice(2),
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal precoAtual);
-
-            bool temLiquidez = decimal.TryParse(
-                cells[3].InnerText.AsSpan().Trim(),
-                NumberStyles.Float,
-                CultureInfo.InvariantCulture,
-                out decimal liquidez);
-
-            decimal dividendo = decimal.Parse(
-                cells[4].InnerText.AsSpan().Trim().Slice(2),
-                provider: CultureCache.PortuguesBrasil);
-
-            bool temDY1Mes = decimal.TryParse(
-                cells[5].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal dy1Mes);
-
-            bool temDY3Meses = decimal.TryParse(
-                cells[6].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal dy3Meses);
-
-            bool temDY6Meses = decimal.TryParse(
-                cells[7].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal dy6Meses);
-
-            bool temDY12Meses = decimal.TryParse(
-                cells[8].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal dy12Meses);
-
-            decimal patrimonio = decimal.Parse(
-                cells[16].InnerText.AsSpan().Trim().Slice(2),
-                provider: CultureCache.PortuguesBrasil);
-
-            decimal vpa = decimal.Parse(
-                cells[17].InnerText.AsSpan().Trim().Slice(2),
-                provider: CultureCache.PortuguesBrasil);
-
-            bool temPVpa = decimal.TryParse(
-                cells[18].InnerText.AsSpan().Trim(),
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal pVpa);
-
-            bool temVacanciaFisica = decimal.TryParse(
-                cells[23].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal vacanciaFisica);
-
-            bool temVacanciaFinanceira = decimal.TryParse(
-                cells[24].InnerText.AsSpan().Trim()[..^1],
-                NumberStyles.Float,
-                CultureCache.PortuguesBrasil,
-                out decimal vacanciaFinanceira);
-
-            int qtdAtivos = int.Parse(
-                cells[25].InnerText.AsSpan().Trim(),
-                provider: CultureCache.PortuguesBrasil);
+            decimal? precoAtual = PtBrNumberParser.TryDecimal(cells[2].InnerText.AsSpan().Trim().Slice(2));
+            decimal? liquidez = PtBrNumberParser.TryDecimal(cells[3].InnerText.AsSpan().Trim());
+            decimal dividendo = PtBrNumberParser.Decimal(cells[4].InnerText.AsSpan().Trim().Slice(2));
+            decimal? dy1Mes = PtBrNumberParser.TryDecimal(cells[5].InnerText.AsSpan().Trim()[..^1]);
+            decimal? dy3Meses = PtBrNumberParser.TryDecimal(cells[6].InnerText.AsSpan().Trim()[..^1]);
+            decimal? dy6Meses = PtBrNumberParser.TryDecimal(cells[7].InnerText.AsSpan().Trim()[..^1]);
+            decimal? dy12Meses = PtBrNumberParser.TryDecimal(cells[8].InnerText.AsSpan().Trim()[..^1]);
+            decimal? patrimonio = PtBrNumberParser.TryDecimal(cells[16].InnerText.AsSpan().Trim().Slice(2));
+            decimal? vpa = PtBrNumberParser.TryDecimal(cells[17].InnerText.AsSpan().Trim().Slice(2));
+            decimal? pVpa = PtBrNumberParser.TryDecimal(cells[18].InnerText.AsSpan().Trim());
+            decimal? vacanciaFisica = PtBrNumberParser.TryDecimal(cells[23].InnerText.AsSpan().Trim()[..^1]);
+            decimal? vacanciaFinanceira = PtBrNumberParser.TryDecimal(cells[24].InnerText.AsSpan().Trim()[..^1]);
+            int qtdAtivos = PtBrNumberParser.Int32(cells[25].InnerText.AsSpan().Trim());
 
             yield return new FundsExplorerIndicadorAtivo(
                 codigo,
                 setor,
-                temPrecoAtual ? precoAtual : null,
-                temLiquidez ? liquidez : null,
+                precoAtual,
+                liquidez,
                 dividendo,
-                temDY1Mes ? dy1Mes / 100m : null,
-                temDY3Meses ? dy3Meses / 100m : null,
-                temDY6Meses ? dy6Meses / 100m : null,
-                temDY12Meses ? dy12Meses / 100m : null,
+                dy1Mes / 100m,
+                dy3Meses / 100m,
+                dy6Meses / 100m,
+                dy12Meses / 100m,
                 patrimonio,
                 vpa,
-                temPVpa ? pVpa : null,
-                temVacanciaFisica ? vacanciaFisica / 100m : null,
-                temVacanciaFinanceira ? vacanciaFinanceira / 100m : null,
+                pVpa,
+                vacanciaFisica / 100m,
+                vacanciaFinanceira / 100m,
                 qtdAtivos);
         }
     }

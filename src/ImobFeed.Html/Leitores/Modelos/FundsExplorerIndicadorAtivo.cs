@@ -10,12 +10,14 @@ public sealed record FundsExplorerIndicadorAtivo(
     decimal? DY3Meses,
     decimal? DY6Meses,
     decimal? DY12Meses,
-    decimal PatrimonioLiquido,
-    decimal Vpa,
+    decimal? PatrimonioLiquido,
+    decimal? Vpa,
     decimal? PVpa,
     decimal? VacanciaFisica,
     decimal? VacanciaFinanceira,
     int QuantidadeAtivos)
 {
-    public int TotalCotas => (int) Math.Round(PatrimonioLiquido / Vpa, 0);
+    public int? TotalCotas => PatrimonioLiquido is not null && Vpa is not null
+        ? (int)Math.Round(PatrimonioLiquido.Value / Vpa.Value, 0)
+        : null;
 }
