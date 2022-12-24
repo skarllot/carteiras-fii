@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{B8006121
 		LICENSE = LICENSE
 		README.md = README.md
 		global.json = global.json
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CCE6889-E3E5-461E-B423-476805CD9239}"
