@@ -5,10 +5,12 @@ namespace ImobFeed.Console.DependencyInjection;
 public sealed class TypeResolver : ITypeResolver, IDisposable
 {
     private readonly IServiceProvider _provider;
+    private readonly IServiceProvider _staticContainer;
 
     public TypeResolver(IServiceProvider provider)
     {
-        _provider = provider ?? throw new ArgumentNullException(nameof(provider));
+        _provider = provider;
+        _staticContainer = new AppStaticContainer();
     }
 
     public object? Resolve(Type? type)
@@ -18,14 +20,12 @@ public sealed class TypeResolver : ITypeResolver, IDisposable
             return null;
         }
 
-        return _provider.GetService(type);
+        return _staticContainer.GetService(type) ?? _provider.GetService(type);
     }
 
     public void Dispose()
     {
-        if (_provider is IDisposable disposable)
-        {
-            disposable.Dispose();
-        }
+        (_staticContainer as IDisposable)?.Dispose();
+        (_provider as IDisposable)?.Dispose();
     }
 }
