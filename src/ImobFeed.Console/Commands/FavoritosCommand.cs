@@ -49,7 +49,7 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
 
     public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
     {
-        var raizDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(settings.PastaRaiz);
+        var raizDirInfo = _fileSystem.DirectoryInfo.New(settings.PastaRaiz);
         if (!raizDirInfo.Exists)
         {
             AnsiConsole.MarkupLine($"[red]A pasta raíz '{settings.PastaRaiz}' não foi encontrada[/]");

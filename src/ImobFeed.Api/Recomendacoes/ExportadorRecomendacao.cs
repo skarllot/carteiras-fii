@@ -28,7 +28,7 @@ public class ExportadorRecomendacao
             (SistemaArquivos.NormalizarNome(recomendacao.NomeCarteira) ?? "default") + ".json");
 
         SerializadorArquivoCarteira.Salvar(
-            _fileSystem.FileInfo.FromFileName(filePath),
+            _fileSystem.FileInfo.New(filePath),
             new ArquivoCarteira(recomendacao.NomeCarteira, recomendacao.Carteira));
 
         progress.Report(new ArquivoCriado(filePath));

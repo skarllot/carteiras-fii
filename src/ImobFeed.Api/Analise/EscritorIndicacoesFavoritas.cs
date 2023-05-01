@@ -42,7 +42,7 @@ public class EscritorIndicacoesFavoritas
         var arquivosCarteira = apiDirectory
             .IrPara(data)
             .EnumerateFiles(FiltrosArquivos.ArquivosJson, SearchOption.AllDirectories)
-            .Where(it => _nomeArquivoCorretora.NomeNormalizadoExiste(it.Directory.Name))
+            .Where(it => it.Directory is not null && _nomeArquivoCorretora.NomeNormalizadoExiste(it.Directory.Name))
             .Where(FiltrosArquivos.ArquivosCarteira)
             .ToList();
 
@@ -51,13 +51,13 @@ public class EscritorIndicacoesFavoritas
             .MaxBy(it => it);
 
         string path = _fileSystem.Path.Combine(apiDirectory.FullName, $"{data.Year}{data.Month:00}-favoritos.json");
-        var destination = _fileSystem.FileInfo.FromFileName(path);
+        var destination = _fileSystem.FileInfo.New(path);
         if (destination.Exists && destination.LastWriteTimeUtc > dataCarteiraMaisNova)
             return;
 
         var indicacoes = arquivosCarteira.Select(
             it => new CarteiraCorretora(
-                Corretora: _nomeArquivoCorretora.BuscaReversaNomeArquivo(it.Directory.Name),
+                Corretora: _nomeArquivoCorretora.BuscaReversaNomeArquivo(it.Directory!.Name),
                 Carteira: SerializadorArquivoCarteira.Ler(it)!));
 
         var lista = _calculadora.Calcular(dictAtivos, dictIndicadores, data, indicacoes);

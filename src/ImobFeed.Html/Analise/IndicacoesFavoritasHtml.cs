@@ -43,7 +43,7 @@ public class IndicacoesFavoritasHtml
             _appConfig.BaseDirectory.FullName,
             source.Name.Replace(".json", ".html"));
 
-        var destination = _fileSystem.FileInfo.FromFileName(destinationFileName);
+        var destination = _fileSystem.FileInfo.New(destinationFileName);
         if (destination.Exists && destination.LastWriteTimeUtc > source.LastWriteTimeUtc)
             return;
 

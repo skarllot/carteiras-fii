@@ -74,14 +74,14 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
             return 2;
         }
 
-        var imagemFileInfo = _fileSystem.FileInfo.FromFileName(settings.Imagem);
+        var imagemFileInfo = _fileSystem.FileInfo.New(settings.Imagem);
         if (!imagemFileInfo.Exists)
         {
             AnsiConsole.MarkupLine($"[red]O arquivo '{settings.Imagem}' não foi encontrado[/]");
             return 3;
         }
 
-        var saidaDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(settings.Saida);
+        var saidaDirInfo = _fileSystem.DirectoryInfo.New(settings.Saida);
         if (!saidaDirInfo.Exists)
         {
             AnsiConsole.MarkupLine($"[red]A pasta de saída '{settings.Saida}' não foi encontrada[/]");

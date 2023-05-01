@@ -58,14 +58,14 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
             return 1;
         }
 
-        var arquivoFileInfo = _fileSystem.FileInfo.FromFileName(settings.Arquivo);
+        var arquivoFileInfo = _fileSystem.FileInfo.New(settings.Arquivo);
         if (!arquivoFileInfo.Exists)
         {
             AnsiConsole.MarkupLine($"[red]O arquivo '{settings.Arquivo}' não foi encontrado[/]");
             return 2;
         }
 
-        var saidaDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(settings.Saida);
+        var saidaDirInfo = _fileSystem.DirectoryInfo.New(settings.Saida);
         if (!saidaDirInfo.Exists)
         {
             AnsiConsole.MarkupLine($"[red]A pasta de saída '{settings.Saida}' não foi encontrada[/]");

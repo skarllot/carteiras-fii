@@ -6,7 +6,7 @@ public sealed class DefaultAppConfiguration : IAppConfiguration
 {
     public DefaultAppConfiguration(IFileSystem fileSystem)
     {
-        BaseDirectory = fileSystem.DirectoryInfo.FromDirectoryName(".");
+        BaseDirectory = fileSystem.DirectoryInfo.New(".");
     }
 
     public IDirectoryInfo BaseDirectory { get; set; }

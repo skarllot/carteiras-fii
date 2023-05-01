@@ -8,20 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ImobFeed.Api\ImobFeed.Api.csproj" />
-      <ProjectReference Include="..\ImobFeed.Html\ImobFeed.Html.csproj" />
-      <ProjectReference Include="..\ImobFeed.Leitores\ImobFeed.Leitores.csproj" />
+        <ProjectReference Include="..\ImobFeed.Api\ImobFeed.Api.csproj" />
+        <ProjectReference Include="..\ImobFeed.Html\ImobFeed.Html.csproj" />
+        <ProjectReference Include="..\ImobFeed.Leitores\ImobFeed.Leitores.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-      <PackageReference Include="Spectre.Console" Version="0.44.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+        <PackageReference Include="Spectre.Console.Cli" Version="0.46.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="tessdata\eng.traineddata">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Include="..\Commons\tessdata\eng.traineddata" Link="tessdata\eng.traineddata" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
 </Project>
