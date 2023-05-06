@@ -14,12 +14,12 @@ namespace ImobFeed.Console.Commands;
 public class TextFileCommand : Command<TextFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly DefaultAppConfiguration _appConfig;
+    private readonly IAppConfigurationManager _appConfig;
     private readonly IReferenciaAtivos _referenciaAtivos;
 
     public TextFileCommand(
         IFileSystem fileSystem,
-        DefaultAppConfiguration appConfig,
+        IAppConfigurationManager appConfig,
         IReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
@@ -72,7 +72,7 @@ public class TextFileCommand : Command<TextFileCommand.Settings>
             return 3;
         }
 
-        _appConfig.BaseDirectory = saidaDirInfo;
+        _appConfig.SetBaseDirectory(saidaDirInfo);
 
         var leitor = new LeitorListaRecomendacao(data.Value);
         var recomendacoes = leitor.LerTudo(

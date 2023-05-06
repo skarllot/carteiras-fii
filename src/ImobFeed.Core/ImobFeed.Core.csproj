@@ -10,6 +10,7 @@
       <PackageReference Include="Jab" Version="0.8.6" />
       <PackageReference Include="NodaTime" Version="3.1.9" />
       <PackageReference Include="System.IO.Abstractions" Version="19.2.18" />
+      <PackageReference Include="System.Reactive" Version="5.0.0" />
       <PackageReference Include="Validation" Version="2.5.51" />
     </ItemGroup>
 

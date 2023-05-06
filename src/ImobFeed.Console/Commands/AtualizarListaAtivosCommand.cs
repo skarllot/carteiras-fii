@@ -11,12 +11,12 @@ namespace ImobFeed.Console.Commands;
 public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly DefaultAppConfiguration _appConfig;
+    private readonly IAppConfigurationManager _appConfig;
     private readonly EscritorListaAtivosIndicadores _escritor;
 
     public AtualizarListaAtivosCommand(
         IFileSystem fileSystem,
-        DefaultAppConfiguration appConfig,
+        IAppConfigurationManager appConfig,
         EscritorListaAtivosIndicadores escritor)
     {
         _fileSystem = fileSystem;
@@ -40,7 +40,7 @@ public class AtualizarListaAtivosCommand : Command<AtualizarListaAtivosCommand.S
             return 1;
         }
 
-        _appConfig.BaseDirectory = raizDirInfo;
+        _appConfig.SetBaseDirectory(raizDirInfo);
 
         _escritor.Explorar(ArquivoCriadoProgress.Default);
 

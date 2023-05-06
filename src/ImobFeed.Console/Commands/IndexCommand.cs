@@ -11,10 +11,10 @@ namespace ImobFeed.Console.Commands;
 public class IndexCommand : Command<IndexCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly DefaultAppConfiguration _appConfig;
+    private readonly IAppConfigurationManager _appConfig;
     private readonly Indices _indices;
 
-    public IndexCommand(IFileSystem fileSystem, DefaultAppConfiguration appConfig, Indices indices)
+    public IndexCommand(IFileSystem fileSystem, IAppConfigurationManager appConfig, Indices indices)
     {
         _fileSystem = fileSystem;
         _appConfig = appConfig;
@@ -37,7 +37,7 @@ public class IndexCommand : Command<IndexCommand.Settings>
             return 1;
         }
 
-        _appConfig.BaseDirectory = raizDirInfo;
+        _appConfig.SetBaseDirectory(raizDirInfo);
 
         _indices.Criar(ArquivoCriadoProgress.Default);
 

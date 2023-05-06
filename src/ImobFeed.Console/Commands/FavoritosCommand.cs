@@ -13,13 +13,13 @@ namespace ImobFeed.Console.Commands;
 public class FavoritosCommand : Command<FavoritosCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly DefaultAppConfiguration _appConfig;
+    private readonly IAppConfigurationManager _appConfig;
     private readonly EscritorIndicacoesFavoritas _escritorJson;
     private readonly IndicacoesFavoritasHtml _escritorHtml;
 
     public FavoritosCommand(
         IFileSystem fileSystem,
-        DefaultAppConfiguration appConfig,
+        IAppConfigurationManager appConfig,
         EscritorIndicacoesFavoritas escritorJson,
         IndicacoesFavoritasHtml escritorHtml)
     {
@@ -63,7 +63,7 @@ public class FavoritosCommand : Command<FavoritosCommand.Settings>
             return 2;
         }
 
-        _appConfig.BaseDirectory = raizDirInfo;
+        _appConfig.SetBaseDirectory(raizDirInfo);
 
         _escritorJson.Calcular(data.Value, ArquivoCriadoProgress.Default);
         _escritorHtml.Criar(ArquivoCriadoProgress.Default);

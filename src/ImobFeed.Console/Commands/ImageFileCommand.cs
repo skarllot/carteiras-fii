@@ -15,12 +15,12 @@ namespace ImobFeed.Console.Commands;
 public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
 {
     private readonly IFileSystem _fileSystem;
-    private readonly DefaultAppConfiguration _appConfig;
+    private readonly IAppConfigurationManager _appConfig;
     private readonly IReferenciaAtivos _referenciaAtivos;
 
     public ImageFileCommand(
         IFileSystem fileSystem,
-        DefaultAppConfiguration appConfig,
+        IAppConfigurationManager appConfig,
         IReferenciaAtivos referenciaAtivos)
     {
         _fileSystem = fileSystem;
@@ -88,7 +88,7 @@ public sealed class ImageFileCommand : Command<ImageFileCommand.Settings>
             return 4;
         }
 
-        _appConfig.BaseDirectory = saidaDirInfo;
+        _appConfig.SetBaseDirectory(saidaDirInfo);
 
         var leitorImagem = new LeitorImagem();
         string textoImagem = leitorImagem.LerTextoImagem(imagemFileInfo);

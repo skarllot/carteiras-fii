@@ -17,6 +17,7 @@ namespace ImobFeed.Console;
 [Import(typeof(IApiContainerModule))]
 [Import(typeof(IHtmlContainerModule))]
 [Singleton(typeof(IAppConfiguration), Factory = nameof(CreateAppConfiguration))]
+[Singleton(typeof(IAppConfigurationManager), Factory = nameof(CreateAppConfiguration))]
 
 // Services
 [Singleton(typeof(IFileSystem), typeof(FileSystem))]
@@ -31,5 +32,5 @@ namespace ImobFeed.Console;
 internal sealed partial class AppStaticContainer
 {
     public IClock CreateClock() => SystemClock.Instance;
-    public IAppConfiguration CreateAppConfiguration() => GetService<DefaultAppConfiguration>();
+    public IAppConfigurationManager CreateAppConfiguration() => GetService<DefaultAppConfiguration>();
 }
