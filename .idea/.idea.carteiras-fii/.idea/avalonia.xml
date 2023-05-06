@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="src/ImobFeed.UI/App.axaml" value="src/ImobFeed.UI/ImobFeed.UI.csproj" />
+        <entry key="src/ImobFeed.UI/Dashboard/DashboardView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
+        <entry key="src/ImobFeed.UI/Main/MainWindow.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
+        <entry key="src/ImobFeed.UI/Views/MainWindow.axaml" value="src/ImobFeed.UI/ImobFeed.UI.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

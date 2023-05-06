@@ -1,0 +1,17 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dashboard="clr-namespace:ImobFeed.UI.Dashboard"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
+             x:Class="ImobFeed.UI.Dashboard.DashboardView"
+             x:DataType="dashboard:DashboardViewModel">
+    <StackPanel Margin="40">
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 40">
+            <Label Content="Pasta raíz" />
+            <TextBox Text="{Binding PastaRaiz, Mode=TwoWay}" />
+            <Button Name="Procurar" Click="Procurar_OnClick">Procurar</Button>
+        </StackPanel>
+        <Button>Atualizar Ativos</Button>
+    </StackPanel>
+</UserControl>

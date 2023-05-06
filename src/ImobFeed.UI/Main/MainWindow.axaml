@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:main="clr-namespace:ImobFeed.UI.Main"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:ui="clr-namespace:ImobFeed.UI"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
+        x:Class="ImobFeed.UI.Main.MainWindow"
+        x:DataType="main:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Carteiras FII"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent">
+
+    <StackPanel Margin="40">
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 40">
+            <Label Content="Pasta raíz:" VerticalAlignment="Center" Margin="0 0 5 0" />
+            <TextBox Text="{Binding QuandoPastaRaizAltera^}" IsReadOnly="True" />
+            <Button Name="Procurar" Click="Procurar_OnClick" Margin="5 0 0 0">Procurar</Button>
+        </StackPanel>
+        <Button Command="{Binding AtualizarAtivos}">Atualizar Ativos</Button>
+    </StackPanel>
+
+</Window>
