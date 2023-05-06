@@ -7,7 +7,7 @@ namespace ImobFeed.UI;
 
 public partial class App : Application
 {
-    internal static AppStaticContainer Container { get; } = new();
+    private static AppStaticContainer Container { get; } = new();
 
     public override void Initialize()
     {

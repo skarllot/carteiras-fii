@@ -1,31 +1,23 @@
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
+using ImobFeed.UI.Dashboard;
+using ImobFeed.UI.ListaAtivos;
+using ImobFeed.UI.Main;
+using Jab;
 using ReactiveUI;
 
 namespace ImobFeed.UI;
 
-public class ViewLocator : IDataTemplate, IViewLocator
+[ServiceProvider]
+[Transient(typeof(IViewFor<MainWindowViewModel>), typeof(MainWindow))]
+[Transient(typeof(IViewFor<DashboardViewModel>), typeof(DashboardView))]
+[Transient(typeof(IViewFor<AtualizarListaAtivosViewModel>), typeof(AtualizarListaAtivosView))]
+public sealed partial class ViewLocator : IViewLocator
 {
-    public IControl Build(object data)
-    {
-        var name = data.GetType().FullName!.Replace("ViewModel", "View");
-        var type = Type.GetType(name);
-
-        if (type != null)
-        {
-            return (Control)Activator.CreateInstance(type)!;
-        }
-
-        return new TextBlock { Text = "Not Found: " + name };
-    }
-
-    public bool Match(object data)
-    {
-        return data is ViewModelBase;
-    }
-
     public IViewFor? ResolveView<T>(T viewModel, string? contract = null)
     {
-        return (IViewFor?)Build(viewModel);
+        if (viewModel is null)
+            return null;
+
+        var serviceType = typeof(IViewFor<>).MakeGenericType(viewModel.GetType());
+        return (IViewFor?)((IServiceProvider)this).GetService(serviceType);
     }
 }

@@ -1,14 +1,13 @@
-﻿using System.IO;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using ReactiveUI;
+using Avalonia.ReactiveUI;
 
 namespace ImobFeed.UI.Dashboard;
 
-public partial class DashboardView : UserControl
+public partial class DashboardView : ReactiveUserControl<DashboardViewModel>
 {
     public DashboardView()
     {
@@ -22,7 +21,8 @@ public partial class DashboardView : UserControl
 
     private async void Procurar_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+            ViewModel is null)
             return;
 
         var folderDialog = new OpenFolderDialog();
@@ -30,5 +30,7 @@ public partial class DashboardView : UserControl
         string? result = await folderDialog.ShowAsync(desktop.MainWindow);
         if (result is null)
             return;
+
+        ViewModel.DefinirPastaRaiz(result);
     }
 }

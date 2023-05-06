@@ -1,8 +1,6 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
-using ReactiveUI;
-using Splat;
 
 namespace ImobFeed.UI.Desktop;
 
@@ -14,7 +12,6 @@ public static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // Locator.CurrentMutable.RegisterLazySingleton(() => new ViewLocator(), typeof(IViewLocator));
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
     }

@@ -26,11 +26,13 @@ namespace ImobFeed.UI;
 
 // View models
 [Singleton(typeof(MainWindowViewModel))]
-[Singleton(typeof(IScreen), Factory = nameof(GetScreen))]
+[Transient(typeof(IScreen), Factory = nameof(GetScreen))]
+[Transient(typeof(DashboardViewModel))]
 [Transient(typeof(AtualizarListaAtivosViewModel))]
+[Singleton(typeof(IFactory<DashboardViewModel>), typeof(ContainerFactory<DashboardViewModel>))]
 [Singleton(typeof(IFactory<AtualizarListaAtivosViewModel>), typeof(ContainerFactory<AtualizarListaAtivosViewModel>))]
 internal sealed partial class AppStaticContainer
 {
-    public IClock CreateClock() => SystemClock.Instance;
-    public IScreen GetScreen() => GetService<MainWindowViewModel>();
+    private IClock CreateClock() => SystemClock.Instance;
+    private IScreen GetScreen(MainWindowViewModel vm) => vm;
 }

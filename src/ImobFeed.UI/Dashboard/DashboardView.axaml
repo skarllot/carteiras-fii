@@ -8,10 +8,10 @@
              x:DataType="dashboard:DashboardViewModel">
     <StackPanel Margin="40">
         <StackPanel Orientation="Horizontal" Margin="0 0 0 40">
-            <Label Content="Pasta raíz" />
-            <TextBox Text="{Binding PastaRaiz, Mode=TwoWay}" />
-            <Button Name="Procurar" Click="Procurar_OnClick">Procurar</Button>
+            <Label Content="Pasta raíz:" VerticalAlignment="Center" Margin="0 0 5 0" />
+            <TextBox Text="{Binding QuandoPastaRaizAltera^}" IsReadOnly="True" />
+            <Button Name="Procurar" Click="Procurar_OnClick" Margin="5 0 0 0">Procurar</Button>
         </StackPanel>
-        <Button>Atualizar Ativos</Button>
+        <Button Command="{Binding AtualizarAtivos}">Atualizar Ativos</Button>
     </StackPanel>
 </UserControl>
