@@ -29,6 +29,19 @@ public static class DirectoryNavigation
             : baseDirectory;
     }
 
+    public static IDirectoryInfo NavegarPara(this IDirectoryInfo baseDirectory, IEnumerable<string> path)
+    {
+        return baseDirectory.FileSystem.DirectoryInfo.New(
+            baseDirectory.FileSystem.Path.Combine(path.Prepend(baseDirectory.FullName).ToArray()));
+    }
+
+    public static IDirectoryInfo NavegarParaApi(this IDirectoryInfo baseDirectory)
+    {
+        return baseDirectory.EstaEm(_api) is false
+            ? baseDirectory.NavegarPara(_api)
+            : baseDirectory;
+    }
+
     public static bool EstaEm(this IDirectoryInfo? directory, IEnumerable<string> path)
     {
         foreach (string name in path.Reverse())
@@ -36,7 +49,7 @@ public static class DirectoryNavigation
             if (directory?.Name != name)
                 return false;
 
-            directory = directory?.Parent;
+            directory = directory.Parent;
         }
 
         return true;

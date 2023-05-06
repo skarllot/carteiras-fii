@@ -6,6 +6,7 @@
         xmlns:rxui="http://reactiveui.net"
         xmlns:ui="clr-namespace:ImobFeed.UI"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
+        Width="900" Height="450"
         x:Class="ImobFeed.UI.Main.MainWindow"
         x:DataType="main:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -13,12 +14,13 @@
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent">
 
-    <StackPanel Margin="40">
-        <rxui:RoutedViewHost Router="{Binding Router}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-            <rxui:RoutedViewHost.ViewLocator>
-                <ui:ViewLocator />
-            </rxui:RoutedViewHost.ViewLocator>
-        </rxui:RoutedViewHost>
-    </StackPanel>
+    <rxui:RoutedViewHost Router="{Binding Router}"
+                         Padding="20"
+                         HorizontalContentAlignment="Stretch"
+                         VerticalContentAlignment="Stretch">
+        <rxui:RoutedViewHost.ViewLocator>
+            <ui:ViewLocator />
+        </rxui:RoutedViewHost.ViewLocator>
+    </rxui:RoutedViewHost>
 
 </Window>

@@ -25,12 +25,14 @@ public class DashboardViewModel : RoutableViewModelBase
 
         AtualizarAtivos = ReactiveCommand.CreateFromObservable(
             () => screen.Router.Navigate.Execute(atualizerAtivos.Create()),
-            appConfig.WhenBaseDirectoryChanged.Select(d => d.Exists));
+            appConfig.WhenBaseDirectoryChanged.Select(d => d.NavegarParaApi().Exists));
 
         this.WhenActivated((CompositeDisposable _) => { });
     }
 
     public ReactiveCommand<Unit, IRoutableViewModel> AtualizarAtivos { get; }
+
+    public string PastaRaiz => _appConfig.BaseDirectory.FullName;
 
     public IObservable<string> QuandoPastaRaizAltera => _appConfig.WhenBaseDirectoryChanged.Select(d => d.FullName);
 

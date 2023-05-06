@@ -25,8 +25,7 @@ public partial class DashboardView : ReactiveUserControl<DashboardViewModel>
             ViewModel is null)
             return;
 
-        var folderDialog = new OpenFolderDialog();
-        folderDialog.Directory = Directory.GetCurrentDirectory();
+        var folderDialog = new OpenFolderDialog { Directory = ViewModel.PastaRaiz };
         string? result = await folderDialog.ShowAsync(desktop.MainWindow);
         if (result is null)
             return;
