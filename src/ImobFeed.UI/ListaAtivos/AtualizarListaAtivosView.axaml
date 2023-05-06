@@ -2,7 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:listaAtivos="clr-namespace:ImobFeed.UI.ListaAtivos"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ImobFeed.UI.ListaAtivos.AtualizarListaAtivosView">
-    Welcome to Avalonia!
+             x:Class="ImobFeed.UI.ListaAtivos.AtualizarListaAtivosView"
+             x:DataType="listaAtivos:AtualizarListaAtivosViewModel">
+    <Grid ColumnDefinitions="*" RowDefinitions="*, Auto">
+        <TextBlock Text="{Binding Output^}" Focusable="False" MinHeight="200" />
+        <Button Command="{Binding Voltar}" HorizontalAlignment="Right" Content="Voltar" Grid.Row="1" />
+    </Grid>
 </UserControl>

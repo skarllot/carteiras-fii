@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using ReactiveUI;
 
 namespace ImobFeed.UI.Dashboard;
 
@@ -12,6 +13,7 @@ public partial class DashboardView : ReactiveUserControl<DashboardViewModel>
     public DashboardView()
     {
         InitializeComponent();
+        this.WhenActivated(_ => { });
     }
 
     private void InitializeComponent()
