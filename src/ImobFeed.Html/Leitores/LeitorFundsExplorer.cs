@@ -12,14 +12,14 @@ public static class LeitorFundsExplorer
         var doc = web.Load(UrlReferencia.FundsExplorerListaUrl);
 
         var containerCards = doc.DocumentNode
-            .SelectNodes("//section[@id=\"fiis-list\"]//div[@id=\"fiis-list-container\"]//div[@class=\"fund-card\"]");
+            .SelectNodes("//div[@class=\"tickerFilter__results\"]//div[@data-element=\"content-list-ticker\"]");
 
         foreach (var card in containerCards)
         {
-            string codigo = card.Descendants("span").First(it => it.HasClass("symbol")).InnerText.Trim();
-            string nome = card.Descendants("span").First(it => it.HasClass("name")).InnerText.Trim();
+            string codigo = card.Descendants("div").First(it => it.HasClass("tickerBox__title")).InnerText.Trim();
+            string nome = card.Descendants("div").First(it => it.HasClass("tickerBox__desc")).InnerText.Trim();
             string? administrador =
-                card.Descendants("span").FirstOrDefault(it => it.HasClass("admin"))?.InnerText.Trim();
+                card.Descendants("div").FirstOrDefault(it => it.HasClass("tickerBox__admin"))?.InnerText.Trim();
 
             yield return new FundsExplorerAtivo(
                 codigo,
