@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public class LeitorRecomendacaoBancoBrasil : ILeitorRecomendacao
 {
     public string NomeCorretora => "BB Investimentos";
+    public string Url => "https://www.bb.com.br/uci/carteira-sugerida.html";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

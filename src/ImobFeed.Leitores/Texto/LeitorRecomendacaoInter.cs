@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoInter : ILeitorRecomendacao
 {
     public string NomeCorretora => "Inter Invest";
+    public string Url => "https://interinvest.bancointer.com.br/carteiras/fundos-imobiliarios/carteira-recomendada-fiis-setembro";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

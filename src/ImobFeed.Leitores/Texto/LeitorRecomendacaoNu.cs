@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoNu : ILeitorRecomendacao
 {
     public string NomeCorretora => "Nu Invest";
+    public string Url => "https://investnews.com.br/carteira-fiis-recomendada/";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

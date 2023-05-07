@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoOrama : ILeitorRecomendacao
 {
     public string NomeCorretora => "Órama";
+    public string Url => "https://analise.orama.com.br/fundos-imobiliarios-e-fiagro-2/";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

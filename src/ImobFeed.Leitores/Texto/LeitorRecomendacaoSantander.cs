@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoSantander : ILeitorRecomendacao
 {
     public string NomeCorretora => "Santander Corretora";
+    public string Url => "https://cms.santander.com.br/sites/WPS/documentos/arq-carteira-fundos-imobiliarios-algomais/21-09-13_201946_carteira-fundos-imobiliarios-santander-corretora.pdf";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

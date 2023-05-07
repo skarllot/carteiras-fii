@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoBtgPactual : ILeitorRecomendacao
 {
     public string NomeCorretora => "BTG Pactual";
+    public string Url => "https://www.btgpactualdigital.com/analises/carteiras-recomendadas";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoGenial : ILeitorRecomendacao
 {
     public string NomeCorretora => "Genial Investimentos";
+    public string Url => "https://analisa.genialinvestimentos.com.br/carteiras-recomendadas/fundos-imobiliarios";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

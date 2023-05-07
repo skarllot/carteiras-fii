@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoMirae : ILeitorRecomendacao
 {
     public string NomeCorretora => "Mirae Asset";
+    public string Url => "https://corretora.miraeasset.com.br/educacional/research";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

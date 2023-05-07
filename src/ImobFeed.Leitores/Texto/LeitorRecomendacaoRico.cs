@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoRico : ILeitorRecomendacao
 {
     public string NomeCorretora => "Rico";
+    public string Url => "https://riconnect.rico.com.vc/relatorio/carteira-fundos-imobiliarios";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

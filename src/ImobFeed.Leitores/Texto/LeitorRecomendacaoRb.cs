@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
 {
     public string NomeCorretora => "RB Investimentos";
+    public string Url => "https://www.rbinvestimentos.com/rb-trends/carteira-de-fundos-imobiliarios-setembro-2022";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

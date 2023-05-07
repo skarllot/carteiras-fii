@@ -9,6 +9,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoGuide : ILeitorRecomendacao
 {
     public string NomeCorretora => "Guide Investimentos";
+    public string Url => "https://www.oguiafinanceiro.com.br/temas_app/recomendacoes-de-investimentos/";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,

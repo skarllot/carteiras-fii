@@ -8,6 +8,7 @@ namespace ImobFeed.Leitores.Texto;
 public sealed class LeitorRecomendacaoItau : ILeitorRecomendacao
 {
     public string NomeCorretora => "Itaú Corretora";
+    public string Url => "https://www.itaucorretora.com.br/assessoria/carteira-recomendada-de-fundos-imobiliarios.aspx?ma";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,
