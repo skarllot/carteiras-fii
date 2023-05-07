@@ -10,7 +10,7 @@
         <StyleInclude Source="/DefaultStyle.axaml" />
     </UserControl.Styles>
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, *, Auto">
-        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto">
+        <Grid ColumnDefinitions="*, Auto, Auto" RowDefinitions="Auto">
             <ComboBox Classes="nomeCorretoras" Items="{Binding NomeCorretoras}" Grid.Column="0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -18,7 +18,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data}" Grid.Column="1" />
+            <Button Classes="link linkRecomendacao" Content="🌎" Grid.Column="1" />
+            <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data}" Grid.Column="2" />
         </Grid>
         <TextBox Classes="conteudo" Grid.Row="1" />
         <StackPanel Classes="comandos" Grid.Row="2">

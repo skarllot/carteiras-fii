@@ -6,12 +6,36 @@
         </Border>
     </Design.PreviewWith>
 
+    <Style Selector="Button.link">
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter Content="{TemplateBinding Content}">
+                    <ContentPresenter.Styles>
+                        <Style Selector="TextBlock">
+                            <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
+                            <Setter Property="FontSize" Value="{TemplateBinding FontSize}" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Style>
+                    </ContentPresenter.Styles>
+                </ContentPresenter>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
     <!-- Importar recomendação (texto) -->
     <Style Selector="ComboBox.nomeCorretoras">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0 0 30 0" />
         <Setter Property="PlaceholderText" Value="Escolha a corretora" />
+    </Style>
+    <Style Selector="Button.linkRecomendacao">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 0 30 0" />
     </Style>
     <Style Selector="DatePicker.dataImportacao">
         <Setter Property="DayVisible" Value="False" />
