@@ -6,12 +6,18 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
              x:Class="ImobFeed.UI.Dashboard.DashboardView"
              x:DataType="dashboard:DashboardViewModel">
+    <UserControl.Styles>
+        <StyleInclude Source="/DefaultStyle.axaml" />
+    </UserControl.Styles>
     <StackPanel>
         <Grid ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto" Margin="0 0 0 20">
             <Label Content="Pasta raíz:" VerticalAlignment="Center" Margin="0 0 5 0" />
             <TextBox Text="{Binding QuandoPastaRaizAltera^}" IsReadOnly="True" Grid.Column="1" />
             <Button Name="Procurar" Click="Procurar_OnClick" Grid.Column="2" Margin="5 0 0 0">Procurar</Button>
         </Grid>
-        <Button Command="{Binding AtualizarAtivos}" Content="Atualizar Ativos" />
+        <StackPanel Classes="comandos">
+            <Button Command="{Binding AtualizarAtivos}" Content="Atualizar Ativos" />
+            <Button Command="{Binding ImportarRecomendacaoTexto}" Content="Importar Recomendação (Texto)" />
+        </StackPanel>
     </StackPanel>
 </UserControl>

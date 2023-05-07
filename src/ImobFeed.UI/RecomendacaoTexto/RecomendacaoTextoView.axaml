@@ -1,0 +1,29 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rt="clr-namespace:ImobFeed.UI.RecomendacaoTexto"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ImobFeed.UI.RecomendacaoTexto.RecomendacaoTextoView"
+             x:DataType="rt:RecomendacaoTextoViewModel">
+    <UserControl.Styles>
+        <StyleInclude Source="/DefaultStyle.axaml" />
+    </UserControl.Styles>
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, *, Auto">
+        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto">
+            <ComboBox Classes="nomeCorretoras" Items="{Binding NomeCorretoras}" Grid.Column="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NomeCorretora}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data}" Grid.Column="1" />
+        </Grid>
+        <TextBox Classes="conteudo" Grid.Row="1" />
+        <StackPanel Classes="comandos" Grid.Row="2">
+            <Button Command="{Binding Importar}" Content="Importar" />
+            <Button Command="{Binding Voltar}" Content="Voltar" />
+        </StackPanel>
+    </Grid>
+</UserControl>

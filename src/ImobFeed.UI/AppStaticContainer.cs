@@ -6,6 +6,7 @@ using ImobFeed.Leitores;
 using ImobFeed.UI.Dashboard;
 using ImobFeed.UI.ListaAtivos;
 using ImobFeed.UI.Main;
+using ImobFeed.UI.RecomendacaoTexto;
 using Jab;
 using NodaTime;
 using ReactiveUI;
@@ -29,8 +30,10 @@ namespace ImobFeed.UI;
 [Transient(typeof(IScreen), Factory = nameof(GetScreen))]
 [Transient(typeof(DashboardViewModel))]
 [Transient(typeof(AtualizarListaAtivosViewModel))]
+[Transient(typeof(RecomendacaoTextoViewModel))]
 [Singleton(typeof(IFactory<DashboardViewModel>), typeof(ContainerFactory<DashboardViewModel>))]
 [Singleton(typeof(IFactory<AtualizarListaAtivosViewModel>), typeof(ContainerFactory<AtualizarListaAtivosViewModel>))]
+[Singleton(typeof(IFactory<RecomendacaoTextoViewModel>), typeof(ContainerFactory<RecomendacaoTextoViewModel>))]
 internal sealed partial class AppStaticContainer
 {
     private IClock CreateClock() => SystemClock.Instance;

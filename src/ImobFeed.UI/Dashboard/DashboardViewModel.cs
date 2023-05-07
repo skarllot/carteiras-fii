@@ -4,6 +4,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ImobFeed.Core;
 using ImobFeed.UI.ListaAtivos;
+using ImobFeed.UI.RecomendacaoTexto;
 using ReactiveUI;
 
 namespace ImobFeed.UI.Dashboard;
@@ -17,20 +18,25 @@ public class DashboardViewModel : RoutableViewModelBase
         IScreen screen,
         IFileSystem fileSystem,
         IAppConfigurationManager appConfig,
-        IFactory<AtualizarListaAtivosViewModel> atualizerAtivos)
+        IFactory<AtualizarListaAtivosViewModel> atualizarAtivos,
+        IFactory<RecomendacaoTextoViewModel> recomendacaoTexto)
         : base(screen)
     {
         _fileSystem = fileSystem;
         _appConfig = appConfig;
 
         AtualizarAtivos = ReactiveCommand.CreateFromObservable(
-            () => screen.Router.Navigate.Execute(atualizerAtivos.Create()),
+            () => screen.Router.Navigate.Execute(atualizarAtivos.Create()),
+            appConfig.WhenBaseDirectoryChanged.Select(d => d.NavegarParaApi().Exists));
+        ImportarRecomendacaoTexto = ReactiveCommand.CreateFromObservable(
+            () => screen.Router.Navigate.Execute(recomendacaoTexto.Create()),
             appConfig.WhenBaseDirectoryChanged.Select(d => d.NavegarParaApi().Exists));
 
         this.WhenActivated((CompositeDisposable _) => { });
     }
 
     public ReactiveCommand<Unit, IRoutableViewModel> AtualizarAtivos { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ImportarRecomendacaoTexto { get; }
 
     public string PastaRaiz => _appConfig.BaseDirectory.FullName;
 

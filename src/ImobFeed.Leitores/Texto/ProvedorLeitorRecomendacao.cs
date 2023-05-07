@@ -10,7 +10,7 @@ public static class ProvedorLeitorRecomendacao
     private static readonly Dictionary<string, string> _nomesArquivo =
         _leitores.Keys.ToDictionary(it => SistemaArquivos.NormalizarNome(it), StringComparer.OrdinalIgnoreCase);
 
-    private static IEnumerable<ILeitorRecomendacao> TodosLeitores()
+    public static IEnumerable<ILeitorRecomendacao> TodosLeitores()
     {
         yield return new LeitorRecomendacaoBancoBrasil();
         yield return new LeitorRecomendacaoBtgPactual();
