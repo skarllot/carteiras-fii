@@ -9,20 +9,22 @@
     <UserControl.Styles>
         <StyleInclude Source="/DefaultStyle.axaml" />
     </UserControl.Styles>
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto, *, Auto">
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *, Auto">
         <Grid ColumnDefinitions="*, Auto, Auto" RowDefinitions="Auto">
-            <ComboBox Classes="nomeCorretoras" Items="{Binding NomeCorretoras}" Grid.Column="0">
+            <ComboBox Classes="nomeCorretoras" Items="{Binding NomeCorretoras}"
+                      SelectedItem="{Binding LeitorRecomendacaoSelecionado}" Grid.Column="0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NomeCorretora}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Classes="link linkRecomendacao" Content="🌎" Grid.Column="1" />
-            <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data}" Grid.Column="2" />
+            <Button Classes="link linkRecomendacao" Content="🌎" Command="{Binding AbrirLink}" Grid.Column="1" />
+            <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data, Mode=TwoWay}" Grid.Column="2" />
         </Grid>
-        <TextBox Classes="conteudo" Grid.Row="1" />
-        <StackPanel Classes="comandos" Grid.Row="2">
+        <TextBox Classes="nomeCarteira" Watermark="Nome da carteira" Text="{Binding NomeCarteira}" Grid.Row="1" />
+        <TextBox Classes="conteudo" Watermark="Conteúdo bruto da recomendação" Text="{Binding Conteudo}" Grid.Row="2" />
+        <StackPanel Classes="comandos" Grid.Row="3">
             <Button Command="{Binding Importar}" Content="Importar" />
             <Button Command="{Binding Voltar}" Content="Voltar" />
         </StackPanel>
