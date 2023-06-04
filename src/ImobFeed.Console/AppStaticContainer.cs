@@ -24,7 +24,6 @@ namespace ImobFeed.Console;
 // Commands
 [Singleton(typeof(AtualizarListaAtivosCommand))]
 [Singleton(typeof(FavoritosCommand))]
-[Singleton(typeof(ImageFileCommand))]
 [Singleton(typeof(IndexCommand))]
 [Singleton(typeof(TextFileCommand))]
 internal sealed partial class AppStaticContainer

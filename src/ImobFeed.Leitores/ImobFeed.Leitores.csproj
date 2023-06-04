@@ -10,8 +10,4 @@
       <ProjectReference Include="..\ImobFeed.Core\ImobFeed.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Tesseract" Version="4.1.1" />
-    </ItemGroup>
-
 </Project>
