@@ -5,10 +5,10 @@ using NodaTime;
 
 namespace ImobFeed.Leitores.Texto;
 
-public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
+public sealed class LeitorRecomendacaoTerra : ILeitorRecomendacao
 {
-    public string NomeCorretora => "RB Investimentos";
-    public string Url => "https://www.rbinvestimentos.com/rb-trends/carteira-de-fundos-imobiliarios-setembro-2022";
+    public string NomeCorretora => "Terra Investimentos";
+    public string Url => "https://www.terrainvestimentos.com.br/investimentos/carteira-de-fiis/";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,
@@ -27,12 +27,7 @@ public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
             if (codigo is null)
                 continue;
 
-            bool hasTwo = line.LastIndexOf(codigo, StringComparison.Ordinal) !=
-                          line.IndexOf(codigo, StringComparison.Ordinal);
-            if (!hasTwo && !line.Contains("entrada", StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            decimal? peso = LeitorCampo.LerPeso(line, true);
+            decimal? peso = LeitorCampo.LerPeso(line);
             if (peso is null)
                 continue;
 

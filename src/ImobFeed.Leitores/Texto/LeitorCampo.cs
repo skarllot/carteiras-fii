@@ -74,6 +74,11 @@ public static class LeitorCampo
             ? line.LastIndexOf("%", StringComparison.Ordinal)
             : line.IndexOf("%", StringComparison.Ordinal);
 
+        line = ExtractFromParenthesis(line, indexPct);
+        indexPct = isLast
+            ? line.LastIndexOf("%", StringComparison.Ordinal)
+            : line.IndexOf("%", StringComparison.Ordinal);
+
         int indexSpc = -2;
         for (int i = indexPct - 1; i >= 0; i--)
         {
@@ -146,5 +151,22 @@ public static class LeitorCampo
             return null;
 
         return peso;
+    }
+
+    private static ReadOnlySpan<char> ExtractFromParenthesis(ReadOnlySpan<char> line, int indexPct)
+    {
+        if (indexPct == line.Length - 1)
+            return line;
+
+        int indexCloseParenthesis = indexPct + 1;
+        if (line[indexCloseParenthesis] != ')')
+            return line;
+
+        int indexOpenParenthesis = line.Slice(0, indexPct)
+            .LastIndexOf("(", StringComparison.Ordinal);
+        if (indexOpenParenthesis == -1 || indexOpenParenthesis == indexCloseParenthesis - 1)
+            return line;
+
+        return line.Slice(indexOpenParenthesis + 1, indexCloseParenthesis - indexOpenParenthesis - 1);
     }
 }

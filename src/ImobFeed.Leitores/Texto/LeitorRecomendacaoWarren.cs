@@ -5,10 +5,10 @@ using NodaTime;
 
 namespace ImobFeed.Leitores.Texto;
 
-public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
+public sealed class LeitorRecomendacaoWarren : ILeitorRecomendacao
 {
-    public string NomeCorretora => "RB Investimentos";
-    public string Url => "https://www.rbinvestimentos.com/rb-trends/carteira-de-fundos-imobiliarios-setembro-2022";
+    public string NomeCorretora => "Warren";
+    public string Url => "https://lp.warren.com.br/hubfs/An%C3%A1lise/Carteiras%20recomendadas%20-%20Maio%20-%202022/Warren%20FIIs%20-%20Maio%202022.pdf";
 
     public Recomendacao Ler(
         IReadOnlyDictionary<string, Ativo> dictAtivos,
@@ -18,26 +18,28 @@ public sealed class LeitorRecomendacaoRb : ILeitorRecomendacao
     {
         var carteiraBuilder = ImmutableArray.CreateBuilder<AtivoRecomendado>();
 
+        decimal? peso = null;
         while (reader.ReadLine() is { } line)
         {
             if (string.IsNullOrWhiteSpace(line))
                 break;
 
+            if (peso is null)
+            {
+                peso = LeitorCampo.LerPeso(line);
+                continue;
+            }
+
             string? codigo = LeitorCampo.LerCodigo(line);
             if (codigo is null)
+            {
+                peso = null;
                 continue;
-
-            bool hasTwo = line.LastIndexOf(codigo, StringComparison.Ordinal) !=
-                          line.IndexOf(codigo, StringComparison.Ordinal);
-            if (!hasTwo && !line.Contains("entrada", StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            decimal? peso = LeitorCampo.LerPeso(line, true);
-            if (peso is null)
-                continue;
+            }
 
             Validar.CodigoAtivo(dictAtivos, codigo);
             carteiraBuilder.Add(new AtivoRecomendado(codigo, new Percentual(peso.Value / 100)));
+            peso = null;
         }
 
         Validar.PesosAtivos(carteiraBuilder);
