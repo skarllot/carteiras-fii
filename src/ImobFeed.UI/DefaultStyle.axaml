@@ -26,8 +26,14 @@
             </ControlTemplate>
         </Setter>
     </Style>
+    <Style Selector="TextBox.saida">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="MinHeight" Value="200" />
+        <Setter Property="Margin" Value="0 20" />
+    </Style>
 
-    <!-- Importar recomendação (texto) -->
+    <!-- Importar recomendação -->
     <Style Selector="ComboBox.nomeCorretoras">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -59,5 +65,12 @@
     </Style>
     <Style Selector="StackPanel.comandos Button:nth-last-child(1)">
         <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <!-- Favoritos -->
+    <Style Selector="DatePicker.dataColeta">
+        <Setter Property="DayVisible" Value="False" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 10" />
     </Style>
 </Styles>

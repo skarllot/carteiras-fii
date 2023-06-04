@@ -28,7 +28,7 @@ public class IndicacoesFavoritasHtml
         _renderSettings.CultureInfo = CultureCache.PortuguesBrasil;
     }
 
-    public void Criar(IProgress<string> progress)
+    public void Criar(IProgress<ArquivoCriado> progress)
     {
         var apiDirectory = _appConfig.GetApiDirectory();
         foreach (var file in apiDirectory.EnumerateFiles("??????-favoritos.json", SearchOption.TopDirectoryOnly))
@@ -37,7 +37,7 @@ public class IndicacoesFavoritasHtml
         }
     }
 
-    private void CriarArquivo(IFileInfo source, IProgress<string> progress)
+    private void CriarArquivo(IFileInfo source, IProgress<ArquivoCriado> progress)
     {
         string destinationFileName = _fileSystem.Path.Combine(
             _appConfig.BaseDirectory.FullName,
@@ -75,6 +75,6 @@ public class IndicacoesFavoritasHtml
 
         _fileSystem.File.WriteAllText(destination.FullName, result, Encoding.UTF8);
 
-        progress.Report(destination.FullName);
+        progress.Report(new ArquivoCriado(destination.FullName));
     }
 }
