@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ImobFeed.UI.Main;
@@ -9,6 +10,8 @@ public partial class App : Application
 {
     private static AppStaticContainer Container { get; } = new();
 
+    public static Window? CurrentMainWindow { get; private set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -18,7 +21,8 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow { ViewModel = Container.GetService<MainWindowViewModel>() };
+            desktop.MainWindow = CurrentMainWindow =
+                new MainWindow { ViewModel = Container.GetService<MainWindowViewModel>() };
         }
 
         base.OnFrameworkInitializationCompleted();

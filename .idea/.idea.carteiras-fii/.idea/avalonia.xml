@@ -8,6 +8,8 @@
         <entry key="src/ImobFeed.UI/DefaultStyle.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/ListaAtivos/AtualizarListaAtivosView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/Main/MainWindow.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
+        <entry key="src/ImobFeed.UI/Recomendacao/RecomendacaoTextoView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
+        <entry key="src/ImobFeed.UI/Recomendacao/RecomendacaoView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/RecomendacaoTexto/RecomendacaoTextoView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/Views/MainWindow.axaml" value="src/ImobFeed.UI/ImobFeed.UI.csproj" />
       </map>

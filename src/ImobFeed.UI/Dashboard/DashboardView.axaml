@@ -17,7 +17,7 @@
         </Grid>
         <StackPanel Classes="comandos">
             <Button Command="{Binding AtualizarAtivos}" Content="Atualizar Ativos" />
-            <Button Command="{Binding ImportarRecomendacaoTexto}" Content="Importar Recomendação (Texto)" />
+            <Button Command="{Binding ImportarRecomendacao}" Content="Importar Recomendação" />
         </StackPanel>
     </StackPanel>
 </UserControl>

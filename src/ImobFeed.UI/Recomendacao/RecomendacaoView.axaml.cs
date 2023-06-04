@@ -2,11 +2,11 @@
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 
-namespace ImobFeed.UI.RecomendacaoTexto;
+namespace ImobFeed.UI.Recomendacao;
 
-public partial class RecomendacaoTextoView : ReactiveUserControl<RecomendacaoTextoViewModel>
+public partial class RecomendacaoView : ReactiveUserControl<RecomendacaoViewModel>
 {
-    public RecomendacaoTextoView()
+    public RecomendacaoView()
     {
         InitializeComponent();
         this.WhenActivated(_ => { });

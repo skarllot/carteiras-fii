@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:rt="clr-namespace:ImobFeed.UI.RecomendacaoTexto"
+             xmlns:recomendacao="clr-namespace:ImobFeed.UI.Recomendacao"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ImobFeed.UI.RecomendacaoTexto.RecomendacaoTextoView"
-             x:DataType="rt:RecomendacaoTextoViewModel">
+             x:Class="ImobFeed.UI.Recomendacao.RecomendacaoView"
+             x:DataType="recomendacao:RecomendacaoViewModel">
     <UserControl.Styles>
         <StyleInclude Source="/DefaultStyle.axaml" />
     </UserControl.Styles>
@@ -23,9 +23,10 @@
             <DatePicker Classes="dataImportacao" SelectedDate="{Binding Data, Mode=TwoWay}" Grid.Column="2" />
         </Grid>
         <TextBox Classes="nomeCarteira" Watermark="Nome da carteira" Text="{Binding NomeCarteira}" Grid.Row="1" />
-        <TextBox Classes="conteudo" Watermark="Conteúdo bruto da recomendação" Text="{Binding Conteudo}" Grid.Row="2" />
+        <TextBox Classes="conteudo" Watermark="Conteúdo bruto da recomendação" Text="{Binding Conteudo}" AcceptsReturn="True" Grid.Row="2" />
         <StackPanel Classes="comandos" Grid.Row="3">
-            <Button Command="{Binding Importar}" Content="Importar" />
+            <Button Command="{Binding ImportarTexto}" Content="Importar Texto" />
+            <Button Command="{Binding ImportarImagem}" Content="Importar Imagem" />
             <Button Command="{Binding Voltar}" Content="Voltar" />
         </StackPanel>
     </Grid>

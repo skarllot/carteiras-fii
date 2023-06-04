@@ -1,7 +1,7 @@
 using ImobFeed.UI.Dashboard;
 using ImobFeed.UI.ListaAtivos;
 using ImobFeed.UI.Main;
-using ImobFeed.UI.RecomendacaoTexto;
+using ImobFeed.UI.Recomendacao;
 using Jab;
 using ReactiveUI;
 
@@ -11,7 +11,7 @@ namespace ImobFeed.UI;
 [Transient(typeof(IViewFor<MainWindowViewModel>), typeof(MainWindow))]
 [Transient(typeof(IViewFor<DashboardViewModel>), typeof(DashboardView))]
 [Transient(typeof(IViewFor<AtualizarListaAtivosViewModel>), typeof(AtualizarListaAtivosView))]
-[Transient(typeof(IViewFor<RecomendacaoTextoViewModel>), typeof(RecomendacaoTextoView))]
+[Transient(typeof(IViewFor<RecomendacaoViewModel>), typeof(RecomendacaoView))]
 public sealed partial class ViewLocator : IViewLocator
 {
     public IViewFor? ResolveView<T>(T viewModel, string? contract = null)

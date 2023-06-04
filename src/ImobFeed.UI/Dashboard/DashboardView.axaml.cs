@@ -1,6 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
@@ -23,12 +21,12 @@ public partial class DashboardView : ReactiveUserControl<DashboardViewModel>
 
     private async void Procurar_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-            ViewModel is null)
+        var mainWindow = App.CurrentMainWindow;
+        if (mainWindow is null || ViewModel is null)
             return;
 
         var folderDialog = new OpenFolderDialog { Directory = ViewModel.PastaRaiz };
-        string? result = await folderDialog.ShowAsync(desktop.MainWindow);
+        string? result = await folderDialog.ShowAsync(mainWindow);
         if (result is null)
             return;
 
