@@ -15,5 +15,9 @@ public static class Validar
         decimal sum = ativos.Sum(it => it.Peso.Valor);
         if (sum - 1m >= 0.0001m)
             Verify.FailOperation("Falha ao ler pesos dos ativos: Total {0}%", sum * 100m);
+        if (sum - 1m < -0.0001m)
+            Verify.FailOperation("Falha ao ler pesos dos ativos: Total {0}%", sum * 100m);
+        if (sum <= 0.0001m)
+            Verify.FailOperation("Falha ao ler pesos dos ativos: Total {0}%", sum * 100m);
     }
 }
