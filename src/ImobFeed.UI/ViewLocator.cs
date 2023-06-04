@@ -1,5 +1,6 @@
 using ImobFeed.UI.Dashboard;
 using ImobFeed.UI.Favoritos;
+using ImobFeed.UI.Indices;
 using ImobFeed.UI.ListaAtivos;
 using ImobFeed.UI.Main;
 using ImobFeed.UI.Recomendacao;
@@ -14,6 +15,7 @@ namespace ImobFeed.UI;
 [Transient(typeof(IViewFor<AtualizarListaAtivosViewModel>), typeof(AtualizarListaAtivosView))]
 [Transient(typeof(IViewFor<RecomendacaoViewModel>), typeof(RecomendacaoView))]
 [Transient(typeof(IViewFor<FavoritosViewModel>), typeof(FavoritosView))]
+[Transient(typeof(IViewFor<IndicesViewModel>), typeof(IndicesView))]
 public sealed partial class ViewLocator : IViewLocator
 {
     public IViewFor? ResolveView<T>(T viewModel, string? contract = null)

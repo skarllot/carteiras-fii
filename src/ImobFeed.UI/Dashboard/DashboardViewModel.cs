@@ -4,6 +4,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ImobFeed.Core;
 using ImobFeed.UI.Favoritos;
+using ImobFeed.UI.Indices;
 using ImobFeed.UI.ListaAtivos;
 using ImobFeed.UI.Recomendacao;
 using ReactiveUI;
@@ -21,7 +22,8 @@ public class DashboardViewModel : RoutableViewModelBase
         IAppConfigurationManager appConfig,
         IFactory<AtualizarListaAtivosViewModel> atualizarAtivos,
         IFactory<RecomendacaoViewModel> recomendacao,
-        IFactory<FavoritosViewModel> favoritos)
+        IFactory<FavoritosViewModel> favoritos,
+        IFactory<IndicesViewModel> indices)
         : base(screen)
     {
         _fileSystem = fileSystem;
@@ -38,6 +40,9 @@ public class DashboardViewModel : RoutableViewModelBase
         GerarFavoritos = ReactiveCommand.CreateFromObservable(
             () => screen.Router.Navigate.Execute(favoritos.Create()),
             whenValidBaseDirectory);
+        GerarIndices = ReactiveCommand.CreateFromObservable(
+            () => screen.Router.Navigate.Execute(indices.Create()),
+            whenValidBaseDirectory);
 
         this.WhenActivated((CompositeDisposable _) => { });
     }
@@ -45,6 +50,7 @@ public class DashboardViewModel : RoutableViewModelBase
     public ReactiveCommand<Unit, IRoutableViewModel> AtualizarAtivos { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> ImportarRecomendacao { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> GerarFavoritos { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> GerarIndices { get; }
 
     public string PastaRaiz => _appConfig.BaseDirectory.FullName;
 

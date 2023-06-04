@@ -1,0 +1,19 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:indices="clr-namespace:ImobFeed.UI.Indices"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ImobFeed.UI.Indices.IndicesView"
+             x:DataType="indices:IndicesViewModel">
+    <UserControl.Styles>
+        <StyleInclude Source="/DefaultStyle.axaml" />
+    </UserControl.Styles>
+    <StackPanel>
+        <TextBox Classes="saida" Watermark="Saída" Text="{Binding Output^}" />
+        <StackPanel Classes="comandos">
+            <Button Command="{Binding Gerar}" Content="Gerar" />
+            <Button Command="{Binding Voltar}" Content="Voltar" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

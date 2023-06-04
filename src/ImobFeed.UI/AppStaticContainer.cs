@@ -5,6 +5,7 @@ using ImobFeed.Html;
 using ImobFeed.Leitores;
 using ImobFeed.UI.Dashboard;
 using ImobFeed.UI.Favoritos;
+using ImobFeed.UI.Indices;
 using ImobFeed.UI.ListaAtivos;
 using ImobFeed.UI.Main;
 using ImobFeed.UI.Recomendacao;
@@ -33,10 +34,12 @@ namespace ImobFeed.UI;
 [Transient(typeof(AtualizarListaAtivosViewModel))]
 [Transient(typeof(RecomendacaoViewModel))]
 [Transient(typeof(FavoritosViewModel))]
+[Transient(typeof(IndicesViewModel))]
 [Singleton(typeof(IFactory<DashboardViewModel>), typeof(ContainerFactory<DashboardViewModel>))]
 [Singleton(typeof(IFactory<AtualizarListaAtivosViewModel>), typeof(ContainerFactory<AtualizarListaAtivosViewModel>))]
 [Singleton(typeof(IFactory<RecomendacaoViewModel>), typeof(ContainerFactory<RecomendacaoViewModel>))]
 [Singleton(typeof(IFactory<FavoritosViewModel>), typeof(ContainerFactory<FavoritosViewModel>))]
+[Singleton(typeof(IFactory<IndicesViewModel>), typeof(ContainerFactory<IndicesViewModel>))]
 internal sealed partial class AppStaticContainer
 {
     private IClock CreateClock() => SystemClock.Instance;

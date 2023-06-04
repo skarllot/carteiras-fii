@@ -7,6 +7,7 @@
         <entry key="src/ImobFeed.UI/Dashboard/DashboardView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/DefaultStyle.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/Favoritos/FavoritosView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
+        <entry key="src/ImobFeed.UI/Indices/IndicesView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/ListaAtivos/AtualizarListaAtivosView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/Main/MainWindow.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />
         <entry key="src/ImobFeed.UI/Recomendacao/RecomendacaoTextoView.axaml" value="src/ImobFeed.UI.Desktop/ImobFeed.UI.Desktop.csproj" />

@@ -19,6 +19,7 @@
             <Button Command="{Binding AtualizarAtivos}" Content="Atualizar Ativos" />
             <Button Command="{Binding ImportarRecomendacao}" Content="Importar Recomendação" />
             <Button Command="{Binding GerarFavoritos}" Content="Gerar Favoritos" />
+            <Button Command="{Binding GerarIndices}" Content="Gerar Índices" />
         </StackPanel>
     </StackPanel>
 </UserControl>
