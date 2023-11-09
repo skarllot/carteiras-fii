@@ -50,7 +50,7 @@ public class IndicacoesFavoritasHtml
         using var stream = source.OpenRead();
         var indicacoesFavoritas = JsonSerializer.Deserialize<ListaIndicacoesFavoritas>(
             stream,
-            SourceGenerationContext.Default.Options)!;
+            JsonSerializerOptionsProvider.Default)!;
 
         string result = _stubble.Render(
             Templates.IndicacoesFavoritas(),

@@ -44,7 +44,7 @@ public sealed class IndicesAno
 
         string filePath = _fileSystem.Path.Join(baseDirectory.FullName, "index.json");
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(fileStream, indiceAno, SourceGenerationContext.DefaultWithConverters.Options);
+        JsonSerializer.Serialize(fileStream, indiceAno, JsonSerializerOptionsProvider.Default);
         fileStream.Flush();
 
         progress.Report(new ArquivoCriado(filePath));

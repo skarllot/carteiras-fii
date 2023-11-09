@@ -24,7 +24,7 @@ public class LeitorArquivosReferencia : IReferenciaAtivos
             .IrParaArquivoReferenciaAtivos();
 
         using var stream = arqAtivos.OpenRead();
-        return JsonSerializer.Deserialize<ListaAtivos>(stream, SourceGenerationContext.DefaultWithConverters.Options) ??
+        return JsonSerializer.Deserialize<ListaAtivos>(stream, JsonSerializerOptionsProvider.Default) ??
                new ListaAtivos(DateTimeOffset.MinValue, ImmutableArray<Ativo>.Empty);
     }
 
@@ -35,7 +35,7 @@ public class LeitorArquivosReferencia : IReferenciaAtivos
             .IrParaArquivoReferenciaIndicadores(data);
 
         using var stream = arqIndicadores.OpenRead();
-        return JsonSerializer.Deserialize<ListaIndicadores>(stream, SourceGenerationContext.DefaultWithConverters.Options) ??
+        return JsonSerializer.Deserialize<ListaIndicadores>(stream, JsonSerializerOptionsProvider.Default) ??
                new ListaIndicadores(DateTimeOffset.MinValue, ImmutableArray<IndicadorAtivo>.Empty);
     }
 }

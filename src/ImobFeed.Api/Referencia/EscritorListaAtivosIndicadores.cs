@@ -36,7 +36,7 @@ public class EscritorListaAtivosIndicadores
         var arqAtivos = apiReferencia.IrParaArquivoReferenciaAtivos();
         using (var stream = arqAtivos.Open(FileMode.Create, FileAccess.Write))
         {
-            JsonSerializer.Serialize(stream, listaAtivos, SourceGenerationContext.DefaultWithConverters.Options);
+            JsonSerializer.Serialize(stream, listaAtivos, JsonSerializerOptionsProvider.Default);
             stream.Flush();
             progress.Report(new ArquivoCriado(arqAtivos.FullName));
         }
@@ -44,7 +44,7 @@ public class EscritorListaAtivosIndicadores
         var arqDiff = apiReferencia.IrParaArquivoDiffReferenciaAtivos(now.ToDateTimeOffset());
         using (var stream = arqDiff.Open(FileMode.Create, FileAccess.Write))
         {
-            JsonSerializer.Serialize(stream, ativosDiff, SourceGenerationContext.DefaultWithConverters.Options);
+            JsonSerializer.Serialize(stream, ativosDiff, JsonSerializerOptionsProvider.Default);
             stream.Flush();
             progress.Report(new ArquivoCriado(arqDiff.FullName));
         }
@@ -52,7 +52,7 @@ public class EscritorListaAtivosIndicadores
         var arqIndicadores = apiReferencia.IrParaArquivoReferenciaIndicadores(new YearMonth(now.Year, now.Month));
         using (var stream = arqIndicadores.Open(FileMode.Create, FileAccess.Write))
         {
-            JsonSerializer.Serialize(stream, listaIndicadores, SourceGenerationContext.DefaultWithConverters.Options);
+            JsonSerializer.Serialize(stream, listaIndicadores, JsonSerializerOptionsProvider.Default);
             stream.Flush();
             progress.Report(new ArquivoCriado(arqIndicadores.FullName));
         }

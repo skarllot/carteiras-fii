@@ -49,7 +49,7 @@ public sealed class IndicesRaiz
 
         string filePath = _fileSystem.Path.Join(baseDirectory.FullName, "index.json");
         using var fileStream = _fileSystem.File.Open(filePath, FileMode.Create, FileAccess.ReadWrite);
-        JsonSerializer.Serialize(fileStream, indiceRaiz, SourceGenerationContext.DefaultWithConverters.Options);
+        JsonSerializer.Serialize(fileStream, indiceRaiz, JsonSerializerOptionsProvider.Default);
         fileStream.Flush();
 
         progress.Report(new ArquivoCriado(filePath));
