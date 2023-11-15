@@ -1,0 +1,25 @@
+{
+    "nome": "Top 5 Dividend Yield FIAgros",
+    "ativos": [
+        {
+            "codigo": "RZAK11",
+            "peso": 0.2
+        },
+        {
+            "codigo": "OGHY11",
+            "peso": 0.2
+        },
+        {
+            "codigo": "VGIR11",
+            "peso": 0.2
+        },
+        {
+            "codigo": "RBRY11",
+            "peso": 0.2
+        },
+        {
+            "codigo": "KNCR11",
+            "peso": 0.2
+        }
+    ]
+}
